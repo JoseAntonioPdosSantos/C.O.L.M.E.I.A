@@ -17,6 +17,10 @@
 
 	<div align="center" style="margin-top: 15%">
 		<h:form>
+		
+		
+		<p:growl id="growl" sticky="true" showDetail="true" life="1500" />
+		
 			<h1>Login:</h1>
 			<h:panelGrid columns="2" cellspacing="5">
 				<p:outputLabel for="cpf" value="CPF: " />
@@ -32,7 +36,7 @@
 			<p:panelGrid columns="1">
 				<p:row>
 					<p:column>
-						<p:commandButton value="Entrar"
+						<p:commandButton value="Entrar" update="@form"
 							style="background-color: dodgerblue" id="entrar"
 							actionListener="#{login.doLogin()}"></p:commandButton>
 					</p:column>
@@ -40,7 +44,7 @@
 
 					<p:column>
 						<p:commandButton value="Cadastrar"
-							style="background-color: dodgerblue" id="cadastrar"
+							style="background-color: dodgerblue"  update="@form" id="cadastrar"
 							actionListener="#{login.cadastrar()}"></p:commandButton>
 					</p:column>
 				</p:row>

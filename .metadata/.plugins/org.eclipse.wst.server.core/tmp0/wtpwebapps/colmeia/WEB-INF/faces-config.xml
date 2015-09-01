@@ -15,16 +15,16 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 		<from-view-id>/pages/login/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>user</from-outcome>
-			<to-view-id>/pages/borders/index.xhtml</to-view-id>
+			<to-view-id>/faces/pages/borders/index.xhtml</to-view-id>
 		</navigation-case>
-		<navigation-case>
-			<from-outcome>no_user</from-outcome>
-			<to-view-id>/pages/login/login.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>register_user</from-outcome>
-			<to-view-id>/pages/cadastro/cadastro_usuario.xhtml</to-view-id>
-		</navigation-case>
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>no_user</from-outcome> -->
+<!-- 			<to-view-id>/pages/login/login.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>register_user</from-outcome> -->
+<!-- 			<to-view-id>/pages/cadastro/cadastro_usuario.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
 <!-- 		<navigation-case> -->
 <!-- 			<from-outcome>i_forget_my_password</from-outcome> -->
 <!-- 			<to-view-id>/pages/cadastro/recuperar_senha.xhtml</to-view-id> -->
