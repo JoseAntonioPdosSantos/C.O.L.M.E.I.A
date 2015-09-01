@@ -1,0 +1,4 @@
+2015-08-31 18:15:10,205[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-08-31 18:15:10,221[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-08-31 18:15:10,221[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-08-31 18:15:10,970[main] WARNorg.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl:93-HHH000402: Using Hibernate built-in connection pool (not for production use!)

@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+C:\Users\Kaenna\Documents\colmeia\C.O.L.M.E.I.A\.metadata\.plugins\org.eclipse.jdt.core
+2875811589.index

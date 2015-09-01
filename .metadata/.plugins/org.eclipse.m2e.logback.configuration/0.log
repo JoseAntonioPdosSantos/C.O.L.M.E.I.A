@@ -1,0 +1,4 @@
+2015-09-01 15:20:44,336 [Worker-9] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: br.com.colmeia:colmeia:0.0.1-SNAPSHOT @ C:\Users\Kaenna\Documents\colmeia\C.O.L.M.E.I.A\colmeia\pom.xml.
+2015-09-01 15:21:05,655 [Worker-9] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /colmeia/src/main/java
+2015-09-01 15:21:05,655 [Worker-9] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /colmeia/src/main/resources
+2015-09-01 15:21:05,665 [Worker-9] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /colmeia/src/test/java
