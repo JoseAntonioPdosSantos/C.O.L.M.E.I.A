@@ -18,10 +18,4 @@ public class UsuarioEventoService extends Service<UsuarioEvento,Long,UsuarioEven
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		dao = new UsuarioEventoHibernateDAO();
-	}
-
-
 }

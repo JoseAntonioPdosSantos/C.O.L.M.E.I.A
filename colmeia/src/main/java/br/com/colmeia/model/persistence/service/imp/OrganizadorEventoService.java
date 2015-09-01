@@ -19,11 +19,4 @@ public class OrganizadorEventoService extends Service<OrganizadorEvento,Long,Org
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

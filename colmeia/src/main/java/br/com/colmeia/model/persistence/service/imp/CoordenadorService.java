@@ -18,10 +18,12 @@ public class CoordenadorService extends Service<Coordenador,Long,CoordenadorHibe
 	}
 
 	@Override
-	public void setDao() {
+	public CoordenadorHibernateDAO getDao() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
 
 
 

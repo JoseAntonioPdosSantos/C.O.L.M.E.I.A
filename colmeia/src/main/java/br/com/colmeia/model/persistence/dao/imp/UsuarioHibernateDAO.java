@@ -1,7 +1,5 @@
 package br.com.colmeia.model.persistence.dao.imp;
 
-import java.util.HashMap;
-
 import br.com.colmeia.model.persistance.dao.UsuarioDAO;
 import br.com.colmeia.model.persistence.dao.generics.GenericHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Usuario;

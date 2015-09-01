@@ -18,11 +18,5 @@ public class CursoService extends Service<Curso,Long,CursoHibernateDAO>{
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

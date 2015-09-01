@@ -18,11 +18,4 @@ public class InstituicaoService extends Service<Instituicao,Long,InstituicaoHibe
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

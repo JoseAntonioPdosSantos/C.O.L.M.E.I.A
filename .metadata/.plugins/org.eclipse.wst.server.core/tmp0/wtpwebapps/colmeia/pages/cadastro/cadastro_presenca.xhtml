@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+
+		<p:layoutUnit position="center">
+			<h:form>
+
+				<p:panel header="Cadastro de Presenca">
+					<h:panelGrid columns="4">
+						<p:outputLabel value="Digite o ID do Usuario:" />
+						<p:inputText id="id" size="40"
+							value="#{presencaController.presenca.id}" />
+						
+
+						<p:panel>
+							<p:commandButton value="Dar Presenca"
+								actionListener="#{presencaController.gravar}" />
+						</p:panel>
+                                                <p:panel>
+
+							<p:commandButton value="Voltar"
+								actionListener="#{presencaController.buscar}" />
+						</p:panel>
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:dataTable value="#{presencaController.presencas}" var="presenca"
+					paginator="true" paginatorAlwaysVisible="true" rows="5" />
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>

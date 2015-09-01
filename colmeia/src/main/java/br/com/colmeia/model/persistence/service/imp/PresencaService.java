@@ -18,11 +18,4 @@ public class PresencaService extends Service<Presenca,Long,PresencaHibernateDAO>
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

@@ -18,11 +18,4 @@ public class EventoService extends Service<Evento,Long,EventoHibernateDAO>{
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

@@ -28,7 +28,8 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 	}
 
 	@Override
-	public void setDao() {
-		dao = new UsuarioHibernateDAO();
+	public UsuarioHibernateDAO getDao() {
+		return new UsuarioHibernateDAO();
 	}
+
 }

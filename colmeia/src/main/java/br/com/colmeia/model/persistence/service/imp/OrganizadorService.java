@@ -18,9 +18,4 @@ public class OrganizadorService extends Service<Organizador,Long,OrganizadorHibe
 		return null;
 	}
 
-	@Override
-	public void setDao() {
-		// TODO Auto-generated method stub
-		
-	}
 }
