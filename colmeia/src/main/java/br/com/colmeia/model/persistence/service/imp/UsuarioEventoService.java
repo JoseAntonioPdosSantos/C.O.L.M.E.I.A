@@ -9,7 +9,7 @@ import br.com.colmeia.model.persistence.service.generics.Service;
 public class UsuarioEventoService extends Service<UsuarioEvento,Long,UsuarioEventoHibernateDAO>{
 
     public boolean validarEntity(UsuarioEvento entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	return true;
     }
 
 	@Override

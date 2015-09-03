@@ -9,7 +9,7 @@ import br.com.colmeia.model.persistence.service.imp.OrganizadorEventoService;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped	
+@ViewScoped
 public class OrganizadorEventoController extends Controller {
 
 	/**
@@ -21,39 +21,39 @@ public class OrganizadorEventoController extends Controller {
 	private List<OrganizadorEvento> organizadorEventos;
 
 	public OrganizadorEventoController() {
-
+		service = new OrganizadorEventoService();
+		organizadorEvento = new OrganizadorEvento();
+		try {
+			organizadorEventos = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(organizadorEvento);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(organizadorEvento);
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(organizadorEvento);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(organizadorEvento);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(organizadorEvento);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(organizadorEvento);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -66,22 +66,16 @@ public class OrganizadorEventoController extends Controller {
 	}
 
 	@Override
-	public void buscarPorId()  {
+	public void buscarPorId() {
 		try {
 			organizadorEvento = service.buscarPorId(organizadorEvento.getId());
-			if(organizadorEvento == null)
+			if (organizadorEvento == null)
 				message(ERROR_FIND);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
 	}
 
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
-	}
-	
 	@Override
 	public void buscar() {
 		try {

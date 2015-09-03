@@ -13,7 +13,7 @@
 	</context-param>
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
-		<location>/faces/pages/login/login.xhtml</location>
+		<location>/pages/login/login.xhtml</location>
 	</error-page>
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -40,6 +40,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
+		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 </web-app>

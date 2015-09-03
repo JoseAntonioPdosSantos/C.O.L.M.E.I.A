@@ -3,7 +3,8 @@ package br.com.colmeia.controller.imp;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import br.com.colmeia.controller.generics.Message;
@@ -11,7 +12,7 @@ import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.imp.UsuarioService;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class Login extends Message implements Serializable{
 
 	/**
@@ -35,8 +36,8 @@ public class Login extends Message implements Serializable{
 					message(Message.ERROR_UNEXPECTED);
 				}
 				if (usuario != null) {
-					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuario);
-					return "user";
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
+					return "usuario";
 				}
 			}
 		}
@@ -46,7 +47,24 @@ public class Login extends Message implements Serializable{
 
 	public Usuario getCurrentUser() {
 		return (Usuario) FacesContext.getCurrentInstance().getExternalContext()
-				.getSessionMap().get("user");
+				.getSessionMap().get("usuario");
+	}
+
+	public void validatorLoginAndPassword(FacesContext arg0, UIComponent arg1,
+			Object arg2) {
+		usuario.setCpf(getUsuario().getCpfUI().getLocalValue().toString());
+		usuario.setSenha(arg2.toString());
+//		try {
+//			usuario = service.isUsuario(usuario);
+//		} catch (Exception e) {
+//			message(ERROR_UNEXPECTED);
+//		}
+//
+//		if (usuario == null) {
+//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL,
+//					"INFORMAÇÃO", "Login ou senha inválido. :'(");
+//			throw new ValidatorException(msg);
+//		}
 	}
 
 	public String esqueciMinhaSenha() {

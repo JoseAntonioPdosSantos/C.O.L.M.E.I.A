@@ -25,12 +25,12 @@ public class Filter implements javax.servlet.Filter {
 		HttpServletRequest requ = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		Object user = null;
-		user = requ.getSession().getAttribute("user");
+		user = requ.getSession().getAttribute("usuario");
 		
-		if (user != null || requ.getRequestURL().toString().endsWith("/faces/pages/login/login.xhtml")) {
+		if (user != null || requ.getRequestURL().toString().endsWith("login.xhtml")) {
 			chain.doFilter(requ, resp);
 		} else {
-			resp.sendRedirect("/colmeia/faces/pages/login/login.xhtml");
+			resp.sendRedirect("/colmeia/pages/login/login.xhtml");
 		}
 	}
 

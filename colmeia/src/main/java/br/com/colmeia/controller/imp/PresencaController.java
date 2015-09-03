@@ -21,39 +21,39 @@ public class PresencaController extends Controller {
 	private List<Presenca> presencas;
 
 	public PresencaController() {
-
+		service = new PresencaService();
+		presenca = new Presenca();
+		try {
+			presencas = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(presenca);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(presenca);
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(presenca);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(presenca);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(presenca);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(presenca);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -74,12 +74,6 @@ public class PresencaController extends Controller {
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
-	}
-
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
 	}
 
 	@Override

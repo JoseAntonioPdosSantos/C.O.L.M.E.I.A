@@ -20,7 +20,7 @@ import br.com.colmeia.model.persistence.service.imp.CoordenadorService;
  */
 @ManagedBean
 @ViewScoped
-public class CoordenadorController extends Controller{
+public class CoordenadorController extends Controller {
 
 	/**
 	 * 
@@ -31,39 +31,39 @@ public class CoordenadorController extends Controller{
 	private List<Coordenador> coordenadores;
 
 	public CoordenadorController() {
-
+		service = new CoordenadorService();
+		coordenador = new Coordenador();
+		try {
+			coordenadores = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(coordenador);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(coordenador);
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(coordenador);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(coordenador);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(coordenador);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(coordenador);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -76,22 +76,16 @@ public class CoordenadorController extends Controller{
 	}
 
 	@Override
-	public void buscarPorId()  {
+	public void buscarPorId() {
 		try {
 			coordenador = service.buscarPorId(coordenador.getId());
-			if(coordenador == null)
+			if (coordenador == null)
 				message(ERROR_FIND);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
 	}
 
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
-	}
-	
 	@Override
 	public void buscar() {
 		try {
@@ -124,5 +118,5 @@ public class CoordenadorController extends Controller{
 	public void setCoordenadores(List<Coordenador> coordenadores) {
 		this.coordenadores = coordenadores;
 	}
-    
+
 }

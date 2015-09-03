@@ -9,7 +9,7 @@ import br.com.colmeia.model.persistence.service.generics.Service;
 public class OrganizadorService extends Service<Organizador,Long,OrganizadorHibernateDAO>{
 
     public boolean validarEntity(Organizador entity) {
-    	return false;
+    	return true;
     }
 
 	@Override

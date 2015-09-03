@@ -21,39 +21,39 @@ public class OrganizadorController extends Controller {
 	private List<Organizador> organizadores;
 
 	public OrganizadorController() {
-
+		service = new OrganizadorService();
+		organizador = new Organizador();
+		try {
+			organizadores = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(organizador);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(organizador);
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(organizador);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(organizador);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(organizador);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(organizador);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -66,22 +66,16 @@ public class OrganizadorController extends Controller {
 	}
 
 	@Override
-	public void buscarPorId()  {
+	public void buscarPorId() {
 		try {
 			organizador = service.buscarPorId(organizador.getId());
-			if(organizador == null)
+			if (organizador == null)
 				message(ERROR_FIND);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
 	}
 
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
-	}
-	
 	@Override
 	public void buscar() {
 		try {
@@ -106,7 +100,6 @@ public class OrganizadorController extends Controller {
 	public void setOrganizador(Organizador organizador) {
 		this.organizador = organizador;
 	}
-
 
 	public List<Organizador> getOrganizadores() {
 		return organizadores;

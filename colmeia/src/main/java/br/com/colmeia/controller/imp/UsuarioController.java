@@ -23,47 +23,41 @@ public class UsuarioController extends Controller {
 
 	public UsuarioController() {
 		usuario = getCurrentInstanceUser();
-		if(usuario==null)
+		if (usuario == null)
 			usuario = new Usuario();
 		service = new UsuarioService();
 		try {
 			usuarios = service.buscarTodos();
 		} catch (Exception e) {
-			message(FAILURE_RECORD);
+			message(ERROR_UNEXPECTED);
 		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(usuario);
-				usuarios = service.buscarTodos();
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(usuario);
+			usuarios = service.buscarTodos();
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(usuario);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(usuario);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(usuario);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(usuario);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -84,12 +78,6 @@ public class UsuarioController extends Controller {
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
-	}
-
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
 	}
 
 	@Override

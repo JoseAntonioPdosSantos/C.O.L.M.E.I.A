@@ -11,7 +11,7 @@ import br.com.colmeia.model.persistence.service.imp.CursoService;
 
 @ManagedBean
 @ViewScoped
-public class CursoController extends Controller{
+public class CursoController extends Controller {
 
 	/**
 	 * 
@@ -22,39 +22,39 @@ public class CursoController extends Controller{
 	private List<Curso> cursos;
 
 	public CursoController() {
-
+		service = new CursoService();
+		curso = new Curso();
+		try {
+			cursos = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
-			try {
-				service.gravar(curso);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			service.gravar(curso);
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void alterar() {
-		if (validarEntity()) {
-			try {
-				service.alterar(curso);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
+		try {
+			service.alterar(curso);
+			message(SUCCESS_UPDATE);
+		} catch (Exception e) {
+			message(FAILURE_UPDATE);
 		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
-			try {
-				service.apagar(curso);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
+		try {
+			service.apagar(curso);
+			message(SUCCESS_DELETE);
+		} catch (Exception e) {
+			message(FAILURE_DELETE);
 		}
 	}
 
@@ -67,22 +67,16 @@ public class CursoController extends Controller{
 	}
 
 	@Override
-	public void buscarPorId()  {
+	public void buscarPorId() {
 		try {
 			curso = service.buscarPorId(curso.getId());
-			if(curso == null)
+			if (curso == null)
 				message(ERROR_FIND);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
 	}
 
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
-	}
-	
 	@Override
 	public void buscar() {
 		try {
@@ -124,7 +118,4 @@ public class CursoController extends Controller{
 		this.cursos = cursos;
 	}
 
-
-	
-	
 }

@@ -26,10 +26,8 @@ public abstract class Controller extends Message implements Serializable{
 
 	public abstract void buscarPorId() throws Exception;
 
-	public abstract boolean validarEntity();
-	
-	public Usuario getCurrentInstanceUser(){
-		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+	public static Usuario getCurrentInstanceUser(){
+		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	}
 	
 }

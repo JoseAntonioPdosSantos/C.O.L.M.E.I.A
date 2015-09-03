@@ -35,19 +35,22 @@ and open the template in the editor.
 					<h:panelGrid columns="2">
 
 
-						<p:commandButton value="Cadastrar"
-							style="background-color: dodgerblue" id="enviar"
+						<p:commandButton value="Cadastrar" id="enviar"
 							actionListener="#{eventroController.gravar()}"></p:commandButton>
-						<p:commandButton value="Voltar"
-							style="background-color: dodgerblue" id="Voltar"
-							action="#{eventoController.voltar}"></p:commandButton>
-
+						<p:commandButton value="Pesquisar" id="pesquisar"
+							action="#{eventoController.buscar}"></p:commandButton>
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{eventoController.eventos}"
-						var="evento" paginator="true" paginatorAlwaysVisible="true"
-						rows="5" />
+					<p:dataTable value="#{eventoController.eventos}" var="evento"
+						paginator="true" paginatorAlwaysVisible="true" rows="5">
+
+						<p:outputLabel value="#{evento.id}" />
+						<p:outputLabel value="#{evento.nome}" />
+						<p:outputLabel value="#{evento.coordenador.nome}" />
+						<p:outputLabel value="#{evento.dtini}" />
+						<p:outputLabel value="#{evento.dtfim}" />
+					</p:dataTable>
 
 				</p:panel>
 			</h:form>

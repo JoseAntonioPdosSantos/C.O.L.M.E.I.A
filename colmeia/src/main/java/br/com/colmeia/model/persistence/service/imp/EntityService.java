@@ -9,7 +9,7 @@ import br.com.colmeia.model.persistence.service.generics.Service;
 public class EntityService extends Service<Entity,Long,EntityHibernateDAO>{
 
     public boolean validarEntity(Entity entity) {
-    	return false;
+    	return true;
     }
 
 	@Override

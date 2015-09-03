@@ -2,11 +2,14 @@ package br.com.colmeia.model.persistence.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+
+import javax.faces.component.UIInput;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 //
+import javax.persistence.Transient;
 
 @javax.persistence.Entity
 public class Usuario implements Serializable {
@@ -24,6 +27,14 @@ public class Usuario implements Serializable {
     private Date data;
     private Curso curso;
     private Instituicao instituicao;
+    
+    @Transient
+	private UIInput cpfUI;
+    @Transient
+	private UIInput passwordUI;
+
+    public Usuario() {
+	}
 
     public Long getId() {
         return id;
@@ -78,8 +89,6 @@ public class Usuario implements Serializable {
     }
 
     public void setCpf(String cpf) {
-    	if(cpf != null)
-    		cpf = cpf.trim().replaceAll(".", "").replace("-", "");
         this.cpf = cpf;
     }
 
@@ -98,6 +107,26 @@ public class Usuario implements Serializable {
     public void setInstituicao(Instituicao instituicao) {
         this.instituicao = instituicao;
     }
+
+	public UIInput getPasswordUI() {
+		return passwordUI;
+	}
+
+	public void setPasswordUI(UIInput passwordUI) {
+		this.passwordUI = passwordUI;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public UIInput getCpfUI() {
+		return cpfUI;
+	}
+
+	public void setCpfUI(UIInput cpfUI) {
+		this.cpfUI = cpfUI;
+	}
 
   
 

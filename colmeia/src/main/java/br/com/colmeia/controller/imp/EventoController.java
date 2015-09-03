@@ -31,11 +31,16 @@ public class EventoController extends Controller{
 	private List<Evento> eventos;
 
 	public EventoController() {
-
+		service = new EventoService();
+		evento = new Evento();
+		try {
+			eventos = service.buscarTodos();
+		} catch (Exception e) {
+			message(ERROR_UNEXPECTED);
+		}
 	}
 
 	public void gravar() {
-		if (validarEntity()) {
 			try {
 				service.gravar(evento);
 				message(SUCCESS_RECORD);
@@ -43,28 +48,23 @@ public class EventoController extends Controller{
 				message(FAILURE_RECORD);
 			}
 		}
-	}
 
 	public void alterar() {
-		if (validarEntity()) {
 			try {
 				service.alterar(evento);
 				message(SUCCESS_UPDATE);
 			} catch (Exception e) {
 				message(FAILURE_UPDATE);
 			}
-		}
 	}
 
 	public void apagar() {
-		if (validarEntity()) {
 			try {
 				service.apagar(evento);
 				message(SUCCESS_DELETE);
 			} catch (Exception e) {
 				message(FAILURE_DELETE);
 			}
-		}
 	}
 
 	public void buscarTodos() {
@@ -86,12 +86,6 @@ public class EventoController extends Controller{
 		}
 	}
 
-	@Override
-	public boolean validarEntity() {
-		message(FAILURE_FILL_DATA);
-		return false;
-	}
-	
 	@Override
 	public void buscar() {
 		try {
@@ -128,6 +122,5 @@ public class EventoController extends Controller{
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-	
-    
+
 }

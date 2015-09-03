@@ -14,29 +14,31 @@
 				<p:panel header="Cadastro de Coordenador">
 					<h:panelGrid columns="4">
 						<p:outputLabel value="Código:" />
-						<p:inputText id="id" size="40"
+						<p:inputText id="id" size="5"
 							value="#{coordenadorController.coordenador.id}" />
 						<p:outputLabel value="Nome:" />
 						<p:inputText id="nome" size="40"
 							value="#{coordenadorController.coordenador.nome}" />
 						<p:outputLabel value="CPF:" />
-						<p:inputText id="cpf" size="40"
+						<p:inputText id="cpf" size="10"
 							value="#{coordenadorController.coordenador.cpf}" />
 						<p:outputLabel value="R.A.:" />
-						<p:inputText id="ra" size="40"
+						<p:inputText id="ra" size="20"
 							value="#{coordenadorController.coordenador.ra}" />
 
 						<p:panel>
-
-							<p:commandButton value="Pesquisar"
-								actionListener="#{coordenadorController.buscar}" />
+							<h:panelGrid columns="4">
+								<p:commandButton value="Pesquisar" actionListener="#{coordenadorController.buscar}" />
+								<p:commandButton value="Cadastrar" actionListener="#{coordenadorController.gravar}" />
+							</h:panelGrid>
 						</p:panel>
 
 					</h:panelGrid>
 				</p:panel>
 
-				<p:dataTable value="#{coordenadorController.coordenadores}" var="usuario"
-					paginator="true" paginatorAlwaysVisible="true" rows="5" />
+				<p:dataTable value="#{coordenadorController.coordenadores}"
+					var="usuario" paginator="true" paginatorAlwaysVisible="true"
+					rows="5" />
 			</h:form>
 		</p:layoutUnit>
 	</ui:define>

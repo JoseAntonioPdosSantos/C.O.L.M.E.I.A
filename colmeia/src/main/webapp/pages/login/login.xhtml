@@ -27,7 +27,7 @@
 				<p:inputMask id="cpf" value="#{login.usuario.cpf}"
 					mask="999.999.999-99" />
 				<h:outputText value="Senha: " />
-				<p:password id="nonFeedback"
+				<p:password id="senha"
 					value="#{login.usuario.senha}" />
 
 			</h:panelGrid>
@@ -38,7 +38,7 @@
 					<p:column>
 						<p:commandButton value="Entrar" update="@form"
 							style="background-color: dodgerblue" id="entrar"
-							actionListener="#{login.doLogin()}"></p:commandButton>
+							action="#{login.doLogin()}"></p:commandButton>
 					</p:column>
 
 
