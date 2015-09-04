@@ -1,20 +1,18 @@
 package br.com.colmeia.controller.imp;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.OrganizadorEvento;
 import br.com.colmeia.model.persistence.service.imp.OrganizadorEventoService;
-import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class OrganizadorEventoController extends Controller {
+public class OrganizadorEventoController extends Controller<OrganizadorEvento> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private OrganizadorEventoService service;
 	private OrganizadorEvento organizadorEvento;
@@ -23,16 +21,14 @@ public class OrganizadorEventoController extends Controller {
 	public OrganizadorEventoController() {
 		service = new OrganizadorEventoService();
 		organizadorEvento = new OrganizadorEvento();
-		try {
-			organizadorEventos = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
 		try {
+			organizadorEvento.setId(null);
 			service.gravar(organizadorEvento);
+			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -42,44 +38,34 @@ public class OrganizadorEventoController extends Controller {
 	public void alterar() {
 		try {
 			service.alterar(organizadorEvento);
+			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(FAILURE_UPDATE);
 		}
 	}
 
-	public void apagar() {
+	public void apagar(OrganizadorEvento organizadorEvento) {
 		try {
 			service.apagar(organizadorEvento);
+			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(FAILURE_DELETE);
 		}
 	}
 
-	public void buscarTodos() {
-		try {
-			service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+	public void limpar() {
+		organizadorEvento = new OrganizadorEvento();
+		setEditando_registro(false);
 	}
-
-	@Override
-	public void buscarPorId() {
-		try {
-			organizadorEvento = service.buscarPorId(organizadorEvento.getId());
-			if (organizadorEvento == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
+	
 	@Override
 	public void buscar() {
 		try {
 			organizadorEventos = service.buscar(organizadorEvento);
+			if (organizadorEventos != null)
+				setSize_maior_q_zero(organizadorEventos.size() > 0 ? true : false);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}

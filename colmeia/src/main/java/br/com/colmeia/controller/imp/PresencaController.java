@@ -1,20 +1,18 @@
 package br.com.colmeia.controller.imp;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Presenca;
 import br.com.colmeia.model.persistence.service.imp.PresencaService;
-import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class PresencaController extends Controller {
+public class PresencaController extends Controller<Presenca> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private PresencaService service;
 	private Presenca presenca;
@@ -23,16 +21,14 @@ public class PresencaController extends Controller {
 	public PresencaController() {
 		service = new PresencaService();
 		presenca = new Presenca();
-		try {
-			presencas = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
 		try {
+			presenca.setId(null);
 			service.gravar(presenca);
+			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -42,40 +38,28 @@ public class PresencaController extends Controller {
 	public void alterar() {
 		try {
 			service.alterar(presenca);
+			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(FAILURE_UPDATE);
 		}
 	}
 
-	public void apagar() {
+	public void apagar(Presenca presenca) {
 		try {
 			service.apagar(presenca);
+			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(FAILURE_DELETE);
 		}
 	}
 
-	public void buscarTodos() {
-		try {
-			service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+	public void limpar() {
+		presenca = new Presenca();
+		setEditando_registro(false);
 	}
-
-	@Override
-	public void buscarPorId() {
-		try {
-			presenca = service.buscarPorId(presenca.getId());
-			if (presenca == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
+	
 	@Override
 	public void buscar() {
 		try {

@@ -11,11 +11,8 @@ import br.com.colmeia.model.persistence.service.imp.CursoService;
 
 @ManagedBean
 @ViewScoped
-public class CursoController extends Controller {
+public class CursoController extends Controller<Curso> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private CursoService service;
 	private Curso curso;
@@ -24,16 +21,14 @@ public class CursoController extends Controller {
 	public CursoController() {
 		service = new CursoService();
 		curso = new Curso();
-		try {
-			cursos = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
 		try {
+			curso.setId(null);
 			service.gravar(curso);
+			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -43,13 +38,14 @@ public class CursoController extends Controller {
 	public void alterar() {
 		try {
 			service.alterar(curso);
+			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(FAILURE_UPDATE);
 		}
 	}
 
-	public void apagar() {
+	public void apagar(Curso curso) {
 		try {
 			service.apagar(curso);
 			message(SUCCESS_DELETE);
@@ -58,32 +54,21 @@ public class CursoController extends Controller {
 		}
 	}
 
-	public void buscarTodos() {
-		try {
-			service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
-	@Override
-	public void buscarPorId() {
-		try {
-			curso = service.buscarPorId(curso.getId());
-			if (curso == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
 	@Override
 	public void buscar() {
 		try {
 			cursos = service.buscar(curso);
+			if (cursos != null)
+				setSize_maior_q_zero(cursos.size() > 0 ? true : false);
+
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
+	}
+
+	public void limpar() {
+		curso = new Curso();
+		setEditando_registro(false);
 	}
 
 	public CursoService getService() {

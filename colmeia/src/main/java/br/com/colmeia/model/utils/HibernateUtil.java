@@ -1,13 +1,15 @@
 package br.com.colmeia.model.utils;
 
+import java.sql.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.hibernate.Session;
 
-public abstract class HibernateUtil{
-	
+public abstract class HibernateUtil {
+
 	protected static EntityManagerFactory emFactory;
 	protected static EntityManager em;
 	private static Session session;
@@ -15,24 +17,28 @@ public abstract class HibernateUtil{
 	static {
 		emFactory = Persistence.createEntityManagerFactory("persistence-unit");
 		em = emFactory.createEntityManager();
-		if(session==null)
+		if (session == null)
 			session = (Session) em.getDelegate();
 	}
 
-	protected Session getSession(){
+	protected Session getSession() {
 		return session;
 	}
+
 	protected void beginTransaction() {
 		em.getTransaction().begin();
 	}
-	
-	 protected void commitTransaction() {
+
+	protected void commitTransaction() {
 		em.getTransaction().commit();
 	}
-	
-          protected void rollbackTransaction() {
+
+	protected void rollbackTransaction() {
 		em.getTransaction().rollback();
 	}
+	
+	public static Date getCurrentDate(){
+		return (Date) em.createQuery("SELECT NOW():: DATE ");
+	}
 
-	 
 }

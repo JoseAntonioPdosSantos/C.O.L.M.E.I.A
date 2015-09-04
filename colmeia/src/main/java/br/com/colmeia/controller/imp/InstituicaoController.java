@@ -11,11 +11,8 @@ import br.com.colmeia.model.persistence.service.imp.InstituicaoService;
 
 @ManagedBean
 @ViewScoped
-public class InstituicaoController extends Controller {
+public class InstituicaoController extends Controller<Instituicao> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private InstituicaoService service;
 	private Instituicao instituicao;
@@ -24,16 +21,14 @@ public class InstituicaoController extends Controller {
 	public InstituicaoController() {
 		service = new InstituicaoService();
 		instituicao = new Instituicao();
-		try {
-			instituicoes = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
 		try {
+			instituicao.setId(null);
 			service.gravar(instituicao);
+			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -43,44 +38,34 @@ public class InstituicaoController extends Controller {
 	public void alterar() {
 		try {
 			service.alterar(instituicao);
+			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(FAILURE_UPDATE);
 		}
 	}
 
-	public void apagar() {
+	public void apagar(Instituicao instituicao) {
 		try {
 			service.apagar(instituicao);
+			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(FAILURE_DELETE);
 		}
 	}
 
-	public void buscarTodos() {
-		try {
-			service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
-	@Override
-	public void buscarPorId() {
-		try {
-			instituicao = service.buscarPorId(instituicao.getId());
-			if (instituicao == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+	public void limpar() {
+		instituicao = new Instituicao();
+		setEditando_registro(false);
 	}
 
 	@Override
 	public void buscar() {
 		try {
 			instituicoes = service.buscar(instituicao);
+			if (instituicoes != null)
+				setSize_maior_q_zero(instituicoes.size() > 0 ? true : false);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}

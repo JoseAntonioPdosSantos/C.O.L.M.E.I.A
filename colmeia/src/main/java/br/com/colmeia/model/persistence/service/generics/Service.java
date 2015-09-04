@@ -8,8 +8,6 @@ import br.com.colmeia.model.persistence.dao.generics.GenericDAO;
 public abstract class Service<T, ID extends Serializable, DAO extends GenericDAO<T, ID>>
 		implements IService<T, ID> {
 
-	protected DAO dao;
-
 	public Service() {
 		
 	}
@@ -42,9 +40,6 @@ public abstract class Service<T, ID extends Serializable, DAO extends GenericDAO
 
 	public abstract List<T> buscar(T entity) throws Exception;
 
-	@SuppressWarnings("unchecked")
-	public DAO getDao() throws InstantiationException, IllegalAccessException{
-		return (DAO) dao.getClass().newInstance();
-	}
+	public abstract DAO getDao();
 
 }

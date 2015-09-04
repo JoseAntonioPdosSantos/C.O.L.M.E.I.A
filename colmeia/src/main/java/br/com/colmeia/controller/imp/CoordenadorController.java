@@ -12,7 +12,9 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Coordenador;
+import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.imp.CoordenadorService;
+import br.com.colmeia.model.utils.HibernateUtil;
 
 /**
  *
@@ -20,11 +22,8 @@ import br.com.colmeia.model.persistence.service.imp.CoordenadorService;
  */
 @ManagedBean
 @ViewScoped
-public class CoordenadorController extends Controller {
+public class CoordenadorController extends Controller<Coordenador> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private CoordenadorService service;
 	private Coordenador coordenador;
@@ -33,16 +32,37 @@ public class CoordenadorController extends Controller {
 	public CoordenadorController() {
 		service = new CoordenadorService();
 		coordenador = new Coordenador();
+		buscarTodos();
+	}
+
+	public void gravarCoordenador(Usuario usuario) {
+		if (usuario != null) {
+			if (coordenador == null)
+				coordenador = new Coordenador();
+			coordenador.setId(usuario.getId());
+			coordenador.setNome(usuario.getNome());
+			coordenador.setCpf(usuario.getCpf());
+			coordenador.setEmail(usuario.getEmail());
+			coordenador.setRa(usuario.getRa());
+			coordenador.setSenha(usuario.getSenha());
+			coordenador.setCurso(usuario.getCurso());
+			coordenador.setData(usuario.getData());
+			coordenador.setInstituicao(usuario.getInstituicao());
+//			coordenador.setDataCadastroCoordenador(HibernateUtil.getCurrentDate());
+		}
 		try {
-			coordenadores = service.buscarTodos();
+			service.alterar(coordenador);
+			message(SUCCESS_RECORD);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(FAILURE_RECORD);
 		}
 	}
 
 	public void gravar() {
 		try {
+			coordenador.setId(null);
 			service.gravar(coordenador);
+			buscarTodos();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -58,9 +78,10 @@ public class CoordenadorController extends Controller {
 		}
 	}
 
-	public void apagar() {
+	public void apagar(Coordenador coordenador) {
 		try {
 			service.apagar(coordenador);
+			buscarTodos();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(FAILURE_DELETE);
@@ -69,21 +90,17 @@ public class CoordenadorController extends Controller {
 
 	public void buscarTodos() {
 		try {
-			service.buscarTodos();
+			coordenadores = service.buscarTodos();
+			if (coordenadores != null)
+				setSize_maior_q_zero(coordenadores.size() > 0 ? true : false);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
 	}
 
-	@Override
-	public void buscarPorId() {
-		try {
-			coordenador = service.buscarPorId(coordenador.getId());
-			if (coordenador == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+	public void limpar() {
+		coordenador = new Coordenador();
+		setEditando_registro(false);
 	}
 
 	@Override

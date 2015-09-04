@@ -16,97 +16,108 @@ public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-    @SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
-    private Long id;
-    private String cpf;
-    private String ra;
-    private String nome;
-    private String email;
-    private String senha;
-    private Date data;
-    private Curso curso;
-    private Instituicao instituicao;
-    
-    @Transient
+	@SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
+	private Long id;
+	private String nome;
+	private String cpf;
+	private String ra;
+	private String email;
+	private String senha;
+	private Curso curso;
+	private Instituicao instituicao;
+	private Perfil perfil;
+	private Date data;
+	
+	@Transient
+	private String confirmarSenha;
+	@Transient
 	private UIInput cpfUI;
-    @Transient
+	@Transient
 	private UIInput passwordUI;
 
-    public Usuario() {
+	public Usuario() {
 	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getRa() {
-        return ra;
-    }
+	public String getRa() {
+		return ra;
+	}
 
-    public void setRa(String ra) {
-        this.ra = ra;
-    }
+	public void setRa(String ra) {
+		this.ra = ra;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public Date getData() {
-        return data;
-    }
+	public Date getData() {
+		return data;
+	}
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+	public void setData(Date data) {
+		this.data = data;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public Curso getCurso() {
-        return curso;
-    }
+	public Curso getCurso() {
+		return curso;
+	}
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
 
-    public Instituicao getInstituicao() {
-        return instituicao;
-    }
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
 
-    public void setInstituicao(Instituicao instituicao) {
-        this.instituicao = instituicao;
-    }
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
 	public UIInput getPasswordUI() {
 		return passwordUI;
@@ -128,6 +139,12 @@ public class Usuario implements Serializable {
 		this.cpfUI = cpfUI;
 	}
 
-  
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
 
 }

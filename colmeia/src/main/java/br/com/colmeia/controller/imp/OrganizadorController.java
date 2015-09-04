@@ -1,20 +1,18 @@
 package br.com.colmeia.controller.imp;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Organizador;
 import br.com.colmeia.model.persistence.service.imp.OrganizadorService;
-import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class OrganizadorController extends Controller {
+public class OrganizadorController extends Controller<Organizador> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private OrganizadorService service;
 	private Organizador organizador;
@@ -23,16 +21,14 @@ public class OrganizadorController extends Controller {
 	public OrganizadorController() {
 		service = new OrganizadorService();
 		organizador = new Organizador();
-		try {
-			organizadores = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
 		try {
+			organizador.setId(null);
 			service.gravar(organizador);
+			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(FAILURE_RECORD);
@@ -42,44 +38,34 @@ public class OrganizadorController extends Controller {
 	public void alterar() {
 		try {
 			service.alterar(organizador);
+			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(FAILURE_UPDATE);
 		}
 	}
 
-	public void apagar() {
+	public void apagar(Organizador organizador) {
 		try {
 			service.apagar(organizador);
+			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(FAILURE_DELETE);
 		}
 	}
 
-	public void buscarTodos() {
-		try {
-			service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
-	}
-
-	@Override
-	public void buscarPorId() {
-		try {
-			organizador = service.buscarPorId(organizador.getId());
-			if (organizador == null)
-				message(ERROR_FIND);
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+	public void limpar() {
+		organizador = new Organizador();
+		setEditando_registro(false);
 	}
 
 	@Override
 	public void buscar() {
 		try {
 			organizadores = service.buscar(organizador);
+			if (organizadores != null)
+				setSize_maior_q_zero(organizadores.size() > 0 ? true : false);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}

@@ -16,13 +16,13 @@ import javax.persistence.SequenceGenerator;
  *
  * @author Takeshi
  */
-@Entity
+//@Entity
 public class OrganizadorEvento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @SequenceGenerator(sequenceName = "organizador_evento_seq", initialValue = 1, name = "organizador_evento_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "organizador_evento_seq")
+//    @Id
+//    @SequenceGenerator(sequenceName = "organizador_evento_seq", initialValue = 1, name = "organizador_evento_seq")
+//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "organizador_evento_seq")
     private Long id;
     private Organizador organizador;
     private Evento evento;

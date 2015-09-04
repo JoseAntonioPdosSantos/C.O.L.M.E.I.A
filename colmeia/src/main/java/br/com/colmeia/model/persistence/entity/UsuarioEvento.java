@@ -7,6 +7,7 @@ package br.com.colmeia.model.persistence.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,48 +21,41 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class UsuarioEvento implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-    @SequenceGenerator(sequenceName = "usuario_evento_seq", initialValue = 1, name = "usuario_evento_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_evento_seq")
-    private Long id;
-    private Evento evento;
-    private Date datacadastro;
-    private Usuario usuario;
+	@SequenceGenerator(sequenceName = "usuario_evento_seq", initialValue = 1, name = "usuario_evento_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_evento_seq")
+	private Long id;
+	private Evento evento;
+	private Date dataCadastro;
+	private Usuario usuario;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Evento getEvento() {
+		return evento;
+	}
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void getEvento(Evento evento) {
-        this.evento = evento;
-    }
-
-    public Date getDate() {
-        return datacadastro;
-    }
-
-    public void setDate(Date datacadastro) {
-        this.datacadastro = datacadastro;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
+	
 }

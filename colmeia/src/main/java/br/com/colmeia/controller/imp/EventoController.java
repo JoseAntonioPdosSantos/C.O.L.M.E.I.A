@@ -20,11 +20,8 @@ import br.com.colmeia.model.persistence.service.imp.EventoService;
  */
 @ManagedBean
 @ViewScoped
-public class EventoController extends Controller{
+public class EventoController extends Controller<Evento> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private EventoService service;
 	private Evento evento;
@@ -33,63 +30,51 @@ public class EventoController extends Controller{
 	public EventoController() {
 		service = new EventoService();
 		evento = new Evento();
-		try {
-			eventos = service.buscarTodos();
-		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
-		}
+		buscar();
 	}
 
 	public void gravar() {
-			try {
-				service.gravar(evento);
-				message(SUCCESS_RECORD);
-			} catch (Exception e) {
-				message(FAILURE_RECORD);
-			}
+		try {
+			evento.setId(null);
+			service.gravar(evento);
+			buscar();
+			message(SUCCESS_RECORD);
+		} catch (Exception e) {
+			message(FAILURE_RECORD);
 		}
+	}
 
 	public void alterar() {
-			try {
-				service.alterar(evento);
-				message(SUCCESS_UPDATE);
-			} catch (Exception e) {
-				message(FAILURE_UPDATE);
-			}
-	}
-
-	public void apagar() {
-			try {
-				service.apagar(evento);
-				message(SUCCESS_DELETE);
-			} catch (Exception e) {
-				message(FAILURE_DELETE);
-			}
-	}
-
-	public void buscarTodos() {
 		try {
-			service.buscarTodos();
+			service.alterar(evento);
+			buscar();
+			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(FAILURE_UPDATE);
 		}
 	}
 
-	@Override
-	public void buscarPorId()  {
+	public void apagar(Evento evento) {
 		try {
-			evento = service.buscarPorId(evento.getId());
-			if(evento == null)
-				message(ERROR_FIND);
+			service.apagar(evento);
+			buscar();
+			message(SUCCESS_DELETE);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(FAILURE_DELETE);
 		}
+	}
+
+	public void limpar() {
+		evento = new Evento();
+		setEditando_registro(false);
 	}
 
 	@Override
 	public void buscar() {
 		try {
 			eventos = service.buscar(evento);
+			if (eventos != null)
+				setSize_maior_q_zero(eventos.size() > 0 ? true : false);
 		} catch (Exception e) {
 			message(ERROR_UNEXPECTED);
 		}
@@ -103,7 +88,7 @@ public class EventoController extends Controller{
 		this.eventos = eventos;
 	}
 
-	public String voltar(){
+	public String voltar() {
 		return "";
 	}
 
@@ -120,6 +105,7 @@ public class EventoController extends Controller{
 	}
 
 	public void setEvento(Evento evento) {
+		setEditando_registro(true);
 		this.evento = evento;
 	}
 

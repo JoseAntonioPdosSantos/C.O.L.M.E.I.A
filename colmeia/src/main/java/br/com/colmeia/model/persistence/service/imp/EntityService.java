@@ -18,4 +18,9 @@ public class EntityService extends Service<Entity,Long,EntityHibernateDAO>{
 		return null;
 	}
 
+	@Override
+	public EntityHibernateDAO getDao() {
+		return new EntityHibernateDAO();
+	}
+
 }
