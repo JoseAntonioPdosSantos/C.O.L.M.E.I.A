@@ -49,7 +49,7 @@ public abstract class Message {
 			severity = FacesMessage.SEVERITY_INFO;
 			break;
 		case ERROR:
-			title = "Erros!";
+			title = "Erro!";
 			severity = FacesMessage.SEVERITY_ERROR;
 			break;
 		case WORNING:

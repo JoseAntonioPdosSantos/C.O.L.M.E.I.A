@@ -6,7 +6,6 @@ import java.util.List;
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.dao.generics.GenericDAO;
 import br.com.colmeia.model.persistence.entity.EntidadeBase;
-import br.com.colmeia.model.utils.HibernateUtil;
 
 public abstract class Service<T extends EntidadeBase, ID extends Serializable, DAO extends GenericDAO<T, ID>>
 		implements IService<T, ID> {
@@ -53,7 +52,5 @@ public abstract class Service<T extends EntidadeBase, ID extends Serializable, D
 		if (entity.getAtivo() == null)
 			entity.setAtivo(true);
 		entity.setUsuarioAlteracao(Controller.getCurrentInstanceUser());
-		if (entity.getVersao() == null)
-			entity.setVersao(HibernateUtil.getCurrentDate());
 	}
 }
