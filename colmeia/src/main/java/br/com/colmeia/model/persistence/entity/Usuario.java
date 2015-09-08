@@ -1,36 +1,51 @@
 package br.com.colmeia.model.persistence.entity;
 
-import java.io.Serializable;
-import java.sql.Date;
-
 import javax.faces.component.UIInput;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-//
 import javax.persistence.Transient;
 
 @javax.persistence.Entity
-public class Usuario implements Serializable {
+public class Usuario extends EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
 	private Long id;
+	@Column(nullable=false)
 	private String nome;
+	@Column(nullable=false,unique=true)
 	private String cpf;
+	@Column(unique=true)
 	private String ra;
+	@Column(unique=true)
 	private String email;
+	@Column(nullable=false)
 	private String senha;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn
 	private Curso curso;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Instituicao instituicao;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable=false)
 	private Perfil perfil;
-	private Date data;
 	
 	@Transient
 	private String confirmarSenha;
+	@Transient
+	private boolean alunoEstacio;
 	@Transient
 	private UIInput cpfUI;
 	@Transient
@@ -77,14 +92,6 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public String getCpf() {
@@ -141,6 +148,14 @@ public class Usuario implements Serializable {
 
 	public String getConfirmarSenha() {
 		return confirmarSenha;
+	}
+
+	public boolean isAlunoEstacio() {
+		return alunoEstacio;
+	}
+
+	public void setAlunoEstacio(boolean alunoEstacio) {
+		this.alunoEstacio = alunoEstacio;
 	}
 
 	public void setConfirmarSenha(String confirmarSenha) {

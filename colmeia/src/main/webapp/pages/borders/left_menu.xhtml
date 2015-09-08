@@ -8,26 +8,24 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<p:layoutUnit position="west" size="200" header="Menu" >
+	<p:layoutUnit position="west" size="15%" header="Menu" >
 		<h:form>
-			<p:panelMenu id="pm_left">
-				<p:submenu id="sm_meu_dados" label="Dados Pessoais">
-					<p:menuitem id="mi_meus_dados" url="/pages/cadastro/cadastro_usuario.xhtml" value="Meus Dados" />
+			<p:panelMenu>
+				<p:submenu id="submenu_minha_conta" label="Minha Conta" rendered="#{menuController.getAcesso('usuario')}">
+					<p:menuitem id="menu_meus_dados" url="/pages/cadastro/cadastro_usuario.xhtml" value="Meus Dados" />
+					<p:menuitem id="menu_meus_eventos" url="/pages/pesquisa/meus_eventos.xhtml"  value="Meus Eventos" />
+					<p:menuitem id="menu_certificado" url="/pages/pesquisa/meus_certificados.xhtml" value="Meus Certificados" />
 				</p:submenu>
-				<p:submenu id="sm_evento" label="Eventos">
-					<p:menuitem id="mi_lista_evento" url="/pages/cadastro/cadastro_evento.xhtml" value="Lista de Eventos" />
-					<p:menuitem id="mi_meus_eventos" url="/pages/pesquisa/meus_eventos.xhtml"  value="Meus Eventos" />
+				<p:submenu id="submenu_evento" label="Eventos" rendered="#{menuController.getAcesso('usuario')}">
+					<p:menuitem id="menu_inscricao_evento" url="/pages/cadastro/cadastro_usuario_evento.xhtml" value="Inscrição de Eventos" />
 				</p:submenu>
-				<p:submenu id="sm_certificado" label="Certificado">
-					<p:menuitem id="mi_certificado" url="/pages/pesquisa/meus_certificados.xhtml" value="Gerar Certificado" />
+				<p:submenu id="submenu_registro" label="Registro" rendered="#{menuController.getAcesso('organizador')}">
+					<p:menuitem id="menu_presenca" url="/pages/registro/registro_presenca.xhtml" value="Registrar Presença" />
 				</p:submenu>
-				<p:submenu id="sm_organizador" label="Organizador">
-					<p:menuitem id="mi_presenca" url="/pages/cadastro/cadastro_evento.xhtml" value="Controle de Presença" />
-					<p:menuitem id="mi_leitor" value="Cadastro de Coordenador" url="/pages/cadastro/cadastro_coordenador.xhtml"/>
-				</p:submenu>
-				<p:submenu id="sm_coordenador" label="Coordenador">
-					<p:menuitem id="mi_cad_organizador" url="/pages/cadastro/cadastro_organizador.xhtml" value="Cadstro de Organizadores" />
-					<p:menuitem id="mi_cad_evento" url="/pages/cadastro/cadastro_evento.xhtml" value="Cadastro de Eventos" />
+				<p:submenu id="submenu_cadastro" label="Cadastro" rendered="#{menuController.getAcesso('coordenador')}">
+					<p:menuitem id="menu_cadastro_evento" url="/pages/cadastro/cadastro_evento.xhtml"  value="Cadastrar Evento" />
+					<p:menuitem id="menu_cadastro_curso" url="/pages/cadastro/cadastro_curso.xhtml" value="Cadastro de Curso" />
+					<p:menuitem id="menu_cadastro_instituicao" url="/pages/cadastro/cadastro_instituicao.xhtml" value="Cadastro de Instituição" />
 				</p:submenu>
 			</p:panelMenu>
 		</h:form>

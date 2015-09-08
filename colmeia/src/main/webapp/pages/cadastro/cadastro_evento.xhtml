@@ -11,7 +11,7 @@ and open the template in the editor.
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <ui:composition template="/pages/borders/index.xhtml">
 
 	<ui:define name="page_central">
@@ -20,13 +20,14 @@ and open the template in the editor.
 
 				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
 
-				<p:panel id="cadastro" header="Cadastro de Eventos">
+				<p:panel id="cadastro" header="Cadastro de Eventos" styleClass="center">
 
 					<h:panelGrid columns="4" cellpadding="5">
 
 						<p:outputLabel id="lb_evento_id" value="Código: " />
 						<p:inputText size="10" id="txt_evento_id"
-							value="#{eventoController.evento.id}" disabled="#{eventoController.editando_registro}">
+							value="#{eventoController.evento.id}"
+							disabled="#{eventoController.editando_registro}">
 							<p:watermark for="txt_evento_id" value="Código"></p:watermark>
 						</p:inputText>
 						<p:outputLabel id="lb_evento_nome" value="Nome do Evento: " />
@@ -49,23 +50,28 @@ and open the template in the editor.
 						</p:calendar>
 					</h:panelGrid>
 
-					<h:panelGrid columns="3" >
+					<h:panelGrid columns="3">
 
-						<p:commandButton value="Cadastrar" id="btn_cadastrar" rendered="#{eventoController.editando_registro eq true ? false : true}"
+						<p:commandButton value="Cadastrar" id="btn_cadastrar"
+							rendered="#{eventoController.editando_registro eq true ? false : true}"
 							update="@form" actionListener="#{eventoController.gravar()}"></p:commandButton>
 
-						<p:commandButton value="Alterar" id="btn_alterar" update="@form" rendered="#{eventoController.editando_registro}"
+						<p:commandButton value="Alterar" id="btn_alterar" update="@form"
+							rendered="#{eventoController.editando_registro}"
 							actionListener="#{eventoController.alterar()}"></p:commandButton>
 
-						<p:commandButton value="Pesquisar" id="pesquisar" update="@form:pesquisa"
+						<p:commandButton value="Pesquisar" id="pesquisar"
+							update="@form:pesquisa"
 							actionListener="#{eventoController.buscar}"></p:commandButton>
-							
-							<p:commandButton value="Limpar" id="limpar" update="@form:cadastro"
+
+						<p:commandButton value="Limpar" id="limpar"
+							update="@form:cadastro"
 							actionListener="#{eventoController.limpar()}"></p:commandButton>
 
 					</h:panelGrid>
 
-					<p:panel id="pesquisa" header="Lista de Eventos" visible="#{eventoController.size_maior_q_zero}">
+					<p:panel id="pesquisa" header="Lista de Eventos"
+						visible="#{eventoController.size_maior_q_zero}">
 						<p:dataTable value="#{eventoController.eventos}" var="evento"
 							paginator="true" paginatorAlwaysVisible="true" rows="5">
 

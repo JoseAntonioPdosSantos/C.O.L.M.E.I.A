@@ -28,10 +28,12 @@ public class CursoController extends Controller<Curso> {
 		try {
 			curso.setId(null);
 			service.gravar(curso);
+			setCurso(new Curso());
 			buscar();
+			limpar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
-			message(FAILURE_RECORD);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -41,7 +43,7 @@ public class CursoController extends Controller<Curso> {
 			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
-			message(FAILURE_UPDATE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -50,7 +52,7 @@ public class CursoController extends Controller<Curso> {
 			service.apagar(curso);
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
-			message(FAILURE_DELETE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -60,9 +62,8 @@ public class CursoController extends Controller<Curso> {
 			cursos = service.buscar(curso);
 			if (cursos != null)
 				setSize_maior_q_zero(cursos.size() > 0 ? true : false);
-
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -102,5 +103,4 @@ public class CursoController extends Controller<Curso> {
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
 	}
-
 }

@@ -1,10 +1,11 @@
 package br.com.colmeia.model.utils;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 
@@ -37,8 +38,9 @@ public abstract class HibernateUtil {
 		em.getTransaction().rollback();
 	}
 	
-	public static Date getCurrentDate(){
-		return (Date) em.createQuery("SELECT NOW():: DATE ");
+	public static Timestamp getCurrentDate(){
+		Query query = em.createQuery("SELECT NOW() FROM Curso ");
+		return (Timestamp) query.getSingleResult();
 	}
 
 }

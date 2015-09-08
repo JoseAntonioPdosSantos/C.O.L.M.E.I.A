@@ -9,11 +9,50 @@
 	<ui:define name="page_central">
 
 		<p:layoutUnit position="center">
+
 			<h:form>
 
-				<p:panel header="Meus Certificados">
+				<p:panel
+					visible="#{meusCertificadosController.size_maior_q_zero eq false ? true : false}">
+					<h1>Desculpe! Não Encontramos Nenhum Certificado Disponível Para Impressão</h1>
 				</p:panel>
+				<p:panel header="Meus Certificados"
+					visible="#{meusCertificadosController.size_maior_q_zero}">
 
+					<p:dataTable value="#{meusCertificadosController.usuarioEventos}"
+						var="usuarioEventos" paginator="true"
+						paginatorAlwaysVisible="true" rows="5">
+
+						<p:column headerText="Código" width="80">
+							<p:outputLabel value="#{usuarioEventos.evento.id}" />
+						</p:column>
+
+						<p:column headerText="Nome" width="80">
+							<p:outputLabel value="#{usuarioEventos.evento.nome}" />
+						</p:column>
+
+						<p:column headerText="Coordenador" width="80">
+							<p:outputLabel value="#{usuarioEventos.evento.coordenador.nome}" />
+						</p:column>
+
+						<p:column headerText="Data Inicial" width="80">
+							<p:outputLabel value="#{usuarioEventos.evento.dtini}" />
+						</p:column>
+
+						<p:column headerText="Data Final" width="80">
+							<p:outputLabel value="#{usuarioEventos.evento.dtfim}" />
+						</p:column>
+
+						<p:column headerText="Emitir Certificado" width="150">
+							<!-- Emitir Certificado -->
+							<p:commandButton icon="ui-icon-trash" update="@form"
+								actionListener="#{meusCertificadosController.gerarCertificado(usuarioEventos)}">
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
 			</h:form>
 		</p:layoutUnit>
 	</ui:define>

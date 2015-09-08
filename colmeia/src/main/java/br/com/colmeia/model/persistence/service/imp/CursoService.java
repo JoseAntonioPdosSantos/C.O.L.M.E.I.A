@@ -11,7 +11,15 @@ import br.com.colmeia.model.persistence.service.generics.Service;
 
 public class CursoService extends Service<Curso, Long, CursoHibernateDAO> {
 
-	public boolean validarEntity(Curso entity) {
+	public boolean validarEntity(Curso entity) throws Exception {
+		if (entity == null)
+			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
+
+		if (entity.getNome() == null)
+			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
+
+		if (entity.getNome().trim().isEmpty())
+			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		return true;
 	}
 

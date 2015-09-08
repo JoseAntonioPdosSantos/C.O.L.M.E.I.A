@@ -11,24 +11,22 @@
 	<title>Login</title>
 	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
 	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-
+	<h:outputScript library="js" name="init.js"></h:outputScript>
 </h:head>
 <h:body style="background-color: darkturquoise">
 
 	<div align="center" style="margin-top: 15%">
 		<h:form>
-		
-		
-		<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
-		
+
+			<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
+
 			<h1>Login:</h1>
 			<h:panelGrid columns="2" cellspacing="5">
 				<p:outputLabel for="cpf" value="CPF: " />
 				<p:inputMask id="cpf" value="#{login.usuario.cpf}"
 					mask="999.999.999-99" />
 				<h:outputText value="Senha: " />
-				<p:password id="senha"
-					value="#{login.usuario.senha}" />
+				<p:password id="senha" value="#{login.usuario.senha}" />
 
 			</h:panelGrid>
 
@@ -44,8 +42,8 @@
 
 					<p:column>
 						<p:commandButton value="Cadastrar"
-							style="background-color: dodgerblue"  update="@form" id="cadastrar"
-							actionListener="#{login.cadastrar()}"></p:commandButton>
+							style="background-color: dodgerblue" update="@form"
+							id="cadastrar" action="#{login.cadastrar()}"></p:commandButton>
 					</p:column>
 				</p:row>
 			</p:panelGrid>

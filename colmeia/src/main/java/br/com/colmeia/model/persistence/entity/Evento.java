@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.colmeia.model.persistence.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -19,7 +16,7 @@ import javax.persistence.SequenceGenerator;
  * @author José Antonio
  */
 @Entity
-public class Evento implements Serializable {
+public class Evento extends EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -27,7 +24,9 @@ public class Evento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "evento_seq")
 	private Long id;
 	private String nome;
-	private Coordenador coordenador;
+	@JoinColumn
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Usuario coordenador;
 	private Date dtini;
 	private Date dtfim;
 
@@ -47,11 +46,11 @@ public class Evento implements Serializable {
 		this.nome = nome;
 	}
 
-	public Coordenador getCoordenador() {
+	public Usuario getCoordenador() {
 		return coordenador;
 	}
 
-	public void setCoordenador(Coordenador coordenador) {
+	public void setCoordenador(Usuario coordenador) {
 		this.coordenador = coordenador;
 	}
 

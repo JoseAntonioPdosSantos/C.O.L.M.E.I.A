@@ -20,7 +20,7 @@
 		<param-value>Development</param-value>
 	</context-param>
 	<welcome-file-list>
-		<welcome-file>/faces/pages/login/login.xhtml</welcome-file>
+		<welcome-file>pages/login/login.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>

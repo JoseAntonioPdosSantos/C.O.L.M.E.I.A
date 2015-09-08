@@ -20,46 +20,57 @@ public class UsuarioController extends Controller<Usuario> {
 	private List<Usuario> usuarios;
 
 	public UsuarioController() {
-		usuario = getCurrentInstanceUser();
-		if (usuario == null)
-			usuario = new Usuario();
+		setUsuario(getCurrentInstanceUser());
+		if (getUsuario() == null)
+			setUsuario(new Usuario());
 		service = new UsuarioService();
 		buscar();
 	}
 
 	public void gravar() {
 		try {
-			service.gravar(usuario);
+			service.gravar(getUsuario());
 			usuarios = service.buscarTodos();
+			setUsuario(new Usuario());
 			buscar();
+			limpar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
-			message(FAILURE_RECORD);
+			message(ERROR, e.getMessage());
 		}
+	}
+
+	public String novoUsuario() {
+		try {
+			service.gravar(getUsuario());
+		} catch (Exception e) {
+			message(ERROR, e.getMessage());
+		}
+		return "/pages/login/login.xhtml";
 	}
 
 	public void alterar() {
 		try {
-			service.alterar(usuario);
+			service.alterar(getUsuario());
 			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
-			message(FAILURE_UPDATE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
-	public void apagar(Usuario usurio) {
+	public void apagar(Usuario usuario) {
 		try {
 			service.apagar(usuario);
 			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
-			message(FAILURE_DELETE);
+			message(ERROR, e.getMessage());
 		}
 	}
-	
+
 	public void limpar() {
-		usuario = new Usuario();
+		setUsuario(new Usuario());
 		setEditando_registro(false);
 	}
 
@@ -70,33 +81,34 @@ public class UsuarioController extends Controller<Usuario> {
 			if (usuarios != null)
 				setSize_maior_q_zero(usuarios.size() > 0 ? true : false);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(ERROR, e.getMessage());
 		}
 	}
 
-	public void cadastrarPerfilCoordenador(Usuario usuario){
+	public void cadastrarPerfilCoordenador(Usuario usuario) {
 		usuario.setPerfil(Perfil.COORDENADOR);
-		this.usuario = usuario;
+		setUsuario(usuario);
 		alterar();
 	}
-	
-	public void cadastrarPerfilOrganizador(Usuario usuario){
+
+	public void cadastrarPerfilOrganizador(Usuario usuario) {
 		usuario.setPerfil(Perfil.ORGANIZADOR);
-		this.usuario = usuario;
+		setUsuario(usuario);
 		alterar();
 	}
-	
-	public void cadastrarPerfilUsuario(Usuario usuario){
+
+	public void cadastrarPerfilUsuario(Usuario usuario) {
 		usuario.setPerfil(Perfil.USUARIO);
-		this.usuario = usuario;
+		setUsuario(usuario);
 		alterar();
 	}
-	
-	public void cadastrarPerfilAdministrador(Usuario usuario){
+
+	public void cadastrarPerfilAdministrador(Usuario usuario) {
 		usuario.setPerfil(Perfil.ADMINISTRADOR);
-		this.usuario = usuario;
+		setUsuario(usuario);
 		alterar();
 	}
+
 	public UsuarioService getService() {
 		return service;
 	}
@@ -110,6 +122,7 @@ public class UsuarioController extends Controller<Usuario> {
 	}
 
 	public void setUsuario(Usuario usuario) {
+		setEditando_registro(true);
 		this.usuario = usuario;
 	}
 
@@ -121,7 +134,4 @@ public class UsuarioController extends Controller<Usuario> {
 		this.usuarios = usuarios;
 	}
 
-	public String voltar() {
-		return "";
-	}
 }

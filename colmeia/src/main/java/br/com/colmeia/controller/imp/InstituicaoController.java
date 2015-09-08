@@ -28,10 +28,12 @@ public class InstituicaoController extends Controller<Instituicao> {
 		try {
 			instituicao.setId(null);
 			service.gravar(instituicao);
+			setInstituicao(new Instituicao());
 			buscar();
+			limpar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
-			message(FAILURE_RECORD);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -41,7 +43,7 @@ public class InstituicaoController extends Controller<Instituicao> {
 			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
-			message(FAILURE_UPDATE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -51,7 +53,7 @@ public class InstituicaoController extends Controller<Instituicao> {
 			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
-			message(FAILURE_DELETE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -67,7 +69,7 @@ public class InstituicaoController extends Controller<Instituicao> {
 			if (instituicoes != null)
 				setSize_maior_q_zero(instituicoes.size() > 0 ? true : false);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -80,6 +82,7 @@ public class InstituicaoController extends Controller<Instituicao> {
 	}
 
 	public void setInstituicao(Instituicao instituicao) {
+		setEditando_registro(true);
 		this.instituicao = instituicao;
 	}
 

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.context.FacesContext;
 
 import br.com.colmeia.model.persistence.entity.Usuario;
+import br.com.colmeia.model.security.Security;
 
 public abstract class Controller<T> extends Message implements Serializable {
 
@@ -22,8 +23,15 @@ public abstract class Controller<T> extends Message implements Serializable {
 	public abstract void buscar() throws Exception;
 
 	public abstract void limpar();
+	
+	public boolean getAcesso(String permissao){
+		if(permissao == null) return false;
+		Usuario usuario = getCurrentInstanceUser();
+		if(usuario==null)return false;
+		return Security.getAcesso(usuario.getPerfil(),permissao);
+	}
 
-	public Usuario getCurrentInstanceUser() {
+	public static Usuario getCurrentInstanceUser() {
 		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	}
 

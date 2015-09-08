@@ -26,6 +26,9 @@ public abstract class Message {
 	public static final int ERROR_UNEXPECTED = 12;
 	public static final int FAILURE_LOGIN = 13;
 	public static final int ERROR_FIND = 14;
+	public static final int ERROR = 15;
+	public static final int SUCCESS = 16;
+	public static final int WORNING = 17;
 
 	protected void message(Severity severity, String title, String message) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -33,8 +36,27 @@ public abstract class Message {
 	}
 
 	protected void message(String title, String message) {
-		FacesMessage faces = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				title, message);
+		FacesMessage faces = new FacesMessage(FacesMessage.SEVERITY_INFO, title, message);
+		FacesContext.getCurrentInstance().addMessage(null, faces);
+	}
+
+	protected void message(final Integer condition, String message) {
+		Severity severity = null;
+		String title = "";
+		switch (condition) {
+		case SUCCESS:
+			title = "Sucesso!";
+			severity = FacesMessage.SEVERITY_INFO;
+			break;
+		case ERROR:
+			title = "Erros!";
+			severity = FacesMessage.SEVERITY_ERROR;
+			break;
+		case WORNING:
+			title = "Aviso!";
+			severity = FacesMessage.SEVERITY_WARN;
+		}
+		FacesMessage faces = new FacesMessage(severity,title, message);
 		FacesContext.getCurrentInstance().addMessage(null, faces);
 	}
 
@@ -46,50 +68,40 @@ public abstract class Message {
 					"Não foi lacalizado nenhum dado para esta consulta!");
 			break;
 		case SUCCESS_UPDATE:
-			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação",
-					"Cadasto atualizado com sucesso!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Cadasto atualizado com sucesso!");
 			break;
 		case FAILURE_UPDATE:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso",
-					"Não foi possível atualizar este cadastro!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Não foi possível atualizar este cadastro!");
 			break;
 		case SUCCESS_DELETE:
-			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação",
-					"Cadastro excluído com sucesso!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Cadastro excluído com sucesso!");
 			break;
 		case FAILURE_DELETE:
-			faces = new FacesMessage(
-					FacesMessage.SEVERITY_WARN,
-					"Aviso",
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso",
 					"Não foi possível excluir este cadastro. Verifique se este registro não está sendo usando em outro cadastro!");
 			break;
 		case SUCCESS_RECORD:
-			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação",
-					"Cadastro gravado com sucesso!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Cadastro gravado com sucesso!");
 			break;
 		case FAILURE_RECORD:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso",
-					"Não foi possível gravar este cadastro!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Não foi possível gravar este cadastro!");
 			break;
 		case FAILURE_FILL_DATA:
 			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso",
 					"Os campos não foram preenchidos corretamente!");
 			break;
 		case DUPLICATE_RECORD:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Registro Duplicado", "Este cadastro já existe!");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Registro Duplicado", "Este cadastro já existe!");
 			break;
 		case FAILURE_LOGIN:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"INFORMAÇÃO", "Login ou senha inválido. :'(");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "INFORMAÇÃO", "Login ou senha inválido. :'(");
 			break;
 		case ERROR_UNEXPECTED:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"ERROR", "Ocorreu um erro inesperado. Favor contatar o administrador do sistema. :'(");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "ERROR",
+					"Ocorreu um erro inesperado. Favor contatar o administrador do sistema. :'(");
 			break;
 		case ERROR_FIND:
-			faces = new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Aviso", "Item não localizado. :'(");
+			faces = new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Item não localizado. :'(");
 			break;
 		}
 		FacesContext.getCurrentInstance().addMessage(null, faces);

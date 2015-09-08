@@ -9,9 +9,47 @@
 	<ui:define name="page_central">
 
 		<p:layoutUnit position="center">
+			
 			<h:form>
 
-				<p:panel header="Meus Eventos">
+				<p:panel visible="#{meusCertificadosController.size_maior_q_zero eq false ? true : false}">
+					<h1>Desculpe! Você Não se Inscreveu em Nenhum Evento</h1>
+				</p:panel>
+
+				<p:panel header="Meus Eventos" visible="#{meusEventosController.size_maior_q_zero}">
+				
+				<p:dataTable value="#{meusEventosController.usuarioEventos}" var="usuarioEvento"
+						paginator="true" paginatorAlwaysVisible="true" rows="5">
+
+						<p:column headerText="Código" width="80">
+							<p:outputLabel value="#{usuarioEvento.evento.id}" />
+						</p:column>
+
+						<p:column headerText="Nome" width="80">
+							<p:outputLabel value="#{usuarioEvento.evento.nome}" />
+						</p:column>
+
+						<p:column headerText="Coordenador" width="80">
+							<p:outputLabel value="#{usuarioEvento.evento.coordenador.nome}" />
+						</p:column>
+
+						<p:column headerText="Data Inicial" width="80">
+							<p:outputLabel value="#{usuarioEvento.evento.dtini}" />
+						</p:column>
+
+						<p:column headerText="Data Final" width="80">
+							<p:outputLabel value="#{usuarioEvento.evento.dtfim}" />
+						</p:column>
+
+						<p:column headerText="Cancelar Evento" width="150">
+							<!-- Cancelar Envento -->
+							<p:commandButton icon="ui-icon-trash" update="@form"
+								actionListener="#{meusEventosController.cancelarEvento(usuarioEvento)}">
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				
 				</p:panel>
 
 			</h:form>

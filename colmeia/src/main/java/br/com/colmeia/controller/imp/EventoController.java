@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Evento;
+import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.imp.EventoService;
 
 /**
@@ -24,23 +25,27 @@ public class EventoController extends Controller<Evento> {
 
 	private static final long serialVersionUID = 1L;
 	private EventoService service;
+	private Usuario coordenador;
 	private Evento evento;
 	private List<Evento> eventos;
 
 	public EventoController() {
 		service = new EventoService();
 		evento = new Evento();
+		coordenador = getCurrentInstanceUser();
 		buscar();
 	}
 
 	public void gravar() {
 		try {
 			evento.setId(null);
+			evento.setCoordenador(coordenador);
 			service.gravar(evento);
+			evento = new Evento();
 			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
-			message(FAILURE_RECORD);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -50,7 +55,7 @@ public class EventoController extends Controller<Evento> {
 			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
-			message(FAILURE_UPDATE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -60,7 +65,7 @@ public class EventoController extends Controller<Evento> {
 			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
-			message(FAILURE_DELETE);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -76,7 +81,7 @@ public class EventoController extends Controller<Evento> {
 			if (eventos != null)
 				setSize_maior_q_zero(eventos.size() > 0 ? true : false);
 		} catch (Exception e) {
-			message(ERROR_UNEXPECTED);
+			message(ERROR, e.getMessage());
 		}
 	}
 
@@ -107,6 +112,18 @@ public class EventoController extends Controller<Evento> {
 	public void setEvento(Evento evento) {
 		setEditando_registro(true);
 		this.evento = evento;
+	}
+
+	public Usuario getCoordenador() {
+		return coordenador;
+	}
+
+	public void setCoordenador(Usuario coordenador) {
+		this.coordenador = coordenador;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

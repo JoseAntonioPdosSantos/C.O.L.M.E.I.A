@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14412354424420" configfile="/colmeia/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="pages/login/login.xhtml" id="pf14412364121593" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14412364121604" path="/pages/login/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="faces/pages/borders/index.xhtml" id="pf14412364121605" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14412364121604" path="/pages/borders/index.xhtml"/>
-  <links id="pf14412364121604" target="pf14412364121605" source="pf14412364121593" outcome="usuario"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/registro/dlg_presenca.xhtml" x="122" y="754" id="pf14414727018521" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" outlinks="pf14416742504746 pf14416742504747 pf14416742504748 pf14416742504749" inlinks="pf14416742504747 pf14416742504749" path="/pages/login/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/borders/index.xhtml" id="pf144167425047410" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14416742504746" path="/pages/borders/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cadastro/cadastro.xhtml" id="pf144167425047411" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf14416742504748" path="/pages/cadastro/cadastro.xhtml"/>
+  <links id="pf14416742504746" target="pf144167425047410" source="pf14414727018521" outcome="usuario"/>
+  <links id="pf14416742504747" target="pf14414727018521" source="pf14414727018521" outcome="novo_usuario"/>
+  <links id="pf14416742504748" target="pf144167425047411" source="pf14414727018521" outcome="register_user"/>
+  <links id="pf14416742504749" target="pf14414727018521" source="pf14414727018521" outcome="sair"/>
 </pageflow:Pageflow>
