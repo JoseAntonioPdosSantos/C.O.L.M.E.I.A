@@ -42,12 +42,17 @@ public class UsuarioController extends Controller<Usuario> {
 
 	public String novoUsuario() {
 		try {
+			String senha = getUsuario().getSenha();
 			service.gravar(getUsuario());
+			Login login =new Login();
+			getUsuario().setSenha(senha);
+			login.setUsuario(getUsuario());
+			login.doLogin();
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 			return "";
 		}
-		return "/pages/login/login.xhtml";
+		return "/pages/borders/index.xhtml";
 	}
 
 	public void alterar() {

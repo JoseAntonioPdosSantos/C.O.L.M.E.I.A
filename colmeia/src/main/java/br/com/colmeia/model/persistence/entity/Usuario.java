@@ -28,7 +28,7 @@ public class Usuario extends EntidadeBase {
 	private String cpf;
 	@Column
 	private String ra;
-	@Column(unique=true)
+	@Column
 	private String email;
 	@Column(nullable=false)
 	private String senha;

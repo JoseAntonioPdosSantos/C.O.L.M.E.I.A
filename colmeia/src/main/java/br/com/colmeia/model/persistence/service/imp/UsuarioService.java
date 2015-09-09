@@ -71,7 +71,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 			return null;
 		if (validaCPFSenha(usuario.getCpf(), usuario.getSenha())) {
 			Criterion cpf = Restrictions.eq("cpf", usuario.getCpf());
-			Criterion senha = Restrictions.eq("senha", usuario.getSenha());
+			Criterion senha = Restrictions.eq("senha", Security.criptografarMD5(usuario.getSenha()));
 
 			List<Usuario> usuarios = getDao().findByCriteria(cpf, senha);
 			if (usuarios.size() == 1)
