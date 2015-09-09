@@ -219,3 +219,35 @@ line 1:19: unexpected token: NOW
 	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:328)
 	at br.com.colmeia.model.utils.HibernateUtil.getCurrentDate(HibernateUtil.java:42)
 	at br.com.asap.casosdeteste.Teste.main(Teste.java:7)
+2015-09-08 11:14:21,258[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:21,340[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:21,349[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:23,291[main] WARNorg.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl:93-HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2015-09-08 11:14:49,065[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:49,074[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:49,082[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:14:51,208[main] WARNorg.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl:93-HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2015-09-08 11:16:00,542[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:16:00,551[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:16:00,559[main] WARNorg.hibernate.ejb.HibernatePersistence:58-HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider [org.hibernate.ejb.HibernatePersistence]; use [org.hibernate.jpa.HibernatePersistenceProvider] instead.
+2015-09-08 11:16:02,503[main] WARNorg.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl:93-HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2015-09-08 11:16:06,483[main]ERRORorg.hibernate.hql.internal.ast.ErrorCounter:78-<AST>:0:0: unexpected end of subtree
+2015-09-08 11:16:06,487[main]ERRORorg.hibernate.hql.internal.ast.ErrorCounter:73-<AST>:0:0: unexpected end of subtree
+<AST>:0:0: unexpected end of subtree
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromElementList(HqlSqlBaseWalker.java:3572)
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromClause(HqlSqlBaseWalker.java:708)
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.query(HqlSqlBaseWalker.java:564)
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.selectStatement(HqlSqlBaseWalker.java:301)
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.statement(HqlSqlBaseWalker.java:249)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:278)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:206)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:158)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:126)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:88)
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:167)
+	at org.hibernate.internal.AbstractSessionImpl.getHQLQueryPlan(AbstractSessionImpl.java:301)
+	at org.hibernate.internal.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:236)
+	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:1800)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:328)
+	at br.com.colmeia.model.utils.HibernateUtil.getCurrentDate(HibernateUtil.java:42)
+	at br.com.asap.casosdeteste.Teste.main(Teste.java:9)

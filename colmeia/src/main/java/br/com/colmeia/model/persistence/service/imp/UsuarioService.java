@@ -9,13 +9,27 @@ import br.com.colmeia.model.persistence.dao.imp.UsuarioHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Perfil;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.generics.Service;
+import br.com.colmeia.model.security.Security;
+import br.com.colmeia.model.utils.Util;
 
 public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> {
 
 	public void gravar(Usuario entity) throws Exception {
-		if (entity != null)
+		if (validarEntity(entity)) {
 			entity.setPerfil(Perfil.USUARIO);
-		super.gravar(entity);
+			criptografarMD5(entity);
+			if(!isSenhaValida(entity)){
+				throw new Exception("Desculpe! O CPF digitado está inválido");
+			}
+			Util.isCPFValido(entity.getCpf());
+			controleBasicoAuditoria(entity);
+			getDao().insert(entity);
+		}
+	}
+	
+	private void criptografarMD5(Usuario entity){
+		entity.setSenha(Security.criptografarMD5(entity.getSenha()));
+		entity.setConfirmarSenha(Security.criptografarMD5(entity.getConfirmarSenha()));
 	}
 
 	public boolean validarEntity(Usuario entity) throws Exception {
@@ -25,39 +39,30 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em branco");
-		if (entity.getCpf() == null)
+		if (entity.getCpf() == null || entity.getCpf().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'CPF' é obrigatório");
-		if (!isCPF(entity.getCpf()))
-			throw new Exception("Desculpe! O CPF digitado é inválido. Tente de novo");
-		if (entity.getCurso() == null)
-			throw new Exception("Desculpe! O campo 'Curso' é obrigatório");
-		if (entity.getInstituicao() == null)
-			throw new Exception("Desculpe! O campo 'Instituiçao' é obrigatório");
-		if (entity.getEmail() == null)
-			throw new Exception("Desculpe! O campo 'E-mail' é obrigatório");
-		if (entity.getSenha() == null)
+//		if (entity.getCurso() == null)
+//			throw new Exception("Desculpe! O campo 'Curso' é obrigatório");
+//		if (entity.getInstituicao() == null)
+//			throw new Exception("Desculpe! O campo 'Instituiçao' é obrigatório");
+//		if (entity.getEmail() == null)
+//			throw new Exception("Desculpe! O campo 'E-mail' é obrigatório");
+		if (entity.getSenha() == null || entity.getSenha().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Senha' é obrigatório");
-		if (entity.getConfirmarSenha() == null)
+		if(entity.getConfirmarSenha() == null || entity.getConfirmarSenha().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Confirmar Senha' é obrigatório");
-		if (isSenhaValida(entity.getSenha(), entity.getConfirmarSenha()))
-			throw new Exception("Desculpe! Parece que você não digitou sua senha corretamente");
-		;
 		return true;
 	}
 
-	private boolean isSenhaValida(String senha, String confirmarSenha) throws Exception {
+	private boolean isSenhaValida(Usuario entity) throws Exception {
+		String senha = entity.getSenha();
+		String confirmarSenha = entity.getConfirmarSenha();
 		if (senha.length() < 4)
 			throw new Exception("Desculpe! Sua senha está muito pequena. Insira uma senha com mais de 4 digitos");
 		if (senha.contains("1234") || senha.contains("4321"))
 			throw new Exception("Desculpe! Sua senha não pode conter caracter sequencial");
 		if (!senha.equals(confirmarSenha))
 			throw new Exception("Desculpe! Parece que sua senha não foi digitada corretamente. Tente de novo");
-		return true;
-	}
-
-	private boolean isCPF(String cpf) throws Exception {
-		if(cpf.length()!=11)
-			throw new Exception("Desculpe! Parece que seu CPF está inválido. Tente de novo");
 		return true;
 	}
 
@@ -76,11 +81,9 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 	}
 
 	private boolean validaCPFSenha(String cpf, String senha) {
-		if (cpf == null)
+		if (Util.isCPFValido(cpf))
 			return false;
 		if (senha == null)
-			return false;
-		if (cpf.trim().isEmpty())
 			return false;
 		if (senha.trim().isEmpty())
 			return false;

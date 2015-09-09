@@ -45,6 +45,7 @@ public class UsuarioController extends Controller<Usuario> {
 			service.gravar(getUsuario());
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
+			return "";
 		}
 		return "/pages/login/login.xhtml";
 	}
