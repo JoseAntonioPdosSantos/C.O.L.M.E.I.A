@@ -14,7 +14,6 @@ import br.com.colmeia.model.persistence.entity.UsuarioEvento;
 import br.com.colmeia.model.persistence.service.imp.AtividadeEventoService;
 import br.com.colmeia.model.persistence.service.imp.EventoService;
 import br.com.colmeia.model.persistence.service.imp.UsuarioEventoService;
-import br.com.colmeia.model.persistence.service.imp.UsuarioService;
 
 @ManagedBean
 @ViewScoped
@@ -77,8 +76,10 @@ public class PresencaController extends Controller<UsuarioEvento> {
 	public void irParaAbaCkeckIn(AtividadeEvento atividadeEvento) {
 		setAba_presenca(true);
 		setAtividadeEvento(atividadeEvento);
+		usuario = new Usuario();
 		usuarioEvento = new UsuarioEvento();
-		usuarioEvento.setUsuario(usuario);
+		System.out.println(usuario);
+		System.out.println(usuarioEvento);
 		buscarUsuariosEventos();
 	}
 
@@ -166,17 +167,10 @@ public class PresencaController extends Controller<UsuarioEvento> {
 		setEditando_registro(false);
 	}
 
-	private void buscarUsuario(){
-//		usuario = UsuarioService.class.newInstance().buscar(usuario);
-	}
-	
 	@Override
 	public void buscar() {
 		try {
-			usuarioEvento.setAtividadeEvento(getAtividadeEvento());
-			usuarioEvento.setAtivo(true);
-			usuarioEvento.setUsuario(getUsuario());
-			usuariosEventos = service.buscar(usuarioEvento);
+			usuariosEventos = service.buscarUsuarioEventoPorUsuarioEAtividadeEvento(usuario,atividadeEvento);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}

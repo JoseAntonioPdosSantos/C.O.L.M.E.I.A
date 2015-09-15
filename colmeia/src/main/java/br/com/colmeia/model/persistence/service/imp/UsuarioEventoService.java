@@ -2,8 +2,6 @@ package br.com.colmeia.model.persistence.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -103,8 +101,8 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 
 	public List<UsuarioEvento> buscarUsuarioEventoPorUsuarioEAtividadeEvento(Usuario usuario,
 			AtividadeEvento atividadeEvento) throws Exception {
-		List<UsuarioEvento> usuariosEvento = new ArrayList<UsuarioEvento>();
 		List<UsuarioEvento> usuariosEvento_ = new ArrayList<UsuarioEvento>();
+		List<UsuarioEvento> usuariosEvento = new ArrayList<UsuarioEvento>();
 		List<Usuario> usuarios = UsuarioService.class.newInstance().buscar(usuario);
 
 		for (Usuario usu : usuarios) {
@@ -112,12 +110,12 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 			usuarioEvento.setUsuario(usu);
 			usuarioEvento.setAtividadeEvento(atividadeEvento);
 			usuarioEvento.setAtivo(true);
-			usuariosEvento = buscar(usuarioEvento);
-			for (UsuarioEvento usuEvento : usuariosEvento)
-				if (!usuariosEvento_.contains(usuEvento))
-					usuariosEvento_.add(usuEvento);
+			usuariosEvento_ = buscar(usuarioEvento);
+			for (UsuarioEvento usuEvento : usuariosEvento_)
+				if (!usuariosEvento.contains(usuEvento))
+					usuariosEvento.add(usuEvento);
 		}
-		return usuariosEvento_;
+		return usuariosEvento;
 	}
 
 	@Override

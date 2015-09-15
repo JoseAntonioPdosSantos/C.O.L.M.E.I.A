@@ -112,13 +112,13 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 				id = Restrictions.eq("id", entity.getId());
 			}
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
-				nome = Restrictions.eq("nome", entity.getNome());
+				nome = Restrictions.ilike("nome", "%"+entity.getNome()+"%");
 			}
 			if (entity.getCpf() != null && !entity.getCpf().trim().isEmpty()) {
 				cpf = Restrictions.eq("cpf", entity.getCpf());
 			}
 			if (entity.getRa() != null && !entity.getRa().trim().isEmpty()) {
-				ra = Restrictions.eq("ra", entity.getRa());
+				ra = Restrictions.ilike("ra", entity.getRa());
 			}
 			if (entity.getEmail() != null && !entity.getEmail().trim().isEmpty()) {
 				email = Restrictions.eq("email", entity.getEmail());

@@ -34,7 +34,7 @@ public class CursoService extends Service<Curso, Long, CursoHibernateDAO> {
 				id = Restrictions.eq("id", entity.getId());
 			}
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
-				nome = Restrictions.eq("nome", entity.getNome());
+				nome = Restrictions.ilike("nome", entity.getNome());
 			}
 		}
 		return getDao().findByCriteria(id, nome);

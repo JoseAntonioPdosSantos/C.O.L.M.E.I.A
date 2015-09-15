@@ -68,9 +68,9 @@ and open the template in the editor.
 
 									<p:commandButton value="Novo" update="@form" ajax="true" process="@this" immediate="true"
 										actionListener="#{usuarioEventoController.buscarAtividadesDesteEvento(eventoVigente)}"
-										onclick="PF('dlg_atividades_de_evento').show();" 
 										icon="ui-icon-circle-plus" />
 								</p:column>
+<!-- 										onclick="PF('dlg_atividades_de_evento').show();"  -->
 
 							</p:dataTable>
 						</p:panel>
@@ -160,17 +160,17 @@ and open the template in the editor.
 
 		</p:layoutUnit>
 
-			<h:form>
-				<!-- Dialog Cadastro em Atividades de Evento -->
-				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true" width="80%"
-					header="Atividades do Evento #{usuarioEventoController.evento.nome}"
-					resizable="false" onShow="" modal="true" showEffect="clip" hideEffect="clip">
-					<p:ajax event="close" update="@form" />
-					<ui:insert>
-						<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" />
-					</ui:insert>
-				</p:dialog>
-			</h:form>
+<!-- 			<h:form> -->
+<!-- 				Dialog Cadastro em Atividades de Evento -->
+<!-- 				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true" width="80%" -->
+<!-- 					header="Atividades do Evento #{usuarioEventoController.evento.nome}" -->
+<!-- 					resizable="false" onShow="" modal="true" showEffect="clip" hideEffect="clip"> -->
+<!-- 					<p:ajax event="load" update="@form" /> -->
+<!-- 					<ui:insert> -->
+<!-- 						<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" /> -->
+<!-- 					</ui:insert> -->
+<!-- 				</p:dialog> -->
+<!-- 			</h:form> -->
 
 	</ui:define>
 </ui:composition>

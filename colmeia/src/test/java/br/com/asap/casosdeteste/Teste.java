@@ -2,8 +2,6 @@ package br.com.asap.casosdeteste;
 
 import java.util.List;
 
-import org.hibernate.engine.transaction.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
-
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.entity.UsuarioEvento;

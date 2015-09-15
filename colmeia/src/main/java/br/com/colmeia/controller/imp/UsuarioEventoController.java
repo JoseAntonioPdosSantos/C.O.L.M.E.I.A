@@ -5,6 +5,10 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
@@ -99,8 +103,17 @@ public class UsuarioEventoController extends Controller<UsuarioEvento> {
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
+		
+		RequestContext.getCurrentInstance().openDialog("cadastro_atividade_evento");
 	}
 
+	public void onCarChosen(SelectEvent event) {
+        UsuarioEvento UsuarioEvento = (UsuarioEvento) event.getObject();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Id:" );
+         
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
 	public void inscrever(AtividadeEvento atividadeEvento) {
 		try {
 			service.inscreverEmUmaAtividadeDeEvento(atividadeEvento, usuario);
