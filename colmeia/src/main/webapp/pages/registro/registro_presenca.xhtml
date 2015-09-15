@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -27,11 +22,12 @@ and open the template in the editor.
 					<p:tab title="Eventos">
 
 						<p:panel
-							visible="#{presencaController.size_maior_q_zero eq false ? true : false}">
+							visible="#{presencaController.eventos_size_maior_q_zero eq false ? true : false}">
 							<h1>Desculpe! Não Encontramos Nenhum Evento Cadastrado</h1>
 						</p:panel>
 
-						<p:panel id="pesquisa_eventos" header="Eventos" visible="#{presencaController.size_maior_q_zero}">
+						<p:panel header="Eventos"
+							visible="#{presencaController.eventos_size_maior_q_zero}">
 							<p:dataTable value="#{presencaController.eventos}" var="evento"
 								paginator="true" paginatorAlwaysVisible="true" rows="5">
 
@@ -56,10 +52,10 @@ and open the template in the editor.
 								</p:column>
 
 								<p:column headerText="Opções" width="150">
-									<!-- Ir para lista de presença -->
-									<p:commandButton value="Registrar" icon="ui-icon-reflash"
+									<!-- Ir para lista de atividades do evento -->
+									<p:commandButton value="Ver Atividades" icon="ui-icon-reflash"
 										update="@form"
-										actionListener="#{presencaController.irParaAbaDePresenca(evento)}">
+										actionListener="#{presencaController.irParaAbaAtividadesDoEvento(evento)}">
 									</p:commandButton>
 								</p:column>
 
@@ -69,41 +65,93 @@ and open the template in the editor.
 
 					</p:tab>
 
-					<p:tab id="tab_registro_presenca" title="Registrar Presença"
+					<p:tab
+						title="Atividades do Evento #{presencaController.evento.nome}"
+						rendered="#{presencaController.aba_atividades_evento}">
+
+						<p:panel
+							visible="#{presencaController.atividades_evento_size_maior_q_zero eq false ? true : false}">
+							<h1>Desculpe! Não Encontramos Nenhuma Atividade de Evento
+								Cadastrada</h1>
+						</p:panel>
+
+						<p:panel header="Eventos"
+							visible="#{presencaController.atividades_evento_size_maior_q_zero}">
+							<p:dataTable value="#{presencaController.atividadesEvento}"
+								var="atividadeEvento" paginator="true"
+								paginatorAlwaysVisible="true" rows="5">
+
+								<p:column headerText="Código" width="10">
+									<p:outputLabel value="#{atividadeEvento.id}" />
+								</p:column>
+
+								<p:column headerText="Nome" width="80">
+									<p:outputLabel value="#{atividadeEvento.nome}" />
+								</p:column>
+
+								<p:column headerText="Coordenador" width="80">
+									<p:outputLabel value="#{atividadeEvento.evento.nome}" />
+								</p:column>
+
+								<p:column headerText="Data Inicial" width="80">
+									<p:outputLabel value="#{atividadeEvento.dataInicial}" />
+								</p:column>
+
+								<p:column headerText="Data Final" width="80">
+									<p:outputLabel value="#{atividadeEvento.dataFinal}" />
+								</p:column>
+
+								<p:column headerText="Opções" width="150">
+									<!-- Ir para lista de Controle de Presença -->
+									<p:commandButton value="Presença" icon="ui-icon-reflash"
+										update="@form"
+										actionListener="#{presencaController.irParaAbaCkeckIn(atividadeEvento)}">
+									</p:commandButton>
+								</p:column>
+
+							</p:dataTable>
+
+						</p:panel>
+
+
+					</p:tab>
+
+					<p:tab
+						title="Check-In para Atividade #{presencaController.atividadeEvento.nome}"
 						rendered="#{presencaController.aba_presenca}">
 
 						<p:panel
 							visible="#{presencaController.size_maior_q_zero eq false ? true : false}">
-							<h1>Desculpe! Não Há Inscritos para Este Evento</h1>
+							<h1>Desculpe! Não Há Inscritos Para Esta Atividade de Evento</h1>
 						</p:panel>
 
-						<p:panel id="pesquisa_usuario" header="Localizar Usuario">
+						<p:panel header="Localizar Usuario">
 
 							<h:panelGrid columns="4">
 
 								<p:outputLabel value="Código:" />
-								<p:inputText id="txt_usuario_evento_id" size="10"
-									value="#{presencaController.usuarioEvento.id}"
+								<p:inputText id="txt_usuario_id" size="10"
+									value="#{presencaController.usuario.id}"
 									disabled="#{presencaController.editando_registro}">
-									<p:watermark for="txt_usuario_evento_id" value="Código"></p:watermark>
+									<p:watermark for="txt_usuario_id" value="Código"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel value="Nome:" />
-								<p:inputText id="txt_usuario_evento_nome" size="40"
-									value="#{presencaController.usuarioEvento.usuario.nome}">
-									<p:watermark for="txt_usuario_evento_nome" value="Nome"></p:watermark>
+								<p:inputText id="txt_usuario_nome" size="40"
+									value="#{presencaController.usuario.nome}">
+									<p:watermark for="txt_usuario_nome" value="Nome"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel value="CPF:" />
-								<p:inputText id="txt_usuario_evento_cpf" size="20"
-									value="#{presencaController.usuarioEvento.usuario.cpf}">
-									<p:watermark for="txt_usuario_evento_cpf" value="CPF"></p:watermark>
+								<p:inputText id="txt_usuario_cpf" size="20"
+									value="#{presencaController.usuario.cpf}">
+									<p:watermark for="txt_usuario_cpf" value="CPF"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel value="R.A.:" />
-								<p:inputText id="txt_usuario_evento_ra" size="20"
-									value="#{presencaController.usuarioEvento.usuario.ra}">
-									<p:watermark for="txt_usuario_evento_ra" value="R.A."></p:watermark>
+								<p:inputText id="txt_usuario_ra" size="20"
+									value="#{presencaController.usuario.ra}">
+									<p:watermark for="txt_usuario_ra" value="R.A."></p:watermark>
 								</p:inputText>
 
 							</h:panelGrid>
@@ -119,7 +167,8 @@ and open the template in the editor.
 
 						</p:panel>
 
-						<p:panel id="pesquisa_usuarios" header="Controle de Presença"
+						<p:panel id="pesquisa_usuarios"
+							header="Marcar Presença para o Evento: #{presencaController.evento.nome}"
 							visible="#{presencaController.size_maior_q_zero}">
 							<p:dataTable value="#{presencaController.usuariosEventos}"
 								var="usuarioEvento" paginator="true"

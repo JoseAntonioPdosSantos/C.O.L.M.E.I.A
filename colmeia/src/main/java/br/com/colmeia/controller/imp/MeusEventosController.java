@@ -42,8 +42,11 @@ public class MeusEventosController extends Controller<Evento> {
 
 	public void cancelarEvento(UsuarioEvento usuarioEvento) {
 		try {
-			UsuarioEventoController.class.newInstance().cancelarEvento(usuarioEvento);
+			UsuarioEventoService.class.newInstance().cancelarEvento(usuarioEvento);
+			buscar();
 		} catch (InstantiationException | IllegalAccessException e) {
+			message(ERROR, e.getMessage());
+		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
 	}

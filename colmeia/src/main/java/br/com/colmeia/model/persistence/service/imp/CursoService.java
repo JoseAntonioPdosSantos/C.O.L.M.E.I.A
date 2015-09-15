@@ -19,7 +19,8 @@ public class CursoService extends Service<Curso, Long, CursoHibernateDAO> {
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 
 		if (entity.getNome().trim().isEmpty())
-			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+			throw new Exception(
+					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		return true;
 	}
 

@@ -19,13 +19,16 @@
 				<p:submenu id="submenu_evento" label="Eventos" rendered="#{menuController.getAcesso('usuario')}">
 					<p:menuitem id="menu_inscricao_evento" url="/pages/cadastro/cadastro_usuario_evento.xhtml" value="Inscrição de Eventos" />
 				</p:submenu>
-				<p:submenu id="submenu_registro" label="Registro" rendered="#{menuController.getAcesso('organizador')}">
-					<p:menuitem id="menu_presenca" url="/pages/registro/registro_presenca.xhtml" value="Registrar Presença" />
+				<p:submenu id="submenu_registro" label="Check-In" rendered="#{menuController.getAcesso('organizador')}">
+					<p:menuitem id="menu_presenca" url="/pages/registro/registro_presenca.xhtml" value="Check-In" />
 				</p:submenu>
 				<p:submenu id="submenu_cadastro" label="Cadastro" rendered="#{menuController.getAcesso('coordenador')}">
-					<p:menuitem id="menu_cadastro_evento" url="/pages/cadastro/cadastro_evento.xhtml"  value="Cadastrar Evento" />
-					<p:menuitem id="menu_cadastro_curso" url="/pages/cadastro/cadastro_curso.xhtml" value="Cadastro de Curso" />
-					<p:menuitem id="menu_cadastro_instituicao" url="/pages/cadastro/cadastro_instituicao.xhtml" value="Cadastro de Instituição" />
+					<p:menuitem url="/pages/cadastro/cadastro_evento.xhtml"  value="Cadastrar Evento" />
+					<p:menuitem url="/pages/cadastro/cadastro_curso.xhtml" value="Cadastro de Curso" />
+					<p:menuitem url="/pages/cadastro/cadastro_instituicao.xhtml" value="Cadastro de Instituição" />
+					<p:menuitem url="/pages/cadastro/cadastro_atividade_evento.xhtml" value="Cadastro do Tipo de Atividade" />
+					<p:menuitem url="/pages/cadastro/cadastro_ingresso.xhtml" value="Cadastro de Ingresso" />
+					<p:menuitem url="/pages/cadastro/cadastro_palestrante.xhtml" value="Cadastro de Palestrante" />
 				</p:submenu>
 			</p:panelMenu>
 		</h:form>

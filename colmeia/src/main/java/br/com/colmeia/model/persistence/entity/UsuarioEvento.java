@@ -9,10 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-/**
- *
- * @author Avell B155 MAX
- */
 @Entity
 public class UsuarioEvento extends EntidadeBase {
 
@@ -23,7 +19,7 @@ public class UsuarioEvento extends EntidadeBase {
 	private Long id;
 	@JoinColumn
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Evento evento;
+	private AtividadeEvento atividadeEvento;
 	@JoinColumn
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario usuario;
@@ -37,12 +33,12 @@ public class UsuarioEvento extends EntidadeBase {
 		this.id = id;
 	}
 
-	public Evento getEvento() {
-		return evento;
+	public AtividadeEvento getAtividadeEvento() {
+		return atividadeEvento;
 	}
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
+	public void setAtividadeEvento(AtividadeEvento atividadeEvento) {
+		this.atividadeEvento = atividadeEvento;
 	}
 
 	public Usuario getUsuario() {

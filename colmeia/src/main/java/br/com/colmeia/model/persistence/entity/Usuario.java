@@ -99,6 +99,8 @@ public class Usuario extends EntidadeBase {
 	}
 
 	public void setCpf(String cpf) {
+		if(cpf != null)
+			cpf = cpf.replace(".", "").replace("-", "");
 		this.cpf = cpf;
 	}
 

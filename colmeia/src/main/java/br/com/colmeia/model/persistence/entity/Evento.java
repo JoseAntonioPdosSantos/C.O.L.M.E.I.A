@@ -24,7 +24,7 @@ public class Evento extends EntidadeBase {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "evento_seq")
 	private Long id;
 	private String nome;
-	@JoinColumn
+	@JoinColumn(nullable=false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario coordenador;
 	private Date dtini;

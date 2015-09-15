@@ -194,14 +194,14 @@
 									icon="ui-icon-alert" />
 							</p:commandButton>
 							<!-- Marcar como Organizador -->
-							<p:commandButton value="O" icon="ui-icon-user" update="@form:pesquisa"
+							<p:commandButton value="O" icon="ui-icon-user" update="@form"
 								actionListener="#{usuarioController.cadastrarPerfilOrganizador(usuario)}">
 								<p:confirm header="Confirmar"
 									message="Tem certeza que deseja marcar este usuário como organizador?"
 									icon="ui-icon-alert" />
 							</p:commandButton>
 							<!-- Marcar como Coordenador -->
-							<p:commandButton value="C" icon="ui-icon-user" update="@form:pesquisa"
+							<p:commandButton value="C" icon="ui-icon-user" update="@form"
 								actionListener="#{usuarioController.cadastrarPerfilCoordenador(usuario)}"
 								rendered="#{usuarioController.getAcesso('administrador')}">
 								<p:confirm header="Confirmar"
@@ -209,7 +209,7 @@
 									icon="ui-icon-alert" />
 							</p:commandButton>
 							<!-- Marcar como Administrador -->
-							<p:commandButton value="A" icon="ui-icon-user" update="@form:pesquisa"
+							<p:commandButton value="A" icon="ui-icon-user" update="@form"
 								actionListener="#{usuarioController.cadastrarPerfilAdministrador(usuario)}"
 								rendered="#{usuarioController.getAcesso('administrador')}">
 								<p:confirm header="Confirmar"

@@ -15,6 +15,7 @@ and open the template in the editor.
 <ui:composition template="/pages/borders/index.xhtml">
 
 	<ui:define name="page_central">
+	
 		<p:layoutUnit position="center">
 
 			<h:form>
@@ -26,12 +27,13 @@ and open the template in the editor.
 
 					<p:tab title="Eventos Vigentes">
 
-						<p:panel 
+						<p:panel
 							visible="#{usuarioEventoController.evento_vigente_size_maior_q_zero eq true ? false : true}">
 							<h1>Desculpe! Não Há Eventos Disponíveis</h1>
 						</p:panel>
 
-						<p:panel id="eventos_vigente" header="Lista de Eventos Vigentes" styleClass="center"
+						<p:panel id="eventos_vigente" header="Lista de Eventos Vigentes"
+							styleClass="center"
 							visible="#{usuarioEventoController.evento_vigente_size_maior_q_zero}">
 							<p:dataTable value="#{usuarioEventoController.eventosVigentes}"
 								var="eventoVigente" paginator="true"
@@ -63,6 +65,11 @@ and open the template in the editor.
 											message="Tem certeza que deseja se inscrever neste evento?"
 											icon="ui-icon-alert" />
 									</p:commandButton>
+
+									<p:commandButton value="Novo" update="@form" ajax="true" process="@this" immediate="true"
+										actionListener="#{usuarioEventoController.buscarAtividadesDesteEvento(eventoVigente)}"
+										onclick="PF('dlg_atividades_de_evento').show();" 
+										icon="ui-icon-circle-plus" />
 								</p:column>
 
 							</p:dataTable>
@@ -107,26 +114,31 @@ and open the template in the editor.
 
 				</p:tabView>
 
-				<p:panel id="meu_eventos" header="Lista dos meus Eventos" styleClass="center"
+				<p:panel id="meu_eventos" header="Lista dos meus Eventos"
+					styleClass="center"
 					visible="#{usuarioEventoController.size_maior_q_zero}">
 					<p:dataTable value="#{usuarioEventoController.usuarioEventos}"
 						var="usuarioEvento" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
+						<p:column headerText="Atividade" width="80">
+							<p:outputLabel value="#{usuarioEvento.atividadeEvento.nome}" />
+						</p:column>
+
 						<p:column headerText="Evento" width="80">
-							<p:outputLabel value="#{usuarioEvento.evento.nome}" />
+							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.nome}" />
 						</p:column>
 
 						<p:column headerText="Coordenador" width="80">
-							<p:outputLabel value="#{usuarioEvento.evento.coordenador.nome}" />
+							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
 						</p:column>
 
 						<p:column headerText="Data Inicial" width="80">
-							<p:outputLabel value="#{usuarioEvento.evento.dtini}" />
+							<p:outputLabel value="#{usuarioEvento.atividadeEvento.dataInicial}" />
 						</p:column>
 
 						<p:column headerText="Data Final" width="80">
-							<p:outputLabel value="#{usuarioEvento.evento.dtfim}" />
+							<p:outputLabel value="#{usuarioEvento.atividadeEvento.dataFinal}" />
 						</p:column>
 
 						<p:column headerText="Inscrições" width="150">
@@ -145,7 +157,21 @@ and open the template in the editor.
 
 				</p:panel>
 			</h:form>
+
 		</p:layoutUnit>
+
+			<h:form>
+				<!-- Dialog Cadastro em Atividades de Evento -->
+				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true" width="80%"
+					header="Atividades do Evento #{usuarioEventoController.evento.nome}"
+					resizable="false" onShow="" modal="true" showEffect="clip" hideEffect="clip">
+					<p:ajax event="close" update="@form" />
+					<ui:insert>
+						<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" />
+					</ui:insert>
+				</p:dialog>
+			</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

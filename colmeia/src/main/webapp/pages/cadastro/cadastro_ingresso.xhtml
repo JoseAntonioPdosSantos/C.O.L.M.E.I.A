@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+
+		<p:layoutUnit position="center">
+
+			<h:form>
+
+				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
+
+				<p:panel id="cadastro" header="Cadastro de Curso" styleClass="center">
+
+					<h:panelGrid columns="4">
+
+						<p:outputLabel value="Código:" />
+						<p:inputText id="txt_curso_id" size="10"
+							value="#{cursoController.curso.id}"
+							disabled="#{cursoController.editando_registro}">
+							<p:watermark for="txt_curso_id" value="Código"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel value="Nome:" />
+						<p:inputText id="txt_curso_nome" size="40"
+							value="#{cursoController.curso.nome}">
+							<p:watermark for="txt_curso_nome" value="Nome"></p:watermark>
+						</p:inputText>
+
+
+					</h:panelGrid>
+
+					<p:panel>
+						<h:panelGrid columns="4">
+							<p:commandButton value="Cadastrar" update="@form"
+								actionListener="#{cursoController.gravar}"
+								rendered="#{cursoController.editando_registro eq true ? false : true}" />
+							<p:commandButton value="Alterar" update="@form"
+								actionListener="#{cursoController.alterar}"
+								rendered="#{cursoController.editando_registro}" />
+							<p:commandButton value="Pesquisar" update="@form:pesquisa"
+								actionListener="#{cursoController.buscar}" />
+							<p:commandButton value="Limpar" update="@form:cadastro"
+								actionListener="#{cursoController.limpar}" />
+						</h:panelGrid>
+					</p:panel>
+
+				</p:panel>
+
+				<p:panel id="pesquisa" header="Lista de Cursos"
+					visible="#{cursoController.size_maior_q_zero}">
+					<p:dataTable value="#{cursoController.cursos}"
+						var="curso" paginator="true" paginatorAlwaysVisible="true"
+						rows="5">
+
+						<p:column headerText="Código" width="80">
+							<p:outputLabel value="#{curso.id}" />
+						</p:column>
+
+						<p:column headerText="Nome" width="80">
+							<p:outputLabel value="#{curso.nome}" />
+						</p:column>
+
+						<p:column headerText="Opções" width="150">
+							<!-- Editar -->
+							<p:commandButton icon="ui-icon-refresh" alt="Editar"
+								title="Editar" immediate="true" process="@this"
+								update="@form:cadastro">
+								<f:setPropertyActionListener
+									target="#{cursoController.curso}"
+									value="#{curso}" />
+							</p:commandButton>
+							<!-- Excluir -->
+							<p:commandButton icon="ui-icon-trash" update="@form:pesquisa"
+								actionListener="#{cursoController.apagar(curso)}">
+								<p:confirm header="Confirmar"
+									message="Tem certeza que deseja excluír?" icon="ui-icon-alert" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>

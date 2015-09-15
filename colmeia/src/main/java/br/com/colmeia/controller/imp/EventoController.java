@@ -15,10 +15,8 @@ import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.imp.EventoService;
 
-/**
- *
- * @author CaioAvell G1511 FIRE
- */
+
+
 @ManagedBean
 @ViewScoped
 public class EventoController extends Controller<Evento> {
@@ -91,10 +89,6 @@ public class EventoController extends Controller<Evento> {
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
-	}
-
-	public String voltar() {
-		return "";
 	}
 
 	public EventoService getService() {
