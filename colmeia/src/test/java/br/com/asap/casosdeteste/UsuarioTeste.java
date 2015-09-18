@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import br.com.colmeia.model.persistance.dao.UsuarioDAO;
-import br.com.colmeia.model.persistence.dao.imp.UsuarioHibernateDAO;
+import br.com.colmeia.model.persistence.dao.implementacao.UsuarioHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Perfil;
 import br.com.colmeia.model.persistence.entity.Usuario;
 

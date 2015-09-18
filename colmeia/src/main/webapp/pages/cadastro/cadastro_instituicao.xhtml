@@ -16,23 +16,29 @@
 
 				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
 
-				<p:panel id="cadastro" header="Cadastro de Instituição" styleClass="center">
+				<p:panel id="cadastro" header="Cadastro de Instituição"
+					styleClass="center">
 
 					<h:panelGrid columns="4">
 
 						<p:outputLabel value="Código:" />
 						<p:inputText id="txt_instituicao_id" size="10"
-							value="#{instituicaoController.instituicao.id}"
+							value="#{instituicaoController.entidade.id}"
 							disabled="#{instituicaoController.editando_registro}">
 							<p:watermark for="txt_instituicao_id" value="Código"></p:watermark>
 						</p:inputText>
 
 						<p:outputLabel value="Nome:" />
 						<p:inputText id="txt_instituicao_nome" size="40"
-							value="#{instituicaoController.instituicao.nome}">
+							value="#{instituicaoController.entidade.nome}">
 							<p:watermark for="txt_instituicao_nome" value="Nome"></p:watermark>
 						</p:inputText>
 
+						<p:outputLabel value="Instituição Estácio de Sá:" />
+						<p:selectOneRadio value="#{instituicaoController.entidade.estacio}">
+							<f:selectItem itemLabel="Sim" itemValue="true" />
+							<f:selectItem itemLabel="Não" itemValue="false" />
+						</p:selectOneRadio>
 
 					</h:panelGrid>
 
@@ -55,7 +61,7 @@
 
 				<p:panel id="pesquisa" header="Lista de Instituições"
 					visible="#{instituicaoController.size_maior_q_zero}">
-					<p:dataTable value="#{instituicaoController.instituicoes}"
+					<p:dataTable value="#{instituicaoController.entidades}"
 						var="instituicao" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
@@ -73,7 +79,7 @@
 								title="Editar" immediate="true" process="@this"
 								update="@form:cadastro">
 								<f:setPropertyActionListener
-									target="#{instituicaoController.instituicao}"
+									target="#{instituicaoController.entidade}"
 									value="#{instituicao}" />
 							</p:commandButton>
 							<!-- Excluir -->

@@ -81,7 +81,7 @@
 	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:1800)
 	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:342)
 	at br.com.colmeia.model.utils.HibernateUtil.getCurrentDate(HibernateUtil.java:42)
-	at br.com.colmeia.model.persistence.dao.imp.UsuarioHibernateDAO.<init>(UsuarioHibernateDAO.java:25)
+	at br.com.colmeia.model.persistence.dao.implementacao.UsuarioHibernateDAO.<init>(UsuarioHibernateDAO.java:25)
 	at br.com.asap.casosdeteste.UsuarioTeste.insertTest(UsuarioTeste.java:27)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)

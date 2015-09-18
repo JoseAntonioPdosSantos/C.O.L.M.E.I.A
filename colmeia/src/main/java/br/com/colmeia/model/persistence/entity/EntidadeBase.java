@@ -20,6 +20,10 @@ public abstract class EntidadeBase implements Serializable {
 	@Version
 	protected Timestamp versao;
 
+	public abstract void setId(Long id);
+	
+	public abstract Long getId();
+	
 	public Timestamp getVersao() {
 		return versao;
 	}

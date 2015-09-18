@@ -5,8 +5,8 @@ import java.util.List;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.entity.UsuarioEvento;
-import br.com.colmeia.model.persistence.service.imp.AtividadeEventoService;
-import br.com.colmeia.model.persistence.service.imp.UsuarioEventoService;
+import br.com.colmeia.model.persistence.service.implementacao.AtividadeEventoService;
+import br.com.colmeia.model.persistence.service.implementacao.UsuarioEventoService;
 
 public class Teste {
 

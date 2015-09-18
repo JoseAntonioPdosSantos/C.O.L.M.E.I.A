@@ -21,16 +21,16 @@
 					<h:panelGrid columns="4">
 
 						<p:outputLabel value="Código:" />
-						<p:inputText id="txt_curso_id" size="10"
-							value="#{cursoController.curso.id}"
+						<p:inputText id="txt_entidade_id" size="10"
+							value="#{cursoController.entidade.id}"
 							disabled="#{cursoController.editando_registro}">
-							<p:watermark for="txt_curso_id" value="Código"></p:watermark>
+							<p:watermark for="txt_entidade_id" value="Código"></p:watermark>
 						</p:inputText>
 
 						<p:outputLabel value="Nome:" />
-						<p:inputText id="txt_curso_nome" size="40"
-							value="#{cursoController.curso.nome}">
-							<p:watermark for="txt_curso_nome" value="Nome"></p:watermark>
+						<p:inputText id="txt_entidade_nome" size="40"
+							value="#{cursoController.entidade.nome}">
+							<p:watermark for="txt_entidade_nome" value="Nome"></p:watermark>
 						</p:inputText>
 
 
@@ -55,16 +55,16 @@
 
 				<p:panel id="pesquisa" header="Lista de Cursos"
 					visible="#{cursoController.size_maior_q_zero}">
-					<p:dataTable value="#{cursoController.cursos}"
-						var="curso" paginator="true" paginatorAlwaysVisible="true"
+					<p:dataTable value="#{cursoController.entidades}"
+						var="entidade" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
 						<p:column headerText="Código" width="80">
-							<p:outputLabel value="#{curso.id}" />
+							<p:outputLabel value="#{entidade.id}" />
 						</p:column>
 
 						<p:column headerText="Nome" width="80">
-							<p:outputLabel value="#{curso.nome}" />
+							<p:outputLabel value="#{entidade.nome}" />
 						</p:column>
 
 						<p:column headerText="Opções" width="150">
@@ -73,12 +73,12 @@
 								title="Editar" immediate="true" process="@this"
 								update="@form:cadastro">
 								<f:setPropertyActionListener
-									target="#{cursoController.curso}"
-									value="#{curso}" />
+									target="#{cursoController.entidade}"
+									value="#{entidade}" />
 							</p:commandButton>
 							<!-- Excluir -->
 							<p:commandButton icon="ui-icon-trash" update="@form:pesquisa"
-								actionListener="#{cursoController.apagar(curso)}">
+								actionListener="#{cursoController.apagar(entidade)}">
 								<p:confirm header="Confirmar"
 									message="Tem certeza que deseja excluír?" icon="ui-icon-alert" />
 							</p:commandButton>

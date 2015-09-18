@@ -7,7 +7,7 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 
 	<managed-bean>
 		<managed-bean-name>Login</managed-bean-name>
-		<managed-bean-class>br.com.colmeia.controller.imp.Login</managed-bean-class>
+		<managed-bean-class>br.com.colmeia.controller.implementacao.Login</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 

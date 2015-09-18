@@ -16,20 +16,20 @@
 
 				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
 
-				<p:panel id="cadastro" header="Cadastro de Curso" styleClass="center">
+				<p:panel id="cadastro" header="Cadastro de Palestrante" styleClass="center">
 
 					<h:panelGrid columns="4">
 
 						<p:outputLabel value="Código:" />
 						<p:inputText id="txt_curso_id" size="10"
-							value="#{cursoController.curso.id}"
-							disabled="#{cursoController.editando_registro}">
+							value="#{palestranteController.entidade.id}"
+							disabled="#{palestranteController.editando_registro}">
 							<p:watermark for="txt_curso_id" value="Código"></p:watermark>
 						</p:inputText>
 
 						<p:outputLabel value="Nome:" />
 						<p:inputText id="txt_curso_nome" size="40"
-							value="#{cursoController.curso.nome}">
+							value="#{palestranteController.entidade.nome}">
 							<p:watermark for="txt_curso_nome" value="Nome"></p:watermark>
 						</p:inputText>
 
@@ -39,32 +39,32 @@
 					<p:panel>
 						<h:panelGrid columns="4">
 							<p:commandButton value="Cadastrar" update="@form"
-								actionListener="#{cursoController.gravar}"
-								rendered="#{cursoController.editando_registro eq true ? false : true}" />
+								actionListener="#{palestranteController.gravar}"
+								rendered="#{palestranteController.editando_registro eq true ? false : true}" />
 							<p:commandButton value="Alterar" update="@form"
-								actionListener="#{cursoController.alterar}"
-								rendered="#{cursoController.editando_registro}" />
+								actionListener="#{palestranteController.alterar}"
+								rendered="#{palestranteController.editando_registro}" />
 							<p:commandButton value="Pesquisar" update="@form:pesquisa"
-								actionListener="#{cursoController.buscar}" />
+								actionListener="#{palestranteController.buscar}" />
 							<p:commandButton value="Limpar" update="@form:cadastro"
-								actionListener="#{cursoController.limpar}" />
+								actionListener="#{palestranteController.limpar}" />
 						</h:panelGrid>
 					</p:panel>
 
 				</p:panel>
 
 				<p:panel id="pesquisa" header="Lista de Cursos"
-					visible="#{cursoController.size_maior_q_zero}">
-					<p:dataTable value="#{cursoController.cursos}"
-						var="curso" paginator="true" paginatorAlwaysVisible="true"
+					visible="#{palestranteController.size_maior_q_zero}">
+					<p:dataTable value="#{palestranteController.entidades}"
+						var="palestrante" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
 						<p:column headerText="Código" width="80">
-							<p:outputLabel value="#{curso.id}" />
+							<p:outputLabel value="#{palestrante.id}" />
 						</p:column>
 
 						<p:column headerText="Nome" width="80">
-							<p:outputLabel value="#{curso.nome}" />
+							<p:outputLabel value="#{palestrante.nome}" />
 						</p:column>
 
 						<p:column headerText="Opções" width="150">
@@ -73,12 +73,12 @@
 								title="Editar" immediate="true" process="@this"
 								update="@form:cadastro">
 								<f:setPropertyActionListener
-									target="#{cursoController.curso}"
-									value="#{curso}" />
+									target="#{palestranteController.entidade}"
+									value="#{palestrante}" />
 							</p:commandButton>
 							<!-- Excluir -->
 							<p:commandButton icon="ui-icon-trash" update="@form:pesquisa"
-								actionListener="#{cursoController.apagar(curso)}">
+								actionListener="#{palestranteController.apagar(palestrante)}">
 								<p:confirm header="Confirmar"
 									message="Tem certeza que deseja excluír?" icon="ui-icon-alert" />
 							</p:commandButton>

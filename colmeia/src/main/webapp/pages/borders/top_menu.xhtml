@@ -13,9 +13,9 @@
 
 			<p:panel styleClass="center" header="Sistema de Gerenciamento de Eventos C.O.L.M.E.I.A">
 				<p:outputLabel
-					value="Seja Bem Vindo(a) #{topMenuController.usuario.nome}" />
+					value="Seja Bem Vindo(a) #{topMenuController.entidade.nome}" />
 				<p:spacer width="10"/>
-				<p:commandLink id="teste" value="Sair" update="@form"
+				<p:commandLink value="Sair" update="@form"
 					action="#{topMenuController.deslogar()}" />
 			</p:panel>
 

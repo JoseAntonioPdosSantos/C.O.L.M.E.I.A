@@ -29,11 +29,9 @@ public abstract class Service<T extends EntidadeBase, ID extends Serializable, D
 	}
 
 	public void apagar(T entity) throws Exception {
-		if (validarEntity(entity)) {
-			controleBasicoAuditoria(entity);
-			entity.setAtivo(false);
-			alterar(entity);
-		}
+		controleBasicoAuditoria(entity);
+		entity.setAtivo(false);
+		alterar(entity);
 	}
 
 	public List<T> buscarTodos() throws Exception {

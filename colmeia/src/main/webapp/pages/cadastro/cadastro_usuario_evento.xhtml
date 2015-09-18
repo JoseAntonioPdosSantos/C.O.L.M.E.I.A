@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -15,13 +10,12 @@ and open the template in the editor.
 <ui:composition template="/pages/borders/index.xhtml">
 
 	<ui:define name="page_central">
-	
+
 		<p:layoutUnit position="center">
 
 			<h:form>
 
-				<p:growl id="msg_usuario_evento" sticky="true" showDetail="true"
-					life="150" />
+				<p:growl id="msg_usuario_evento" life="1500" />
 
 				<p:tabView id="tabView_usuario_evento" dynamic="true" cache="true">
 
@@ -66,11 +60,12 @@ and open the template in the editor.
 											icon="ui-icon-alert" />
 									</p:commandButton>
 
-									<p:commandButton value="Novo" update="@form" ajax="true" process="@this" immediate="true"
+									<p:commandButton value="Novo" update="@form" ajax="true"
+										process="@this" immediate="true"
 										actionListener="#{usuarioEventoController.buscarAtividadesDesteEvento(eventoVigente)}"
+										onclick="PF('dlg_atividades_de_evento').show();"
 										icon="ui-icon-circle-plus" />
 								</p:column>
-<!-- 										onclick="PF('dlg_atividades_de_evento').show();"  -->
 
 							</p:dataTable>
 						</p:panel>
@@ -117,7 +112,7 @@ and open the template in the editor.
 				<p:panel id="meu_eventos" header="Lista dos meus Eventos"
 					styleClass="center"
 					visible="#{usuarioEventoController.size_maior_q_zero}">
-					<p:dataTable value="#{usuarioEventoController.usuarioEventos}"
+					<p:dataTable value="#{usuarioEventoController.entidades}"
 						var="usuarioEvento" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
@@ -126,15 +121,18 @@ and open the template in the editor.
 						</p:column>
 
 						<p:column headerText="Evento" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.nome}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.evento.nome}" />
 						</p:column>
 
 						<p:column headerText="Coordenador" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
 						</p:column>
 
 						<p:column headerText="Data Inicial" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.dataInicial}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.dataInicial}" />
 						</p:column>
 
 						<p:column headerText="Data Final" width="80">
@@ -160,17 +158,20 @@ and open the template in the editor.
 
 		</p:layoutUnit>
 
-<!-- 			<h:form> -->
-<!-- 				Dialog Cadastro em Atividades de Evento -->
-<!-- 				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true" width="80%" -->
-<!-- 					header="Atividades do Evento #{usuarioEventoController.evento.nome}" -->
-<!-- 					resizable="false" onShow="" modal="true" showEffect="clip" hideEffect="clip"> -->
-<!-- 					<p:ajax event="load" update="@form" /> -->
-<!-- 					<ui:insert> -->
-<!-- 						<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" /> -->
-<!-- 					</ui:insert> -->
-<!-- 				</p:dialog> -->
-<!-- 			</h:form> -->
+		<h:form>
+				Dialog Cadastro em Atividades de Evento
+				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true"
+				width="80%"
+				header="Atividades do Evento #{usuarioEventoController.evento.nome}"
+				resizable="false" onShow="" modal="true" showEffect="clip"
+				hideEffect="clip">
+				<!-- 				<p:ajax event="load" update="@form" /> -->
+				<ui:insert>
+					<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" />
+				</ui:insert>
+			</p:dialog>
+
+		</h:form>
 
 	</ui:define>
 </ui:composition>

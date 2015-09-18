@@ -31,26 +31,26 @@ and open the template in the editor.
 
 								<p:outputLabel id="lb_evento_id" value="Código: " />
 								<p:inputText size="10" id="txt_evento_id"
-									value="#{eventoController.evento.id}"
+									value="#{eventoController.entidade.id}"
 									disabled="#{eventoController.editando_registro}">
 									<p:watermark for="txt_evento_id" value="Código"></p:watermark>
 								</p:inputText>
 								<p:outputLabel id="lb_evento_nome" value="Nome do Evento: " />
 								<p:inputText size="40" id="txt_evento_nome"
-									value="#{eventoController.evento.nome}">
+									value="#{eventoController.entidade.nome}">
 									<p:watermark for="txt_evento_nome"
 										value="Digite o nome do Evento"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel id="lb_evento_dtini" value="Data de Inicio:" />
 								<p:calendar id="txt_evento_dtini"
-									value="#{eventoController.evento.dtini_}"
+									value="#{eventoController.entidade.dtini_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
 								<p:outputLabel id="lb_evento_dtfim" value="Data de Término:" />
 								<p:calendar id="txt_evento_dtfim"
-									value="#{eventoController.evento.dtfim_}"
+									value="#{eventoController.entidade.dtfim_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 							</h:panelGrid>
@@ -75,7 +75,7 @@ and open the template in the editor.
 
 							<p:panel id="pesquisa_evento" header="Lista de Eventos"
 								visible="#{eventoController.size_maior_q_zero}">
-								<p:dataTable value="#{eventoController.eventos}" var="evento"
+								<p:dataTable value="#{eventoController.entidades}" var="evento"
 									paginator="true" paginatorAlwaysVisible="true" rows="5">
 
 									<p:column headerText="Código" width="80">
@@ -105,7 +105,7 @@ and open the template in the editor.
 											update="@form"
 											actionListener="#{atividadeEventoController.setEvento(evento)}">>
 											<f:setPropertyActionListener
-												target="#{eventoController.evento}" value="#{evento}" />
+												target="#{eventoController.entidade}" value="#{evento}" />
 										</p:commandButton>
 										<!-- Excluir -->
 										<p:commandButton icon="ui-icon-trash" update="@form"
@@ -135,7 +135,7 @@ and open the template in the editor.
 
 								<p:outputLabel id="lb_atividade_evento_id" value="Código: " />
 								<p:inputText size="10" id="txt_atividade_evento_id"
-									value="#{atividadeEventoController.atividadeEvento.id}"
+									value="#{atividadeEventoController.entidade.id}"
 									disabled="#{atividadeEventoController.editando_registro}">
 									<p:watermark for="txt_atividade_evento_id" value="Código"></p:watermark>
 								</p:inputText>
@@ -143,15 +143,15 @@ and open the template in the editor.
 								<p:outputLabel id="lb_atividade_evento_nome"
 									value="Nome da Atividade: " />
 								<p:inputText size="40" id="txt_atividade_evento_nome"
-									value="#{atividadeEventoController.atividadeEvento.nome}">
+									value="#{atividadeEventoController.entidade.nome}">
 									<p:watermark for="txt_atividade_evento_nome"
 										value="Digite o Nome da Atividade do Evento"></p:watermark>
 								</p:inputText>
 
-								<p:outputLabel value="Quantidade de Inscritos: " />
+								<p:outputLabel value="Limite de Inscritos: " />
 								<p:inputText size="5"
 									id="txt_atividade_evento_quantidade_inscritos"
-									value="#{atividadeEventoController.atividadeEvento.quantidadeInscritos}">
+									value="#{atividadeEventoController.entidade.quantidadeInscritos}">
 									<p:watermark for="txt_atividade_evento_quantidade_inscritos"
 										value="Qtd"></p:watermark>
 								</p:inputText>
@@ -159,27 +159,27 @@ and open the template in the editor.
 								<p:outputLabel id="lb_atividadeEvento_dataInicial"
 									value="Data de Inicio:" />
 								<p:calendar id="txt_atividadeEvento_dataInicial"
-									value="#{atividadeEventoController.atividadeEvento.dataInicial_}"
+									value="#{atividadeEventoController.entidade.dataInicial_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
 								<p:outputLabel id="lb_atividadeEvento_dataFinal"
 									value="Data de Término:" />
 								<p:calendar id="txt_atividadeEvento_dataFinal"
-									value="#{atividadeEventoController.atividadeEvento.dataFinal_}"
+									value="#{atividadeEventoController.entidade.dataFinal_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
 								<p:outputLabel value="Palestrante: " />
 								<p:inputText size="40" id="txt_atividade_evento_palestrante"
-									value="#{atividadeEventoController.atividadeEvento.palestrante}">
+									value="#{atividadeEventoController.entidade.palestrante}">
 									<p:watermark for="txt_atividade_evento_palestrante"
 										value="Digite o Nome do Palestrante"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel value="Ingresso: " />
 								<p:inputText size="40" id="txt_atividade_evento_ingresso"
-									value="#{atividadeEventoController.atividadeEvento.ingresso}">
+									value="#{atividadeEventoController.entidade.ingresso}">
 									<p:watermark for="txt_atividade_evento_ingresso"
 										value="Ingresso"></p:watermark>
 								</p:inputText>
@@ -187,7 +187,7 @@ and open the template in the editor.
 								<p:outputLabel value="Descrição: " />
 								<p:inputTextarea cols="40" maxlength="256" rows="4"
 									id="txt_atividade_evento_descricao"
-									value="#{atividadeEventoController.atividadeEvento.descricao}">
+									value="#{atividadeEventoController.entidade.descricao}">
 									<p:watermark for="txt_atividade_evento_descricao"
 										value="Digite uma descrição sobre esta atividade"></p:watermark>
 								</p:inputTextarea>
@@ -214,10 +214,10 @@ and open the template in the editor.
 							</h:panelGrid>
 
 							<p:panel id="pesquisa_atividade_evento"
-								header="Lista de Atividades do Evento #{atividadeEventoController.atividadeEvento.evento.nome}"
+								header="Lista de Atividades do Evento #{atividadeEventoController.entidade.evento.nome}"
 								visible="#{atividadeEventoController.size_maior_q_zero}">
 								<p:dataTable
-									value="#{atividadeEventoController.atividadeEventos}"
+									value="#{atividadeEventoController.entidades}"
 									var="atividadeEvento" paginator="true"
 									paginatorAlwaysVisible="true" rows="5">
 
@@ -247,7 +247,7 @@ and open the template in the editor.
 											title="Editar" immediate="true" process="@this"
 											update="@form">
 											<f:setPropertyActionListener
-												target="#{atividadeEventoController.atividadeEvento}"
+												target="#{atividadeEventoController.entidade}"
 												value="#{atividadeEvento}" />
 										</p:commandButton>
 										<!-- Excluir -->
