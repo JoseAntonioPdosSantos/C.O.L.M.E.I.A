@@ -19,8 +19,9 @@ public class TopMenuController extends Controller<Usuario, UsuarioService> {
 		limpar();
 	}
 
-	public void deslogar() {
+	public String deslogar() {
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+		return "index.xhtml";
 	}
 
 	@Override

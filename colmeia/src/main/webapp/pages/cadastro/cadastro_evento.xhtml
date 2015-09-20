@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -18,7 +13,7 @@ and open the template in the editor.
 		<p:layoutUnit position="center">
 			<h:form>
 
-				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
+				<p:growl id="msg" showDetail="true" life="1500" />
 
 				<p:tabView id="tabView_cadastro_evento" dynamic="true" cache="true">
 
@@ -149,11 +144,11 @@ and open the template in the editor.
 								</p:inputText>
 
 								<p:outputLabel value="Limite de Inscritos: " />
-								<p:inputText size="5"
+								<p:inputText size="10"
 									id="txt_atividade_evento_quantidade_inscritos"
 									value="#{atividadeEventoController.entidade.quantidadeInscritos}">
 									<p:watermark for="txt_atividade_evento_quantidade_inscritos"
-										value="Qtd"></p:watermark>
+										value="Limite"></p:watermark>
 								</p:inputText>
 
 								<p:outputLabel id="lb_atividadeEvento_dataInicial"
@@ -171,18 +166,36 @@ and open the template in the editor.
 								</p:calendar>
 
 								<p:outputLabel value="Palestrante: " />
-								<p:inputText size="40" id="txt_atividade_evento_palestrante"
+								<p:selectOneMenu label="Palestrante"
+									converter="PalestranteConverter" filter="true"
 									value="#{atividadeEventoController.entidade.palestrante}">
-									<p:watermark for="txt_atividade_evento_palestrante"
-										value="Digite o Nome do Palestrante"></p:watermark>
-								</p:inputText>
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems
+										value="#{atividadeEventoController.palestrantes}"
+										var="palestrante" itemLabel="#{palestrante.nome}"
+										itemValue="#{palestrante}" />
+								</p:selectOneMenu>
 
 								<p:outputLabel value="Ingresso: " />
-								<p:inputText size="40" id="txt_atividade_evento_ingresso"
+								<p:selectOneMenu label="Ingresso" converter="IngressoConverter"
+									filter="true"
 									value="#{atividadeEventoController.entidade.ingresso}">
-									<p:watermark for="txt_atividade_evento_ingresso"
-										value="Ingresso"></p:watermark>
-								</p:inputText>
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems value="#{atividadeEventoController.ingressos}"
+										var="ingresso" itemLabel="#{ingresso.nome}"
+										itemValue="#{ingressso}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Sala: " />
+								<p:selectOneMenu label="Sala"
+									converter="SalaConverter" filter="true"
+									value="#{atividadeEventoController.entidade.sala}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems
+										value="#{atividadeEventoController.salas}"
+										var="sala" itemLabel="#{sala.nome}"
+										itemValue="#{sala}" />
+								</p:selectOneMenu>
 
 								<p:outputLabel value="Descrição: " />
 								<p:inputTextarea cols="40" maxlength="256" rows="4"
@@ -216,8 +229,7 @@ and open the template in the editor.
 							<p:panel id="pesquisa_atividade_evento"
 								header="Lista de Atividades do Evento #{atividadeEventoController.entidade.evento.nome}"
 								visible="#{atividadeEventoController.size_maior_q_zero}">
-								<p:dataTable
-									value="#{atividadeEventoController.entidades}"
+								<p:dataTable value="#{atividadeEventoController.entidades}"
 									var="atividadeEvento" paginator="true"
 									paginatorAlwaysVisible="true" rows="5">
 

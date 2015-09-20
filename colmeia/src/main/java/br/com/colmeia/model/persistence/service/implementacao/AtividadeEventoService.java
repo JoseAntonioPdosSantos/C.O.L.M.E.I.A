@@ -38,7 +38,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(entity.getDescricao() == null || entity.getDescricao().trim().isEmpty()){
 			throw new Exception("Desculpe! O campo 'Descrição' é obrigatório");
 		}
-		if(entity.getPalestrante() == null || entity.getPalestrante().trim().isEmpty()){
+		if(entity.getPalestrante() == null){
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
 		}
 		return true;

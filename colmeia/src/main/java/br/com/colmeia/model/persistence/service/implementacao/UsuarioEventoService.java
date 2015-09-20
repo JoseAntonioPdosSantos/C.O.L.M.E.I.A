@@ -27,7 +27,7 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 	@Override
 	public List<UsuarioEvento> buscar(UsuarioEvento entity) throws Exception {
 		Criterion id = null;
-		Criterion evento = null;
+		Criterion atividadeEvento = null;
 		Criterion dataCadastro = null;
 		Criterion usuario = null;
 		Criterion ativo = null;
@@ -37,7 +37,7 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 				id = Restrictions.eq("id", entity.getId());
 			}
 			if (entity.getAtividadeEvento() != null) {
-				evento = Restrictions.eq("atividadeEvento", entity.getAtividadeEvento());
+				atividadeEvento = Restrictions.eq("atividadeEvento", entity.getAtividadeEvento());
 			}
 			if (entity.getUsuario() != null) {
 				usuario = Restrictions.eq("usuario", entity.getUsuario());
@@ -49,7 +49,7 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 				presenca = Restrictions.eq("presenca", entity.getPresenca());
 			}
 		}
-		return getDao().findByCriteria(id, evento, dataCadastro, usuario, ativo, presenca);
+		return getDao().findByCriteria(id, atividadeEvento, dataCadastro, usuario, ativo, presenca);
 	}
 
 	public void inscreverEmUmaAtividadeDeEvento(AtividadeEvento atividadeEvento, Usuario usuario) throws Exception {
@@ -60,8 +60,24 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 			usuarioEvento.setPresenca(false);
 			super.gravar(usuarioEvento);
 		} else {
-			throw new Exception("Você já se inscreveu neste evento");
+			UsuarioEvento usuarioEvento = new UsuarioEvento();
+			usuarioEvento.setAtividadeEvento(atividadeEvento);
+			usuarioEvento.setUsuario(usuario);
+			usuarioEvento.setAtivo(true);
+			List<UsuarioEvento> usuarioEventos = buscar(usuarioEvento);
+			if (usuarioEventos == null || usuarioEventos.size() != 1)
+				throw new Exception("Ocorreu um erro indevido. Favor contatar o administrador do sistema.");
+			cancelarAtividadeDoEvento(usuarioEventos.get(0));
 		}
+	}
+
+	public boolean cancelarAtividadeDoEvento(UsuarioEvento usuarioEvento) throws Exception {
+		if (usuarioEvento.getPresenca() != null)
+			if (usuarioEvento.getPresenca())
+				throw new Exception("Não é possível cancelar um evento que você já tenha recebido presença");
+		usuarioEvento.setAtivo(false);
+		alterar(usuarioEvento);
+		return true;
 	}
 
 	public boolean isCadastrado(Usuario usuario, AtividadeEvento atividadeEvento) {
@@ -77,15 +93,6 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 		Criterion ct_atividade_evento = Restrictions.eq("atividadeEvento", atividadeEvento);
 		Criterion ct_ativo = Restrictions.eq("ativo", true);
 		return getDao().findByCriteria(ct_usuario, ct_atividade_evento, ct_ativo);
-	}
-
-	public boolean cancelarEvento(UsuarioEvento usuarioEvento) throws Exception {
-		if (usuarioEvento.getPresenca() != null)
-			if (usuarioEvento.getPresenca())
-				throw new Exception("Não é possível cancelar um evento que você já tenha recebido presença");
-		usuarioEvento.setAtivo(false);
-		alterar(usuarioEvento);
-		return true;
 	}
 
 	public UsuarioEvento registrarPresenca(UsuarioEvento usuarioEvento) throws Exception {

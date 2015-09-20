@@ -14,7 +14,7 @@
 
 			<h:form>
 
-				<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
+				<p:growl id="msg" showDetail="true" life="1500" />
 
 				<p:tabView id="tabView_registro_presenca" dynamic="true"
 					cache="true">
@@ -28,7 +28,7 @@
 
 						<p:panel header="Eventos"
 							visible="#{presencaController.eventos_size_maior_q_zero}">
-							<p:dataTable value="#{presencaController.entidades}" var="evento"
+							<p:dataTable value="#{presencaController.eventos}" var="evento"
 								paginator="true" paginatorAlwaysVisible="true" rows="5">
 
 								<p:column headerText="Código" width="10">
@@ -103,7 +103,7 @@
 
 								<p:column headerText="Opções" width="150">
 									<!-- Ir para lista de Controle de Presença -->
-									<p:commandButton value="Presença" icon="ui-icon-reflash"
+									<p:commandButton value="Check-In" icon="ui-icon-reflash"
 										update="@form"
 										actionListener="#{presencaController.irParaAbaCkeckIn(atividadeEvento)}">
 									</p:commandButton>
@@ -170,7 +170,7 @@
 						<p:panel id="pesquisa_usuarios"
 							header="Marcar Presença para o Evento: #{presencaController.evento.nome}"
 							visible="#{presencaController.size_maior_q_zero}">
-							<p:dataTable value="#{presencaController.usuariosEventos}"
+							<p:dataTable value="#{presencaController.entidades}"
 								var="usuarioEvento" paginator="true"
 								paginatorAlwaysVisible="true" rows="5">
 
@@ -184,13 +184,13 @@
 
 								<p:column headerText="Opções" width="150">
 									<!-- Marcar Presença -->
-									<p:commandButton value="Marcar" icon="ui-icon-trash"
+									<p:commandButton value="Marcar"
 										update="@form"
 										rendered="#{usuarioEvento.presenca_ eq true ? false:true}"
 										actionListener="#{presencaController.marcarPresenca(usuarioEvento)}">
 									</p:commandButton>
 									<!-- desmarcar Presença -->
-									<p:commandButton value="Desmarcar" icon="ui-icon-trash"
+									<p:commandButton value="Desmarcar"
 										update="@form" rendered="#{usuarioEvento.presenca_}"
 										actionListener="#{presencaController.desmarcarPresenca(usuarioEvento)}">
 									</p:commandButton>

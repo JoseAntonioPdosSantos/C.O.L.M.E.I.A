@@ -1,7 +1,5 @@
 package br.com.colmeia.model.persistence.service.implementacao;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
@@ -10,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.EventoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.persistence.service.generics.Service;
+import br.com.colmeia.model.utils.HibernateUtil;
 
 public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 
@@ -59,12 +58,12 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 	}
 
 	public List<Evento> buscarEventosEncerrados() {
-		Criterion dtini = Restrictions.le("dtini", new Date(Calendar.getInstance().getTimeInMillis()));
+		Criterion dtini = Restrictions.le("dtini", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 
 	public List<Evento> buscarEventosVigentes() {
-		Criterion dtini = Restrictions.le("dtini", new Date(Calendar.getInstance().getTimeInMillis()));
+		Criterion dtini = Restrictions.ge("dtini", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 

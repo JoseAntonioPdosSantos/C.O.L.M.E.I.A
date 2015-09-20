@@ -30,7 +30,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 			getDao().update(entity);
 		}
 	}
-	
+
 	private void criptografarMD5(Usuario entity) {
 		entity.setSenha(Security.criptografarMD5(entity.getSenha()));
 		entity.setConfirmarSenha(Security.criptografarMD5(entity.getConfirmarSenha()));
@@ -45,24 +45,25 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em branco");
 		if (entity.getCpf() == null || entity.getCpf().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'CPF' é obrigatório");
-		// if (entity.getCurso() == null)
-		// throw new Exception("Desculpe! O campo 'Curso' é obrigatório");
-		// if (entity.getInstituicao() == null)
-		// throw new Exception("Desculpe! O campo 'Instituiçao' é obrigatório");
-		// if (entity.getEmail() == null)
-		// throw new Exception("Desculpe! O campo 'E-mail' é obrigatório");
+		if (entity.isUniversitario()) {
+			if (entity.getCurso() == null)
+				throw new Exception("Desculpe! O campo 'Curso' é obrigatório");
+			if (entity.getInstituicao() == null)
+				throw new Exception("Desculpe! O campo 'Instituiçao' é obrigatório");
+
+		}
 		if (entity.getSenha() == null || entity.getSenha().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Senha' é obrigatório");
-		if(entity.getId() != null && entity.getId() > 0 && entity.getConfirmarSenha() == null)
+		if (entity.getId() != null && entity.getId() > 0 && entity.getConfirmarSenha() == null)
 			entity.setConfirmarSenha(entity.getSenha());
 		if (entity.getConfirmarSenha() == null || entity.getConfirmarSenha().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Confirmar Senha' é obrigatório");
 		if (!isSenhaValida(entity)) {
 			throw new Exception("Desculpe! A senha digitada está inválida");
 		}
-		if(!Util.isCPFValido(entity.getCpf()))
+		if (!Util.isCPFValido(entity.getCpf()))
 			throw new Exception("Desculpe! O CPF digitado está inválido");
-				
+
 		return true;
 	}
 
@@ -120,7 +121,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 				id = Restrictions.eq("id", entity.getId());
 			}
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
-				nome = Restrictions.ilike("nome", "%"+entity.getNome()+"%");
+				nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
 			if (entity.getCpf() != null && !entity.getCpf().trim().isEmpty()) {
 				cpf = Restrictions.eq("cpf", entity.getCpf());
@@ -144,7 +145,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 				senha = Restrictions.eq("senha", entity.getSenha());
 			}
 		}
-		 return getDao().findByCriteria(id, nome, cpf, ra, email, curso, instituicao, perfil, senha);
+		return getDao().findByCriteria(id, nome, cpf, ra, email, curso, instituicao, perfil, senha);
 	}
 
 	@Override

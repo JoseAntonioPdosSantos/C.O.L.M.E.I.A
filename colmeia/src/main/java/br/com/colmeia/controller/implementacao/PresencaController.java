@@ -20,7 +20,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioEventoServi
 public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoService> {
 
 	private static final long serialVersionUID = 1L;
-	private UsuarioEventoService service;
+//	private UsuarioEventoService service;
 
 	// Aba Eventos
 	private Evento evento;
@@ -34,14 +34,15 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 	private boolean atividades_evento_size_maior_q_zero;
 
 	// Aba de Inscritos na Atividade do Evento Selecionado
-	private UsuarioEvento usuarioEvento;
-	private List<UsuarioEvento> usuariosEventos;
+//	private UsuarioEvento usuarioEvento;
+//	private List<UsuarioEvento> usuariosEventos;
 	private Usuario usuario;
 	private boolean aba_presenca;// Torna a Aba de Check-In
 
 	@Override
 	protected void inicializarVariavel() {
 		limpar();
+		buscarEventos();
 	}
 	
 	public void irParaAbaAtividadesDoEvento(Evento evento) {
@@ -71,15 +72,17 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 		setAba_presenca(true);
 		setAtividadeEvento(atividadeEvento);
 		usuario = new Usuario();
-		usuarioEvento = new UsuarioEvento();
+		entidade = new UsuarioEvento();
 		System.out.println(usuario);
-		System.out.println(usuarioEvento);
+		System.out.println(entidade);
 		buscarUsuariosEventos();
 	}
 
 	private void buscarEventos() {
 		try {
-			eventos = EventoService.class.newInstance().buscarTodos();
+			evento = new Evento();
+			evento.setAtivo(true);
+			eventos = new EventoService().buscar(evento);
 			if (eventos != null && eventos.size() > 0) {
 				setEventos_size_maior_q_zero(true);
 			} else {
@@ -92,12 +95,12 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 	}
 
 	private void buscarUsuariosEventos() {
-		usuarioEvento = new UsuarioEvento();
-		usuarioEvento.setAtivo(true);
-		usuarioEvento.setAtividadeEvento(getAtividadeEvento());
+		entidade = new UsuarioEvento();
+		entidade.setAtivo(true);
+		entidade.setAtividadeEvento(getAtividadeEvento());
 		try {
-			usuariosEventos = UsuarioEventoService.class.newInstance().buscar(usuarioEvento);
-			if (usuariosEventos != null && usuariosEventos.size() > 0) {
+			entidades = getService().buscar(entidade);
+			if (entidades != null && entidades.size() > 0) {
 				setSize_maior_q_zero(true);
 			} else {
 				setSize_maior_q_zero(false);
@@ -118,7 +121,7 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 
 	public void marcarPresenca(UsuarioEvento usuarioEvento) {
 		try {
-			usuarioEvento = service.registrarPresenca(usuarioEvento);
+			usuarioEvento = getService().registrarPresenca(usuarioEvento);
 			message(FacesMessage.SEVERITY_INFO, "Registro de Presença", "Presença Registrada com Sucesso");
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
@@ -126,14 +129,14 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 	}
 
 	public void limpar() {
-		usuarioEvento = new UsuarioEvento();
+		setEntidade(new UsuarioEvento());
 		setEditando_registro(false);
 	}
 
 	@Override
 	public void buscar() {
 		try {
-			usuariosEventos = service.buscarUsuarioEventoPorUsuarioEAtividadeEvento(usuario,atividadeEvento);
+			entidades = getService().buscarUsuarioEventoPorUsuarioEAtividadeEvento(usuario,atividadeEvento);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
@@ -145,18 +148,6 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 
 	public void setService(UsuarioEventoService service) {
 		this.service = service;
-	}
-
-	public UsuarioEvento getUsuarioEvento() {
-		return usuarioEvento;
-	}
-
-	public void setUsuarioEvento(UsuarioEvento usuarioEvento) {
-		this.usuarioEvento = usuarioEvento;
-	}
-
-	public List<UsuarioEvento> getUsuariosEventos() {
-		return usuariosEventos;
 	}
 
 	public AtividadeEvento getAtividadeEvento() {
@@ -173,10 +164,6 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 
 	public void setAtividadesEvento(List<AtividadeEvento> atividadesEvento) {
 		this.atividadesEvento = atividadesEvento;
-	}
-
-	public void setUsuariosEventos(List<UsuarioEvento> usuariosEventos) {
-		this.usuariosEventos = usuariosEventos;
 	}
 
 	public boolean isAba_presenca() {

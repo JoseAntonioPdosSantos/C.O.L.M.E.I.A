@@ -23,13 +23,11 @@ public class MeusEventosController extends Controller<UsuarioEvento, UsuarioEven
 
 	public void cancelarEvento(UsuarioEvento usuarioEvento) {
 		try {
-			UsuarioEventoService.class.newInstance().cancelarEvento(usuarioEvento);
-			buscar();
-		} catch (InstantiationException | IllegalAccessException e) {
-			message(ERROR, e.getMessage());
+			new UsuarioEventoService().cancelarAtividadeDoEvento(usuarioEvento);
 		} catch (Exception e) {
-			message(ERROR, e.getMessage());
+			message(ERROR,e.getMessage());
 		}
+		buscar();
 	}
 
 	public void limpar() {

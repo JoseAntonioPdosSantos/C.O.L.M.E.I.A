@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Curso extends EntidadeBase {
+public class Sala extends EntidadeBase{
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @SequenceGenerator(sequenceName = "curso_seq", initialValue = 1, name = "curso_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "curso_seq")
+	private static final long serialVersionUID = 1L;
+	@Id
+    @SequenceGenerator(sequenceName = "sala_seq", initialValue = 1, name = "sala_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "sala_seq")
     private Long id;
     @Column(nullable=false,unique=true)
     private String nome;

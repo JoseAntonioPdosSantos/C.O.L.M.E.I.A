@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity
 public class AtividadeEvento extends EntidadeBase {
@@ -29,10 +30,17 @@ public class AtividadeEvento extends EntidadeBase {
 	private Timestamp dataInicial;
 	private Timestamp dataFinal;
 	private Integer quantidadeInscritos;
-	private String palestrante;
+	@Column(nullable = false)
+	private Palestrante palestrante;
 	private String descricao;
-	private String ingresso;
-	
+	@Column(nullable = false)
+	private Ingresso ingresso;
+	@Column(nullable = false)
+	private Sala sala;
+
+	@Transient
+	private boolean usuarioInscrito;
+
 	public Long getId() {
 		return id;
 	}
@@ -107,11 +115,11 @@ public class AtividadeEvento extends EntidadeBase {
 		return serialVersionUID;
 	}
 
-	public String getPalestrante() {
+	public Palestrante getPalestrante() {
 		return palestrante;
 	}
 
-	public void setPalestrante(String palestrante) {
+	public void setPalestrante(Palestrante palestrante) {
 		this.palestrante = palestrante;
 	}
 
@@ -123,12 +131,28 @@ public class AtividadeEvento extends EntidadeBase {
 		this.descricao = descricao;
 	}
 
-	public String getIngresso() {
+	public Ingresso getIngresso() {
 		return ingresso;
 	}
 
-	public void setIngresso(String ingresso) {
+	public void setIngresso(Ingresso ingresso) {
 		this.ingresso = ingresso;
+	}
+
+	public boolean isUsuarioInscrito() {
+		return usuarioInscrito;
+	}
+
+	public void setUsuarioInscrito(boolean usuarioInscrito) {
+		this.usuarioInscrito = usuarioInscrito;
+	}
+
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 
 }

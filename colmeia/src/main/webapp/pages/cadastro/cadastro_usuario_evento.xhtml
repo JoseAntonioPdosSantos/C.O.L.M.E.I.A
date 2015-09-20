@@ -15,7 +15,7 @@
 
 			<h:form>
 
-				<p:growl id="msg_usuario_evento" life="1500" />
+				<p:growl id="msg" showDetail="true" life="1500" />
 
 				<p:tabView id="tabView_usuario_evento" dynamic="true" cache="true">
 
@@ -50,21 +50,11 @@
 								</p:column>
 
 								<p:column headerText="Inscrições" width="150">
-									<!-- Inscrever -->
-									<p:commandButton value="Inscrever" icon="ui-icon-refresh"
-										alt="Inscrever" title="Inscrever" immediate="true"
-										process="@this" update="@form"
-										actionListener="#{usuarioEventoController.inscrever(eventoVigente)}">
-										<p:confirm header="Confirmar"
-											message="Tem certeza que deseja se inscrever neste evento?"
-											icon="ui-icon-alert" />
-									</p:commandButton>
 
-									<p:commandButton value="Novo" update="@form" ajax="true"
-										process="@this" immediate="true"
+									<p:commandButton value="Novo" 
+										update="@form:panel_ativiade_evento"
 										actionListener="#{usuarioEventoController.buscarAtividadesDesteEvento(eventoVigente)}"
-										onclick="PF('dlg_atividades_de_evento').show();"
-										icon="ui-icon-circle-plus" />
+										process="@this" immediate="true" icon="ui-icon-circle-plus" />
 								</p:column>
 
 							</p:dataTable>
@@ -109,69 +99,46 @@
 
 				</p:tabView>
 
-				<p:panel id="meu_eventos" header="Lista dos meus Eventos"
-					styleClass="center"
-					visible="#{usuarioEventoController.size_maior_q_zero}">
-					<p:dataTable value="#{usuarioEventoController.entidades}"
-						var="usuarioEvento" paginator="true" paginatorAlwaysVisible="true"
-						rows="5">
+				<p:panel id="panel_ativiade_evento"
+					visible="#{usuarioEventoController.atividade_evento_vigente_size_maior_q_zero}"
+					header="Atividades para o Evento #{usuarioEventoController.evento.nome}">
+					<p:dataTable value="#{usuarioEventoController.atividadesEvento}"
+						var="atividadeEvento" paginator="true"
+						paginatorAlwaysVisible="true" rows="5">
 
 						<p:column headerText="Atividade" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.nome}" />
-						</p:column>
-
-						<p:column headerText="Evento" width="80">
-							<p:outputLabel
-								value="#{usuarioEvento.atividadeEvento.evento.nome}" />
+							<p:outputLabel value="#{atividadeEvento.nome}" />
 						</p:column>
 
 						<p:column headerText="Coordenador" width="80">
-							<p:outputLabel
-								value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
+							<p:outputLabel value="#{atividadeEvento.evento.coordenador.nome}" />
 						</p:column>
 
 						<p:column headerText="Data Inicial" width="80">
-							<p:outputLabel
-								value="#{usuarioEvento.atividadeEvento.dataInicial}" />
+							<p:outputLabel value="#{atividadeEvento.dataInicial}" />
 						</p:column>
 
 						<p:column headerText="Data Final" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.dataFinal}" />
+							<p:outputLabel value="#{atividadeEvento.dataFinal}" />
 						</p:column>
 
 						<p:column headerText="Inscrições" width="150">
-							<!-- Cancelar Inscrição -->
-							<p:commandButton value="Cancelar" icon="ui-icon-refresh"
-								alt="Cancelar" title="Cancelar" immediate="true" process="@this"
-								update="@form"
-								actionListener="#{usuarioEventoController.cancelarEvento(usuarioEvento)}">
+							<!-- Inscrever -->
+							<p:commandButton value="#{atividadeEvento.usuarioInscrito}"
+								process="@this" update="@form"
+								actionListener="#{usuarioEventoController.inscrever(atividadeEvento)}">
 								<p:confirm header="Confirmar"
-									message="Tem certeza que deseja cancelar sua inscrição para este evento?"
+									message="Tem certeza que deseja se inscrever nesta atividade?"
 									icon="ui-icon-alert" />
 							</p:commandButton>
+							
 						</p:column>
-
 					</p:dataTable>
-
 				</p:panel>
+
 			</h:form>
 
 		</p:layoutUnit>
-
-		<h:form>
-				Dialog Cadastro em Atividades de Evento
-				<p:dialog widgetVar="dlg_atividades_de_evento" closable="true"
-				width="80%"
-				header="Atividades do Evento #{usuarioEventoController.evento.nome}"
-				resizable="false" onShow="" modal="true" showEffect="clip"
-				hideEffect="clip">
-				<!-- 				<p:ajax event="load" update="@form" /> -->
-				<ui:insert>
-					<ui:include src="/pages/cadastro/cadastro_atividade_evento.xhtml" />
-				</ui:insert>
-			</p:dialog>
-
-		</h:form>
 
 	</ui:define>
 </ui:composition>

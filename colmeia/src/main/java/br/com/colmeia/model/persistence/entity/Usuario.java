@@ -22,26 +22,26 @@ public class Usuario extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
 	private Long id;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false,unique=true)
+	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column
 	private String ra;
 	@Column
 	private String email;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String senha;
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Curso curso;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Instituicao instituicao;
 	@Enumerated(EnumType.ORDINAL)
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Perfil perfil;
-	
+
 	@Transient
 	private String confirmarSenha;
 	@Transient
@@ -50,6 +50,8 @@ public class Usuario extends EntidadeBase {
 	private UIInput cpfUI;
 	@Transient
 	private UIInput passwordUI;
+	@Transient
+	private boolean universitario;
 
 	public Usuario() {
 	}
@@ -99,7 +101,7 @@ public class Usuario extends EntidadeBase {
 	}
 
 	public void setCpf(String cpf) {
-		if(cpf != null)
+		if (cpf != null)
 			cpf = cpf.replace(".", "").replace("-", "");
 		this.cpf = cpf;
 	}
@@ -162,6 +164,14 @@ public class Usuario extends EntidadeBase {
 
 	public void setConfirmarSenha(String confirmarSenha) {
 		this.confirmarSenha = confirmarSenha;
+	}
+
+	public boolean isUniversitario() {
+		return universitario;
+	}
+
+	public void setUniversitario(boolean universitario) {
+		this.universitario = universitario;
 	}
 
 }

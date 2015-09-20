@@ -2,11 +2,8 @@ package br.com.colmeia.controller.implementacao;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import org.primefaces.context.RequestContext;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
@@ -46,36 +43,26 @@ public class UsuarioEventoController extends Controller<UsuarioEvento, UsuarioEv
 		usuario = getCurrentInstanceUser();
 		buscarEventosVigentes();
 		buscarEventosEncerrados();
-		carregarUsuarioEventos();
+		carregarAtividadesInscritasDoUsuario();
 		limpar();
 	}
 
 	private void buscarEventosEncerrados() {
-		try {
-			eventosEncerrados = new EventoService().getClass().newInstance().buscarEventosEncerrados();
-			if (eventosEncerrados.size() > 0) {
-				setEvento_encerrado_size_maior_q_zero(true);
-			} else {
-				setEvento_encerrado_size_maior_q_zero(false);
-			}
-		} catch (InstantiationException | IllegalAccessException e) {
-			message(ERROR, e.getMessage());
+		eventosEncerrados = new EventoService().buscarEventosEncerrados();
+		if (eventosEncerrados.size() > 0) {
+			setEvento_encerrado_size_maior_q_zero(true);
+		} else {
+			setEvento_encerrado_size_maior_q_zero(false);
 		}
 	}
 
 	private void buscarEventosVigentes() {
-		try {
-			eventosVigentes = new EventoService().getClass().newInstance().buscarTodos();
+			eventosVigentes = new EventoService().buscarEventosVigentes();
 			if (eventosVigentes.size() > 0) {
 				setEvento_vigente_size_maior_q_zero(true);
 			} else {
 				setEvento_vigente_size_maior_q_zero(false);
 			}
-		} catch (InstantiationException | IllegalAccessException e) {
-			message(ERROR, e.getMessage());
-		} catch (Exception e) {
-			message(ERROR, e.getMessage());
-		}
 	}
 
 	public void buscarAtividadesDesteEvento(Evento evento) {
@@ -93,38 +80,38 @@ public class UsuarioEventoController extends Controller<UsuarioEvento, UsuarioEv
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
-
-		RequestContext.getCurrentInstance().openDialog("cadastro_atividade_evento");
+		carregarAtividadesInscritasDoUsuario();
 	}
 
 	public void inscrever(AtividadeEvento atividadeEvento) {
 		try {
-			service.inscreverEmUmaAtividadeDeEvento(atividadeEvento, usuario);
-		} catch (Exception e) {
-			message(WORNING, e.getMessage());
-		}
-		carregarUsuarioEventos();
-	}
-
-	public void carregarUsuarioEventos() {
-		entidade = new UsuarioEvento();
-		entidade.setUsuario(usuario);
-		super.buscar();
-	}
-
-	public void cancelarEvento(UsuarioEvento usuarioEvento) {
-		boolean eventoCancelado = false;
-		try {
-			eventoCancelado = service.cancelarEvento(usuarioEvento);
+			getService().inscreverEmUmaAtividadeDeEvento(atividadeEvento, usuario);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
-		if (eventoCancelado) {
-			message(FacesMessage.SEVERITY_INFO, "Cancelado", "Evento cancelado com sucesso");
-		} else {
-			message(ERROR_UNEXPECTED);
+		carregarAtividadesInscritasDoUsuario();
+	}
+
+	public void carregarAtividadesInscritasDoUsuario() {
+		setEntidade(new UsuarioEvento());
+		entidade.setUsuario(usuario);
+		super.buscar();
+		if (atividadesEvento != null) {
+			for (AtividadeEvento ae : atividadesEvento) {
+				boolean axou = false;
+				for (UsuarioEvento usu : entidades) {
+					if (usu.getAtividadeEvento().equals(ae)) {
+						axou = true;
+						break;
+					}
+				}
+				if (axou)
+					ae.setUsuarioInscrito(true);
+				else
+					ae.setUsuarioInscrito(false);
+
+			}
 		}
-		carregarUsuarioEventos();
 	}
 
 	public void limpar() {
