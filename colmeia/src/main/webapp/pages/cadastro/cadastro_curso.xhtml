@@ -56,15 +56,15 @@
 				<p:panel id="pesquisa" header="Lista de Cursos"
 					visible="#{cursoController.size_maior_q_zero}">
 					<p:dataTable value="#{cursoController.entidades}"
-						var="entidade" paginator="true" paginatorAlwaysVisible="true"
+						var="curso" paginator="true" paginatorAlwaysVisible="true"
 						rows="5">
 
 						<p:column headerText="Código" width="80">
-							<p:outputLabel value="#{entidade.id}" />
+							<p:outputLabel value="#{curso.id}" />
 						</p:column>
 
 						<p:column headerText="Nome" width="80">
-							<p:outputLabel value="#{entidade.nome}" />
+							<p:outputLabel value="#{curso.nome}" />
 						</p:column>
 
 						<p:column headerText="Opções" width="150">
@@ -74,11 +74,11 @@
 								update="@form:cadastro">
 								<f:setPropertyActionListener
 									target="#{cursoController.entidade}"
-									value="#{entidade}" />
+									value="#{curso}" />
 							</p:commandButton>
 							<!-- Excluir -->
 							<p:commandButton icon="ui-icon-trash" update="@form:pesquisa"
-								actionListener="#{cursoController.apagar(entidade)}">
+								actionListener="#{cursoController.apagar(curso)}">
 								<p:confirm header="Confirmar"
 									message="Tem certeza que deseja excluír?" icon="ui-icon-alert" />
 							</p:commandButton>
