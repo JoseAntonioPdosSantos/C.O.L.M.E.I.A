@@ -24,6 +24,7 @@ public abstract class Controller<T extends EntidadeBase,Service extends br.com.c
 
 	public Controller() {
 		inicializarVariavel();
+		if(entidade==null)return;
 		entidade.setAtivo(true);
 		buscar();
 	}

@@ -16,7 +16,8 @@
 
 				<p:growl id="msg" showDetail="true" life="1500" />
 
-				<p:panel id="cadastro" header="Cadastro de Ingresso" styleClass="center">
+				<p:panel id="cadastro" header="Cadastro de Ingresso"
+					styleClass="center">
 
 					<h:panelGrid columns="4">
 
@@ -54,9 +55,16 @@
 
 				<p:panel id="pesquisa" header="Lista de Ingressos"
 					visible="#{ingressoController.size_maior_q_zero}">
-					<p:dataTable value="#{ingressoController.entidades}"
-						var="ingresso" paginator="true" paginatorAlwaysVisible="true"
-						rows="5">
+					<p:dataTable id="table_ingressos" value="#{ingressoController.entidades}" var="ingresso"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" paginatorAlwaysVisible="true" rows="5">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage name="/images/pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="table_ingressos" fileName="entidades" preProcessor="#{ingressoController.postProcessXLS}" />
+							</h:commandLink>
+						</f:facet>
 
 						<p:column headerText="Código" width="80">
 							<p:outputLabel value="#{ingresso.id}" />
@@ -72,8 +80,7 @@
 								title="Editar" immediate="true" process="@this"
 								update="@form:cadastro">
 								<f:setPropertyActionListener
-									target="#{ingressoController.entidade}"
-									value="#{ingresso}" />
+									target="#{ingressoController.entidade}" value="#{ingresso}" />
 							</p:commandButton>
 							<!-- Excluir -->
 							<p:commandButton icon="ui-icon-trash" update="@form:pesquisa"

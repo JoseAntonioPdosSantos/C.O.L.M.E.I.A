@@ -70,12 +70,6 @@
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		<groupId>javax</groupId> -->
-<!-- 		<artifactId>javaee-web-api</artifactId> -->
-<!-- 		<version>6.0</version> -->
-<!-- 		<scope>provided</scope> -->
-<!-- 		</dependency> -->
 		<!-- Dependencias dos testes -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -111,11 +105,19 @@
 			<artifactId>flick</artifactId>
 			<version>1.0.9</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.8-02</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.13-beta1</version>
+		</dependency>
+
+
+
 	</dependencies>
 </project>

@@ -3,6 +3,7 @@ package br.com.colmeia.controller.implementacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Usuario;
@@ -20,8 +21,11 @@ public class TopMenuController extends Controller<Usuario, UsuarioService> {
 	}
 
 	public String deslogar() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
-		return "index.xhtml";
+//		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+		FacesContext fc = FacesContext.getCurrentInstance();  
+	       HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);  
+	       session.invalidate();
+		return "index";
 	}
 
 	@Override
