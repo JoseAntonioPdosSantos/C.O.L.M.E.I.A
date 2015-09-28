@@ -11,14 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-/**
- *
- * @author José Antonio
- */
 @Entity
 public class Evento extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4591691756212749346L;
 	@Id
 	@SequenceGenerator(sequenceName = "evento_seq", initialValue = 1, name = "evento_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "evento_seq")

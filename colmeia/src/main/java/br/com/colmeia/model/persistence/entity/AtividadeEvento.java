@@ -16,8 +16,8 @@ import javax.persistence.Transient;
 @Entity
 public class AtividadeEvento extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 55820150624622989L;
 	@Id
 	@SequenceGenerator(sequenceName = "atividade_evento_seq", initialValue = 1, name = "atividade_evento_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "atividade_evento_seq")

@@ -12,7 +12,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public abstract class EntidadeBase implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2896653165482488556L;
 	@JoinColumn
 	@ManyToOne(fetch=FetchType.LAZY)
 	protected Usuario usuarioAlteracao;

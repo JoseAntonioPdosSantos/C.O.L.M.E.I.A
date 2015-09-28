@@ -11,7 +11,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioService;
 @ViewScoped
 public class MenuController extends Controller<Usuario, UsuarioService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 798122193214715935L;
 
 	@Override
 	protected void inicializarVariavel() {

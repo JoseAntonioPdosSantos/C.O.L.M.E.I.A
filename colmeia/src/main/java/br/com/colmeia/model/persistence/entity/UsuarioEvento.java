@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class UsuarioEvento extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1189918725646039730L;
 	@Id
 	@SequenceGenerator(sequenceName = "usuario_evento_seq", initialValue = 1, name = "usuario_evento_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_evento_seq")

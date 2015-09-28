@@ -10,8 +10,8 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class TipoAtividade extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 8311941389888951493L;
 	@Id
 	@SequenceGenerator(sequenceName = "tipo_atividade_seq", initialValue = 1, name = "tipo_atividade_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "tipo_atividade_seq")

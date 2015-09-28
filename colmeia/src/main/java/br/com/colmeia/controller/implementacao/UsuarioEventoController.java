@@ -20,7 +20,8 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioEventoServi
 @ViewScoped
 public class UsuarioEventoController extends Controller<UsuarioEvento, UsuarioEventoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6113937366231935225L;
+
 	private Usuario usuario;
 
 	// Aba Eventos Vigente

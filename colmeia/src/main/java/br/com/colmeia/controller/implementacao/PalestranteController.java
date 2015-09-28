@@ -11,7 +11,7 @@ import br.com.colmeia.model.persistence.service.implementacao.PalestranteService
 @ViewScoped
 public class PalestranteController extends Controller<Palestrante, PalestranteService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2645736014012269825L;
 
 	@Override
 	protected void inicializarVariavel() {

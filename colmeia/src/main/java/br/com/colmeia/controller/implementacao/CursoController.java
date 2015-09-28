@@ -11,7 +11,7 @@ import br.com.colmeia.model.persistence.service.implementacao.CursoService;
 @ViewScoped
 public class CursoController extends Controller<Curso, CursoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6345317717654131295L;
 
 	@Override
 	protected void inicializarVariavel() {

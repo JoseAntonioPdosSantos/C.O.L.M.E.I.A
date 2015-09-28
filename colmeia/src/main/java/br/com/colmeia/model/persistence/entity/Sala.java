@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Sala extends EntidadeBase{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6064416955392267780L;
 	@Id
     @SequenceGenerator(sequenceName = "sala_seq", initialValue = 1, name = "sala_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "sala_seq")

@@ -18,7 +18,7 @@ import br.com.colmeia.model.persistence.service.implementacao.IngressoService;
 @ViewScoped
 public class IngressoController extends Controller<Ingresso, IngressoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8490761805658830369L;
 
 	@Override
 	protected void inicializarVariavel() {

@@ -17,7 +17,7 @@ import javax.persistence.Transient;
 @javax.persistence.Entity
 public class Usuario extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3864722570142381907L;
 	@Id
 	@SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")

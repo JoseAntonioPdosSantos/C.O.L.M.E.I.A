@@ -11,7 +11,8 @@ import br.com.colmeia.model.persistence.service.implementacao.TipoAtividadeServi
 @ViewScoped
 public class TipoAtividadeController extends Controller<TipoAtividade,TipoAtividadeService>{
 
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 2581628615604632657L;
 
 	@Override
 	protected void inicializarVariavel() {

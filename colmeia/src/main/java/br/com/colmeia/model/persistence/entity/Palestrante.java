@@ -10,8 +10,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Palestrante extends EntidadeBase {
 
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 4844950168823560860L;
 	@Id
 	@SequenceGenerator(sequenceName = "palestrante_seq", initialValue = 1, name = "palestrante_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "palestrante_seq")

@@ -13,7 +13,7 @@ import br.com.colmeia.model.persistence.service.implementacao.InstituicaoService
 @ViewScoped
 public class InstituicaoController extends Controller<Instituicao, InstituicaoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1975142712336043764L;
 
 	@Override
 	protected void inicializarVariavel() {

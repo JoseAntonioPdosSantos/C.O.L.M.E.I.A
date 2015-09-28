@@ -20,7 +20,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioService;
 @ViewScoped
 public class UsuarioController extends Controller<Usuario, UsuarioService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2420576638407918975L;
 	private List<Instituicao> instituicoes;
 	private List<Curso> cursos;
 

@@ -21,9 +21,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioEventoServi
 @ViewScoped
 public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoService> {
 
-	private static final long serialVersionUID = 1L;
-//	private UsuarioEventoService service;
-
+	private static final long serialVersionUID = 2696411785475048450L;
 	// Aba Eventos
 	private Evento evento;
 	private List<Evento> eventos;
@@ -35,9 +33,6 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 	private boolean aba_atividades_evento;// Torna a Aba de Atividades Visível
 	private boolean atividades_evento_size_maior_q_zero;
 
-	// Aba de Inscritos na Atividade do Evento Selecionado
-//	private UsuarioEvento usuarioEvento;
-//	private List<UsuarioEvento> usuariosEventos;
 	private Usuario usuario;
 	private boolean aba_presenca;// Torna a Aba de Check-In
 

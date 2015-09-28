@@ -22,7 +22,7 @@ import br.com.colmeia.model.persistence.service.implementacao.SalaService;
 @ViewScoped
 public class AtividadeEventoController extends Controller<AtividadeEvento, AtividadeEventoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7146803575911012221L;
 	private Evento evento;
 	private List<AtividadeEvento> atividadeEventos;
 	private boolean cadastrar_atividade;

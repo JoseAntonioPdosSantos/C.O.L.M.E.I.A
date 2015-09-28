@@ -16,7 +16,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioService;
 @RequestScoped
 public class Login implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2449843197655946960L;
 	private UsuarioService service;
 	private Usuario usuario;
 

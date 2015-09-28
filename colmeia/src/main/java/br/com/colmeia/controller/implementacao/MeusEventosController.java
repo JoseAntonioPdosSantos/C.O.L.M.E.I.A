@@ -14,7 +14,7 @@ import br.com.colmeia.model.persistence.service.implementacao.UsuarioEventoServi
 @ViewScoped
 public class MeusEventosController extends Controller<UsuarioEvento, UsuarioEventoService> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2545686189038661846L;
 	private Usuario usuario;
 
 	@Override

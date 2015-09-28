@@ -10,8 +10,8 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Curso extends EntidadeBase {
 
-    private static final long serialVersionUID = 1L;
-    @Id
+	private static final long serialVersionUID = -2419729743420449269L;
+	@Id
     @SequenceGenerator(sequenceName = "curso_seq", initialValue = 1, name = "curso_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "curso_seq")
     private Long id;

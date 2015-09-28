@@ -11,7 +11,8 @@ import br.com.colmeia.model.persistence.service.implementacao.SalaService;
 @ViewScoped
 public class SalaController extends Controller<Sala, SalaService> {
 
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -1391059909667003245L;
 
 	@Override
 	protected void inicializarVariavel() {
