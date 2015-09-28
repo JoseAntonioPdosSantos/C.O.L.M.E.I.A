@@ -2,18 +2,19 @@ package br.com.colmeia.controller.implementacao;
 
 import java.io.Serializable;
 
+import static br.com.colmeia.controller.util.Message.*;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-import br.com.colmeia.controller.generics.Message;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.implementacao.UsuarioService;
 
 @ManagedBean
 @RequestScoped
-public class Login extends Message implements Serializable {
+public class Login implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private UsuarioService service;
@@ -39,7 +40,7 @@ public class Login extends Message implements Serializable {
 				}
 			}
 		}
-		message(Message.FAILURE_LOGIN);
+		message(FAILURE_LOGIN);
 		return "";
 	}
 

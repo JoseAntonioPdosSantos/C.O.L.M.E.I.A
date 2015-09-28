@@ -3,6 +3,8 @@ package br.com.colmeia.controller.implementacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import static br.com.colmeia.controller.util.Message.*;
+
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.entity.UsuarioEvento;

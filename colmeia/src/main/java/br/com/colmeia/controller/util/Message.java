@@ -1,6 +1,4 @@
-package br.com.colmeia.controller.generics;
-
-import java.util.List;
+package br.com.colmeia.controller.util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -8,9 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-public abstract class Message {
+public final class Message {
 
-	protected Boolean success = false;
 	public static final int SIZE_ZERO = 0;
 	public static final int SUCCESS_UPDATE = 1;
 	public static final int FAILURE_UPDATE = 2;
@@ -30,17 +27,17 @@ public abstract class Message {
 	public static final int SUCCESS = 16;
 	public static final int WORNING = 17;
 
-	protected void message(Severity severity, String title, String message) {
+	public static void message(Severity severity, String title, String message) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage(severity, title, message));
 	}
 
-	protected void message(String title, String message) {
+	public static void message(String title, String message) {
 		FacesMessage faces = new FacesMessage(FacesMessage.SEVERITY_INFO, title, message);
 		FacesContext.getCurrentInstance().addMessage(null, faces);
 	}
 
-	protected void message(final Integer condition, String message) {
+	public static void message(final Integer condition, String message) {
 		Severity severity = null;
 		String title = "";
 		switch (condition) {
@@ -62,7 +59,7 @@ public abstract class Message {
 		FacesContext.getCurrentInstance().addMessage(null, faces);
 	}
 
-	protected void message(final Integer condition) {
+	public static void message(final Integer condition) {
 		FacesMessage faces = null;
 		switch (condition) {
 		case SIZE_ZERO:
@@ -134,20 +131,6 @@ public abstract class Message {
 			message(failed);
 			return false;
 		}
-	}
-
-	public void checkList(List<?> args) {
-		if (args != null)
-			if (args.size() == 0)
-				message(Message.SIZE_ZERO);
-	}
-
-	public Boolean getSuccess() {
-		return success;
-	}
-
-	public void setSuccess(Boolean gravado) {
-		this.success = gravado;
 	}
 
 }

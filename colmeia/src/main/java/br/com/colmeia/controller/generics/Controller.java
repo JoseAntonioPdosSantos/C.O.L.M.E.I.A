@@ -3,6 +3,8 @@ package br.com.colmeia.controller.generics;
 import java.io.Serializable;
 import java.util.List;
 
+import static br.com.colmeia.controller.util.Message.*;
+
 import javax.faces.context.FacesContext;
 
 import br.com.colmeia.model.persistence.entity.EntidadeBase;
@@ -10,7 +12,7 @@ import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.security.Security;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public abstract class Controller<T extends EntidadeBase,Service extends br.com.colmeia.model.persistence.service.generics.Service> extends Message implements Serializable {
+public abstract class Controller<T extends EntidadeBase,Service extends br.com.colmeia.model.persistence.service.generics.Service> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
