@@ -8,42 +8,52 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Login</title>
-	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
-	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-	<h:outputScript library="js" name="init.js"></h:outputScript>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		<title>Login</title>
+	</f:facet>
+
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+
+
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="../../resources/css/style.css"></link>
+
 </h:head>
-<h:body style="background-color: darkturquoise">
 
-	<div align="center" style="margin-top: 15%">
-		<h:form>
+<h:body>
 
-			<p:growl id="msg" sticky="true" showDetail="true" life="1500" />
+	<div class="container">
+
+		<h:form styleClass="form col-sm-8">
+
+			<p:growl id="msg" life="3000" />
 
 			<h1>Login:</h1>
-			<h:panelGrid columns="2" cellspacing="5">
-				<p:outputLabel for="cpf" value="CPF: " />
-				<p:inputMask id="cpf" value="#{login.usuario.cpf}"
-					mask="999.999.999-99" />
-				<h:outputText value="Senha: " />
-				<p:password id="senha" value="#{login.usuario.senha}" />
+			<p:outputLabel value="CPF: " />
+			<p:inputMask id="sizing-addon1" styleClass="form-control duzentos_px"
+				value="#{login.usuario.cpf}" mask="999.999.999-99" />
+			<h:outputText value="Senha: " />
+			<p:password styleClass="form-control duzentos_px" value="#{login.usuario.senha}" />
 
-			</h:panelGrid>
 
 			<br />
 			<p:panelGrid columns="1">
 				<p:row>
 					<p:column>
-						<p:commandButton value="Entrar" update="@form"
-							style="background-color: dodgerblue" id="entrar"
+						<p:commandButton value="Entrar" update="@form" styleClass="btn"
 							action="#{login.doLogin()}"></p:commandButton>
 					</p:column>
 
 
 					<p:column>
-						<p:commandButton value="Cadastrar"
-							style="background-color: dodgerblue" update="@form"
-							id="cadastrar" action="#{login.cadastrar()}"></p:commandButton>
+						<p:commandButton value="Cadastrar" styleClass="btn" update="@form"
+							action="#{login.cadastrar()}"></p:commandButton>
 					</p:column>
 				</p:row>
 			</p:panelGrid>

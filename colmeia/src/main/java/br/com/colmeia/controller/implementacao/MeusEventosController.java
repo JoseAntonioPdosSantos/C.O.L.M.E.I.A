@@ -25,7 +25,7 @@ public class MeusEventosController extends Controller<UsuarioEvento, UsuarioEven
 
 	public void cancelarEvento(UsuarioEvento usuarioEvento) {
 		try {
-			new UsuarioEventoService().cancelarAtividadeDoEvento(usuarioEvento);
+			getService().cancelarAtividadeDoEvento(usuarioEvento);
 		} catch (Exception e) {
 			message(ERROR,e.getMessage());
 		}
@@ -42,7 +42,7 @@ public class MeusEventosController extends Controller<UsuarioEvento, UsuarioEven
 		try {
 			entidade.setUsuario(usuario);
 			entidade.setAtivo(true);
-			entidades = service.buscar(entidade);
+			entidades = getService().buscar(entidade);
 			if (entidades != null)
 				setSize_maior_q_zero(entidades.size() > 0 ? true : false);
 		} catch (Exception e) {
@@ -52,10 +52,6 @@ public class MeusEventosController extends Controller<UsuarioEvento, UsuarioEven
 
 	public UsuarioEventoService getService() {
 		return new UsuarioEventoService();
-	}
-
-	public void setService(UsuarioEventoService service) {
-		this.service = service;
 	}
 
 	public Usuario getUsuario() {

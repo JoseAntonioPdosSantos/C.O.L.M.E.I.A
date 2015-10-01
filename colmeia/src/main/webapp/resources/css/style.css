@@ -1,12 +1,15 @@
 @CHARSET "ISO-8859-1";
 
-body{font-size:10px}
+body{font-size:10px;}
 
 .center{text-align:left;}
 
+.duzentos_px{
+width:200px !important;
+}
 .ui-layout-north {
 				z-index: 20 !important;
-				overflow: visible !important;;
+				overflow: visible !important;
 }
 			
 .ui-layout-north .ui-layout-unit-content {

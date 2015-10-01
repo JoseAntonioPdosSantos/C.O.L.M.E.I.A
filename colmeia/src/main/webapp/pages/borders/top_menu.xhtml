@@ -17,14 +17,15 @@
 				<p:outputLabel
 					value="Seja Bem Vindo(a) #{topMenuController.entidade.nome}" />
 				<p:spacer width="10" />
-				<p:commandButton value="Sair" update="@form"
-					action="#{topMenuController.deslogar()}" />
+<!-- 				<p:commandButton value="Sair" update="@form" -->
+<!-- 					action="#{topMenuController.deslogar()}" /> -->
+				<p:commandLink id="lnkLogout" style="color: black; font-size: 14px"
+					value="Logout" action="#{topMenuController.deslogar()}" ajax="false">
+				</p:commandLink>
 			</p:panel>
 
 
-			<p:commandLink id="lnkLogout" style="color: black; font-size: 14px"
-				value="Logout" action="#{topMenuController.deslogar()}" ajax="false">
-			</p:commandLink>
+
 
 		</h:form>
 

@@ -12,3 +12,7 @@ button.onclick = function(){
 	alert("Oi");
 	init();
 	};
+	
+	jQuery(function($){
+	       $(".mask_cpf").mask("999.999.999-99");
+	});

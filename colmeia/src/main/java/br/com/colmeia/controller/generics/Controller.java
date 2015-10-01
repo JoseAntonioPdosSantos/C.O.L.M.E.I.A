@@ -14,9 +14,7 @@ import br.com.colmeia.model.security.Security;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class Controller<T extends EntidadeBase,Service extends br.com.colmeia.model.persistence.service.generics.Service> implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	
+	private static final long serialVersionUID = -1464679430891204110L;
 	protected Service service;
 	protected T entidade;
 	protected List<T> entidades;
