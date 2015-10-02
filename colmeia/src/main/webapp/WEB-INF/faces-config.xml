@@ -25,6 +25,10 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 			<from-outcome>register_user</from-outcome>
 			<to-view-id>/pages/cadastro/cadastro.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/pages/cadastro/cadastro.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 </faces-config>

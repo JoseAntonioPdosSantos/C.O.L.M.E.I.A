@@ -39,7 +39,7 @@ public abstract class HibernateUtil {
 	}
 	
 	public static Timestamp getCurrentDate(){
-		Query query = em.createQuery("SELECT CURRENT_TIMESTAMP FROM Curso");
+		Query query = em.createQuery("SELECT CURRENT_TIMESTAMP FROM Usuario");
 		return (Timestamp) query.getSingleResult();
 	}
 

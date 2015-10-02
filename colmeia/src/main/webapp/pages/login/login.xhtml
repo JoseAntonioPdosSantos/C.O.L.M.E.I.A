@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -22,7 +21,7 @@
 
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="../../resources/css/style.css"></link>
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 
 </h:head>
 
@@ -39,7 +38,8 @@
 			<p:inputMask id="sizing-addon1" styleClass="form-control duzentos_px"
 				value="#{login.usuario.cpf}" mask="999.999.999-99" />
 			<h:outputText value="Senha: " />
-			<p:password styleClass="form-control duzentos_px" value="#{login.usuario.senha}" />
+			<p:password styleClass="form-control duzentos_px"
+				value="#{login.usuario.senha}" />
 
 
 			<br />
