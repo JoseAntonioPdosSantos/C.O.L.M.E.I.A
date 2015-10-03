@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<div class="aba_cad_instituicao_curso">
+
+		<h1>Escolha a Instituição onde você Estuda</h1>
+
+		<p:outputLabel value="Instituição:" />
+		<p:selectOneMenu label="Instituição" editable="false" id="combobox"
+			converter="InstituicaoConverter" filter="true"
+			value="#{usuarioController.entidade.instituicao}">
+			<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+			<f:selectItems value="#{usuarioController.instituicoes}"
+				var="instituicao" itemLabel="#{instituicao.nome}"
+				itemValue="#{instituicao}" />
+		</p:selectOneMenu>
+
+		<br></br>
+
+		<h1>Escolha o Curso de sua Graduação</h1>
+		<p:outputLabel value="Curso:" />
+		<p:selectOneMenu label="Curso" converter="CursoConverter"
+			filter="true" value="#{usuarioController.entidade.curso}">
+			<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+			<f:selectItems value="#{usuarioController.cursos}" var="curso"
+				itemLabel="#{curso.nome}" itemValue="#{curso}" />
+		</p:selectOneMenu>
+
+		<br /> <br />
+		<div class="container">
+			<h:panelGrid columns="3">
+				<h:commandButton value="Voltar" update="@form"
+					styleClass="btn btn-warning"
+					action="#{usuarioController.novoUsuario}" />
+				<br />
+				<h:commandButton value="Proximo >>" update="@form"
+					styleClass="btn btn-success"
+					action="#{usuarioController.novoUsuario}" />
+			</h:panelGrid>
+		</div>
+
+
+	</div>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<div class="aba_cad_dados_pessoais">
+
+		<h:panelGrid columns="4">
+
+			<h:outputLabel value="CPF:" />
+			<p:inputMask id="sizing-addon1" styleClass="form-control duzentos_px"
+				value="#{login.usuario.cpf}" mask="999.999.999-99" />
+
+			<h:outputLabel value="Nome:" />
+			<h:inputText id="txt_usuario_nome" size="40"
+				styleClass="form-control" value="#{usuarioController.entidade.nome}">
+			</h:inputText>
+
+			<h:outputLabel value="R.A.:" />
+			<h:inputText id="txt_usuario_ra" size="20" styleClass="form-control"
+				value="#{usuarioController.entidade.ra}">
+			</h:inputText>
+			<h:outputLabel value="E-mail:" />
+			<h:inputText id="txt_usuario_email" size="40"
+				styleClass="form-control"
+				value="#{usuarioController.entidade.email}">
+			</h:inputText>
+
+			<h:outputLabel value="Senha:" />
+			<h:inputText id="txt_usuario_senha" size="20"
+				styleClass="form-control"
+				value="#{usuarioController.entidade.senha}"
+				match="txt_usuario_confirmarsenha" feedback="true">
+			</h:inputText>
+
+			<h:outputLabel value="Confirmar Senha:" />
+			<h:inputText id="txt_usuario_confirmarsenha" size="20"
+				styleClass="form-control"
+				value="#{usuarioController.entidade.confirmarSenha}" feedback="true">
+			</h:inputText>
+
+		</h:panelGrid>
+
+<br/>
+<br/>
+		<div class="container">
+			<h:panelGrid columns="3">
+				<h:commandButton value="Voltar" update="@form"
+					styleClass="btn btn-warning"
+					action="#{usuarioController.novoUsuario}" />
+				<br />
+				<h:commandButton value="Cadastrar" update="@form"
+					styleClass="btn btn-success"
+					action="#{usuarioController.novoUsuario}" />
+			</h:panelGrid>
+		</div>
+
+	</div>
+
+</ui:composition>
+
+</html>

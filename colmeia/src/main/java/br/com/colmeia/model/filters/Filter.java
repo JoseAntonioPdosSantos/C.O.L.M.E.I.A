@@ -27,7 +27,10 @@ public class Filter implements javax.servlet.Filter {
 		user = requ.getSession().getAttribute("usuario");
 
 		if (user != null || requ.getRequestURL().toString().endsWith("login.xhtml")
-				|| requ.getRequestURL().toString().endsWith("cadastro.xhtml")) {
+				|| requ.getRequestURL().toString().endsWith("cadastro.xhtml")
+				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_inicial.xhtml.xhtml")
+				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_inst_curso.xhtml")
+				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_dados_pessoais.xhtml")) {
 			chain.doFilter(requ, resp);
 		} else {
 			resp.sendRedirect("/colmeia/pages/login/login.xhtml");

@@ -1,17 +1,27 @@
 @CHARSET "ISO-8859-1";
 
-body{font-size:10px !important;}
-
-.center{text-align:left;}
-
-.duzentos_px{
-width:200px !important;
+body {
+	font-size: 10px !important;
 }
-.ui-layout-north {
-				z-index: 20 !important;
-				overflow: visible !important;
+
+.center {
+	text-align: left;
 }
-			
+
+.duzentos_px {
+	width: 200px !important;
+}
+
+
 .ui-layout-north .ui-layout-unit-content {
-				overflow: visible !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
 }

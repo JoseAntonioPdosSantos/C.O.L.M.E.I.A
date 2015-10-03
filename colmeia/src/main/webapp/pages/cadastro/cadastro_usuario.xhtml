@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -23,7 +23,7 @@
 
 						<p:outputLabel value="Instituição:" />
 						<p:selectOneMenu label="Instituição"
-							converter="InstituicaoConverter" filter="true"
+							converter="InstituicaoConverter" filter="true" editable="false"
 							value="#{usuarioController.entidade.instituicao}">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItems value="#{usuarioController.instituicoes}"
@@ -32,7 +32,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Curso:" />
-						<p:selectOneMenu label="Curso" converter="CursoConverter"
+						<p:selectOneMenu label="Curso" converter="CursoConverter" editable="false"
 							filter="true" value="#{usuarioController.entidade.curso}">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItems value="#{usuarioController.cursos}" var="curso"
