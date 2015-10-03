@@ -7,20 +7,16 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
 	<f:facet name="first">
 		<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 		<title>Login</title>
 	</f:facet>
 
-	<link type="text/css" rel="stylesheet"
-		href="#{request.contextPath}/css/default.css" />
-	<link type="text/css" rel="stylesheet"
-		href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
-
-
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 
 </h:head>
@@ -46,7 +42,7 @@
 			<p:panelGrid columns="1">
 				<p:row>
 					<p:column>
-						<p:commandButton value="Entrar" update="@form" styleClass="btn"
+						<p:commandButton id="entrar" value="Entrar" update="@form" styleClass="btn"
 							action="#{login.doLogin()}"></p:commandButton>
 					</p:column>
 
