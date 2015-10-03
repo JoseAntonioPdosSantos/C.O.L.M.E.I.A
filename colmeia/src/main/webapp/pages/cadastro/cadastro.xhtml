@@ -28,128 +28,94 @@
 .ui-layout-north .ui-layout-unit-content {
 	overflow: visible !important;
 }
+
+body {
+	background-color: rgb(100, 255, 100);
+	background-image: url(http://imgms.viajeaqui.abril.com.br/1/foto-galeria-materia-620-bm1q.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+	width: 100vw;
+	height: 100vh;
+}
 </style>
 
 	</h:head>
 
 	<h:body>
+
 		<h:form>
 
-			<p:growl id="msg" showDetail="true" life="1500" />
+			<p:growl id="msg" life="3000" />
 
-			<p:panel id="cadastro" header="Cadastro de Usuario">
+			<h:panelGrid id="cadastro" header="Cadastro de Usuario">
 
-				<p:panelGrid>
+				<h:panelGrid>
 
-					<p:row>
-						<p:column colspan="4">
-							<p:outputLabel value="Sou aluno Estácio:" />
-							<p:selectOneRadio id="aluno_estacio"
-								value="#{usuarioController.usuario.alunoEstacio}">
-								<f:selectItem itemLabel="Sim" itemValue="true" />
-								<f:selectItem itemLabel="Não" itemValue="false" />
-							</p:selectOneRadio>
-						</p:column>
-					</p:row>
+					<p:outputLabel value="Sou aluno Estácio:" />
+					<p:selectOneRadio id="aluno_estacio"
+						value="#{usuarioController.entidade.alunoEstacio}">
+						<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+					</p:selectOneRadio>
 
-					<p:row>
-						<p:column>
-							<p:outputLabel value="Instituição:" />
-						</p:column>
-						<p:column>
-							<p:autoComplete id="txt_usuario_instituicao" size="40"
-								value="#{usuarioController.usuario.instituicao}">
-								<p:watermark for="txt_usuario_instituicao"
-									value="Selecione uma Instituição"></p:watermark>
-							</p:autoComplete>
-						</p:column>
-						<p:column>
-							<p:outputLabel value="Curso:" />
-						</p:column>
-						<p:column>
-							<p:autoComplete id="txt_usuario_curso" size="30"
-								value="#{usuarioController.usuario.curso}">
-								<p:watermark for="txt_usuario_curso" value="Selecione um Curso"></p:watermark>
-							</p:autoComplete>
-						</p:column>
-					</p:row>
+					<p:outputLabel value="Instituição:" />
+					<p:autoComplete id="txt_usuario_instituicao" size="40"
+						value="#{usuarioController.entidade.instituicao}">
+						<p:watermark for="txt_usuario_instituicao"
+							value="Selecione uma Instituição"></p:watermark>
+					</p:autoComplete>
+					<p:outputLabel value="Curso:" />
+					<p:autoComplete id="txt_usuario_curso" size="30"
+						value="#{usuarioController.entidade.curso}">
+					</p:autoComplete>
 
-					<p:row>
-						<p:column>
-							<p:outputLabel value="CPF:" />
-						</p:column>
-						<p:column>
-							<p:inputText id="txt_usuario_cpf" size="20"
-								value="#{usuarioController.usuario.cpf}">
-								<p:watermark for="txt_usuario_cpf" value="CPF"></p:watermark>
-							</p:inputText>
-						</p:column>
-					</p:row>
+					<p:outputLabel value="CPF:" />
+					<h:inputText id="txt_usuario_cpf" size="20"
+						value="#{usuarioController.entidade.cpf}">
+					</h:inputText>
 
-					<p:row>
-						<p:column>
-							<p:outputLabel value="Nome:" />
-						</p:column>
-						<p:column colspan="3">
-							<p:inputText id="txt_usuario_nome" size="40"
-								value="#{usuarioController.usuario.nome}">
-								<p:watermark for="txt_usuario_nome" value="Nome"></p:watermark>
-							</p:inputText>
-						</p:column>
-					</p:row>
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="txt_usuario_nome" size="40"
+						value="#{usuarioController.entidade.nome}">
+						<p:watermark for="txt_usuario_nome" value="Nome"></p:watermark>
+					</p:inputText>
 
-					<p:row>
-						<p:column>
-							<p:outputLabel value="R.A.:" />
-						</p:column>
-						<p:column>
-							<p:inputText id="txt_usuario_ra" size="20"
-								value="#{usuarioController.usuario.ra}">
-								<p:watermark for="txt_usuario_ra" value="R.A."></p:watermark>
-							</p:inputText>
-						</p:column>
-						<p:column>
-							<p:outputLabel value="E-mail:" />
-						</p:column>
-						<p:column>
-							<p:inputText id="txt_usuario_email" size="40"
-								value="#{usuarioController.usuario.email}">
-								<p:watermark for="txt_usuario_email" value="E-mail"></p:watermark>
-							</p:inputText>
-						</p:column>
-					</p:row>
+					<p:outputLabel value="R.A.:" />
+					<p:inputText id="txt_usuario_ra" size="20"
+						value="#{usuarioController.entidade.ra}">
+						<p:watermark for="txt_usuario_ra" value="R.A."></p:watermark>
+					</p:inputText>
+					<p:outputLabel value="E-mail:" />
+					<p:inputText id="txt_usuario_email" size="40"
+						value="#{usuarioController.entidade.email}">
+						<p:watermark for="txt_usuario_email" value="E-mail"></p:watermark>
+					</p:inputText>
 
-					<p:row>
-						<p:column>
-							<p:outputLabel value="Senha:" />
-						</p:column>
-						<p:column>
-							<p:password id="txt_usuario_senha" size="20"
-								value="#{usuarioController.usuario.senha}" match="txt_usuario_confirmarsenha" feedback="true">
-								<p:watermark for="txt_usuario_senha" value="Senha"></p:watermark>
-							</p:password>
-						</p:column>
-						<p:column>
-							<p:outputLabel value="Confirmar Senha:" />
-						</p:column>
-						<p:column>
-							<p:password id="txt_usuario_confirmarsenha" size="20"
-								value="#{usuarioController.usuario.confirmarSenha}" feedback="true">
-								<p:watermark for="txt_usuario_confirmarsenha"
-									value="Confirmar Senha"></p:watermark>
-							</p:password>
-						</p:column>
-					</p:row>
-				</p:panelGrid>
+					<p:outputLabel value="Senha:" />
+					<p:password id="txt_usuario_senha" size="20"
+						value="#{usuarioController.entidade.senha}"
+						match="txt_usuario_confirmarsenha" feedback="true">
+						<p:watermark for="txt_usuario_senha" value="Senha"></p:watermark>
+					</p:password>
+					<p:outputLabel value="Confirmar Senha:" />
+					<p:password id="txt_usuario_confirmarsenha" size="20"
+						value="#{usuarioController.entidade.confirmarSenha}"
+						feedback="true">
+						<p:watermark for="txt_usuario_confirmarsenha"
+							value="Confirmar Senha"></p:watermark>
+					</p:password>
 
-				<p:panel>
+				</h:panelGrid>
+
+				<h:panelGrid>
 					<h:panelGrid columns="4">
 						<p:commandButton value="Cadastrar" update="@form"
 							action="#{usuarioController.novoUsuario}" />
 					</h:panelGrid>
-				</p:panel>
-
-			</p:panel>
+				</h:panelGrid>
+			</h:panelGrid>
 		</h:form>
 	</h:body>
 </f:view>
