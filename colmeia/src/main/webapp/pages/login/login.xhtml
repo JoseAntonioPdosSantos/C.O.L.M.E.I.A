@@ -14,10 +14,13 @@
 		<title>Login</title>
 	</f:facet>
 
-	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
-	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
 
 </h:head>
 
@@ -29,30 +32,36 @@
 
 			<p:growl id="msg" life="3000" />
 
-			<h1>Login:</h1>
-			<p:outputLabel value="CPF: " />
-			<p:inputMask id="sizing-addon1" styleClass="form-control duzentos_px"
-				value="#{login.usuario.cpf}" mask="999.999.999-99" />
-			<h:outputText value="Senha: " />
-			<p:password styleClass="form-control duzentos_px"
-				value="#{login.usuario.senha}" />
+			<h:panelGrid>
+				<h1>Login:</h1>
 
+<!-- 				<p:panel> -->
+					<p:outputLabel value="CPF: " />
+					<p:inputMask id="sizing-addon1"
+						styleClass="form-control duzentos_px" value="#{login.usuario.cpf}"
+						mask="999.999.999-99" />
+					<p:outputLabel value="Senha: " />
+					<p:password styleClass="form-control duzentos_px"
+						value="#{login.usuario.senha}" />
+<!-- 				</p:panel> -->
 
-			<br />
-			<p:panelGrid columns="1">
+				<br />
 				<p:row>
+
 					<p:column>
-						<p:commandButton id="entrar" value="Entrar" update="@form" styleClass="btn"
-							action="#{login.doLogin()}"></p:commandButton>
+						<h:commandButton value="Cadastrar" styleClass="btn btn-success"
+							immediate="true" action="#{login.cadastrar()}"></h:commandButton>
 					</p:column>
 
-
+					<p:spacer width="30" />
+					
 					<p:column>
-						<p:commandButton value="Cadastrar" styleClass="btn" update="@form"
-							action="#{login.cadastrar()}"></p:commandButton>
+						<h:commandButton id="entrar" value="Log In" immediate="true"
+							styleClass="btn btn-primary" action="#{login.doLogin()}"></h:commandButton>
 					</p:column>
 				</p:row>
-			</p:panelGrid>
+
+			</h:panelGrid>
 		</h:form>
 	</div>
 

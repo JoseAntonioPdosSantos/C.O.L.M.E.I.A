@@ -11,13 +11,14 @@
 
 	<div class="aba_aluno_estacio">
 		<p:outputLabel value="Sou aluno Estácio:" />
+		<br /> <br />
 
 		<p:selectOneRadio value="#{usuarioController.entidade.alunoEstacio}">
 			<f:selectItem itemLabel="Sim" itemValue="true" />
 			<f:selectItem itemLabel="Não" itemValue="false" />
 		</p:selectOneRadio>
-		
-			<br /> <br />
+
+		<br /> <br />
 		<div class="container">
 			<h:panelGrid columns="3">
 				<h:commandButton value="Proximo >>" update="@form"
@@ -25,7 +26,7 @@
 					action="#{usuarioController.novoUsuario}" />
 			</h:panelGrid>
 		</div>
-		
+
 	</div>
 
 </ui:composition>

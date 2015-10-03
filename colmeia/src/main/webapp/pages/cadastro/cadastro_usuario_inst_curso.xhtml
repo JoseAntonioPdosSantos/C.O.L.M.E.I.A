@@ -12,6 +12,7 @@
 	<div class="aba_cad_instituicao_curso">
 
 		<h1>Escolha a Instituição onde você Estuda</h1>
+		<br /> <br />
 
 		<p:outputLabel value="Instituição:" />
 		<p:selectOneMenu label="Instituição" editable="false" id="combobox"
@@ -26,6 +27,8 @@
 		<br></br>
 
 		<h1>Escolha o Curso de sua Graduação</h1>
+		<br /> <br />
+
 		<p:outputLabel value="Curso:" />
 		<p:selectOneMenu label="Curso" converter="CursoConverter"
 			filter="true" value="#{usuarioController.entidade.curso}">
