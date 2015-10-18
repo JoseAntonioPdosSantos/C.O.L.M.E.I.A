@@ -1,18 +1,19 @@
 package br.com.colmeia.controller.implementacao;
 
-import java.io.Serializable;
+import static br.com.colmeia.controller.util.Message.ERROR;
+import static br.com.colmeia.controller.util.Message.FAILURE_LOGIN;
+import static br.com.colmeia.controller.util.Message.message;
 
-import static br.com.colmeia.controller.util.Message.*;
+import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import br.com.colmeia.model.persistence.entity.Usuario;
 import br.com.colmeia.model.persistence.service.implementacao.UsuarioService;
 
-@ManagedBean
+@ManagedBean(name = "login")
 @RequestScoped
 public class Login implements Serializable {
 
@@ -46,11 +47,6 @@ public class Login implements Serializable {
 
 	public Usuario getCurrentUser() {
 		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-	}
-
-	public void validatorLoginAndPassword(FacesContext arg0, UIComponent arg1, Object arg2) {
-		usuario.setCpf(getUsuario().getCpfUI().getLocalValue().toString());
-		usuario.setSenha(arg2.toString());
 	}
 
 	public String esqueciMinhaSenha() {

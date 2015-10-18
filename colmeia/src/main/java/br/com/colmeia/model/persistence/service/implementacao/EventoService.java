@@ -42,7 +42,7 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			}
 			if (entity.getNome() != null) {
 				if (!entity.getNome().trim().isEmpty())
-					nome = Restrictions.ilike("nome", entity.getNome());
+					nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
 			if (entity.getCoordenador() != null) {
 				coordenador = Restrictions.eq("coordenador", entity.getCoordenador());

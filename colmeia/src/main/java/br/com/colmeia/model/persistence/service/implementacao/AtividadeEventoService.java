@@ -62,7 +62,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 			}
 			if (entity.getNome() != null) {
 				if (!entity.getNome().trim().isEmpty())
-					nome = Restrictions.ilike("nome", entity.getNome());
+					nome = Restrictions.ilike("nome", "%" + entity.getNome()+ "%");
 			}
 			if (entity.getEvento() != null) {
 				evento = Restrictions.eq("evento", entity.getEvento());

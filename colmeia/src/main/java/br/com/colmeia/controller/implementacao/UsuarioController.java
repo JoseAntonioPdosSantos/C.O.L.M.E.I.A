@@ -24,10 +24,21 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 	private List<Instituicao> instituicoes;
 	private List<Curso> cursos;
 
+	private boolean aba_cadastro_usuario_sou_universitario;
+	private boolean aba_cadastro_usuario_sou_estacio;
+	private boolean aba_cadasto_inst_curso;
+	private boolean aba_cadasto_dados_pessoais;
+	private boolean combobox_instituicao;
+
 	@Override
 	protected void inicializarVariavel() {
 		limpar();
-		setEntidade(getCurrentInstanceUser());
+		if (getCurrentInstanceUser() == null) {
+			setEntidade(new Usuario());
+			tornarAbaVisivel("aba_cadastro_usuario_sou_universitario");
+		} else {
+			setEntidade(getCurrentInstanceUser());
+		}
 		carregarInstituicoes();
 		carregarCursos();
 	}
@@ -55,7 +66,7 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 	public String novoUsuario() {
 		try {
 			String senha = getEntidade().getSenha();
-			service.gravar(getEntidade());
+			getService().gravar(getEntidade());
 			Login login = new Login();
 			getEntidade().setSenha(senha);
 			login.setUsuario(getEntidade());
@@ -64,7 +75,7 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 			message(ERROR, e.getMessage());
 			return "";
 		}
-		return "/pages/borders/index.xhtml";
+		return "acessar";
 	}
 
 	public void limpar() {
@@ -96,6 +107,95 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 		alterar();
 	}
 
+	public void irParaProximaAbaDepoisUniversitario() {
+		if (entidade.isUniversitario()) {
+			tornarAbaVisivel("aba_cadastro_usuario_sou_estacio");
+		} else {
+			tornarAbaVisivel("aba_cadasto_dados_pessoais");
+		}
+	}
+
+	public void irParaCadastroInstituicaoECurso() {
+		if (entidade.isAlunoEstacio()) {
+			Instituicao instituicao = new Instituicao();
+			instituicao.setEstacio(true);
+			try {
+				List<Instituicao> instituicoes = new InstituicaoService().buscar(instituicao);
+				if (instituicoes.size() > 0) {
+					entidade.setInstituicao(instituicoes.get(0));
+					combobox_instituicao = false;
+					if (instituicoes.size() > 1) {
+						combobox_instituicao = true;
+					}
+				}
+			} catch (Exception e) {
+				message(ERROR, e.getMessage());
+			}
+		} else {
+			entidade.setInstituicao(null);
+			combobox_instituicao = true;
+		}
+		tornarAbaVisivel("aba_cadasto_inst_curso");
+	}
+
+	public void irParaCadastroDadosPessoais() {
+		if (entidade.getInstituicao() != null) {
+			entidade.setAlunoEstacio(entidade.getInstituicao().isEstacio());
+			if (entidade.getCurso() != null) {
+				tornarAbaVisivel("aba_cadasto_dados_pessoais");
+			} else {
+				message(WORNING, "Favor escolher seu curso. Caso não-o encontre na lista, selecione 'Outro'");
+			}
+		} else {
+			message(WORNING,
+					"Favor escolher sua instituição de ensino. Caso não-a encontre na lista, selecione 'Outra'");
+		}
+	}
+
+	public void cadastroSouEstacioVoltar() {
+		tornarAbaVisivel("aba_cadastro_usuario_sou_universitario");
+	}
+
+	public void cadastroInstCursoVoltar() {
+		tornarAbaVisivel("aba_cadastro_usuario_sou_estacio");
+	}
+
+	public void cadastroDadosPessoaisVotar() {
+		if (entidade.isUniversitario())
+			tornarAbaVisivel("aba_cadasto_inst_curso");
+		else
+			tornarAbaVisivel("aba_cadastro_usuario_sou_universitario");
+	}
+
+	private void tornarAbaVisivel(final String aba) {
+		switch (aba) {
+		case "aba_cadastro_usuario_sou_universitario":
+			aba_cadastro_usuario_sou_universitario = true;
+			aba_cadastro_usuario_sou_estacio = false;
+			aba_cadasto_inst_curso = false;
+			aba_cadasto_dados_pessoais = false;
+			break;
+		case "aba_cadastro_usuario_sou_estacio":
+			aba_cadastro_usuario_sou_estacio = true;
+			aba_cadastro_usuario_sou_universitario = false;
+			aba_cadasto_inst_curso = false;
+			aba_cadasto_dados_pessoais = false;
+			break;
+		case "aba_cadasto_inst_curso":
+			aba_cadasto_inst_curso = true;
+			aba_cadastro_usuario_sou_universitario = false;
+			aba_cadastro_usuario_sou_estacio = false;
+			aba_cadasto_dados_pessoais = false;
+			break;
+		case "aba_cadasto_dados_pessoais":
+			aba_cadasto_dados_pessoais = true;
+			aba_cadastro_usuario_sou_universitario = false;
+			aba_cadastro_usuario_sou_estacio = false;
+			aba_cadasto_inst_curso = false;
+			break;
+		}
+	}
+
 	public UsuarioService getService() {
 		return new UsuarioService();
 	}
@@ -122,6 +222,46 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isAba_cadasto_inst_curso() {
+		return aba_cadasto_inst_curso;
+	}
+
+	public void setAba_cadasto_inst_curso(boolean aba_cadasto_inst_curso) {
+		this.aba_cadasto_inst_curso = aba_cadasto_inst_curso;
+	}
+
+	public boolean isAba_cadasto_dados_pessoais() {
+		return aba_cadasto_dados_pessoais;
+	}
+
+	public void setAba_cadasto_dados_pessoais(boolean aba_cadasto_dados_pessoais) {
+		this.aba_cadasto_dados_pessoais = aba_cadasto_dados_pessoais;
+	}
+
+	public boolean isCombobox_instituicao() {
+		return combobox_instituicao;
+	}
+
+	public void setCombobox_instituicao(boolean combobox_instituicao) {
+		this.combobox_instituicao = combobox_instituicao;
+	}
+
+	public boolean isAba_cadastro_usuario_sou_estacio() {
+		return aba_cadastro_usuario_sou_estacio;
+	}
+
+	public void setAba_cadastro_usuario_sou_estacio(boolean aba_cadastro_usuario_sou_estacio) {
+		this.aba_cadastro_usuario_sou_estacio = aba_cadastro_usuario_sou_estacio;
+	}
+
+	public boolean isAba_cadastro_usuario_sou_universitario() {
+		return aba_cadastro_usuario_sou_universitario;
+	}
+
+	public void setAba_cadastro_usuario_sou_universitario(boolean aba_cadastro_usuario_sou_universitario) {
+		this.aba_cadastro_usuario_sou_universitario = aba_cadastro_usuario_sou_universitario;
 	}
 
 }

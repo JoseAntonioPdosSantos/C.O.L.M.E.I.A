@@ -20,12 +20,10 @@ public class TopMenuController extends Controller<Usuario, UsuarioService> {
 		limpar();
 	}
 
-	public String deslogar() {
-//		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
-		FacesContext fc = FacesContext.getCurrentInstance();  
-	       HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);  
-	       session.invalidate();
-		return "index";
+	public void deslogar() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		session.invalidate();
 	}
 
 	@Override

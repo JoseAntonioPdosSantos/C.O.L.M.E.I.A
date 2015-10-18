@@ -26,15 +26,19 @@ public class InstituicaoService extends Service<Instituicao, Long, InstituicaoHi
 	public List<Instituicao> buscar(Instituicao entity) throws Exception {
 		Criterion id = null;
 		Criterion nome = null;
+		Criterion estacio = null;
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
 			}
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
-				nome = Restrictions.ilike("nome", entity.getNome());
+				nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
+			}
+			if (entity.isEstacio()) {
+				estacio = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
 		}
-		return getDao().findByCriteria(id, nome);
+		return getDao().findByCriteria(id, nome,estacio);
 	}
 
 	@Override

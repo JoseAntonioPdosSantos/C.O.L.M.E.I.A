@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+	
+		<p:layoutUnit position="center">
+			<h:form>
+
+				<p:growl id="msg" showDetail="true" life="3000" />
+
+				<p:tabView id="tabView_cadastro_evento" dynamic="true" cache="true">
+
+					<p:tab id="tab_cadastro_evento" title="Cadastro de Eventos">
+
+						<p:panel id="cadastro_evento" header="Cadastro de Eventos"
+							styleClass="center">
+
+							<h:panelGrid columns="4" cellpadding="5">
+
+								<p:outputLabel id="lb_evento_id" value="Código: " />
+								<p:inputText size="10" id="txt_evento_id"
+									value="#{eventoController.entidade.id}"
+									disabled="#{eventoController.editando_registro}">
+									<p:watermark for="txt_evento_id" value="Código"></p:watermark>
+								</p:inputText>
+								<p:outputLabel id="lb_evento_nome" value="Nome do Evento: " />
+								<p:inputText size="40" id="txt_evento_nome"
+									value="#{eventoController.entidade.nome}">
+									<p:watermark for="txt_evento_nome"
+										value="Digite o nome do Evento"></p:watermark>
+								</p:inputText>
+
+								<p:outputLabel id="lb_evento_dtini" value="Data de Inicio:" />
+								<p:calendar id="txt_evento_dtini"
+									value="#{eventoController.entidade.dtini_}"
+									pattern="dd/MM/yyyy HH:mm">
+								</p:calendar>
+
+								<p:outputLabel id="lb_evento_dtfim" value="Data de Término:" />
+								<p:calendar id="txt_evento_dtfim"
+									value="#{eventoController.entidade.dtfim_}"
+									pattern="dd/MM/yyyy HH:mm">
+								</p:calendar>
+							</h:panelGrid>
+
+							<h:panelGrid columns="3">
+
+								<p:commandButton value="Cadastrar"
+									rendered="#{eventoController.editando_registro eq true ? false : true}"
+									update="@form" actionListener="#{eventoController.gravar()}"></p:commandButton>
+
+								<p:commandButton value="Alterar" update="@form"
+									rendered="#{eventoController.editando_registro}"
+									actionListener="#{eventoController.alterar()}"></p:commandButton>
+
+								<p:commandButton value="Pesquisar" update="@form"
+									actionListener="#{eventoController.buscar}"></p:commandButton>
+
+								<p:commandButton value="Limpar" update="@form"
+									actionListener="#{eventoController.limpar()}"></p:commandButton>
+
+							</h:panelGrid>
+
+							<p:panel id="pesquisa_evento" header="Lista de Eventos"
+								visible="#{eventoController.size_maior_q_zero}">
+								<p:dataTable value="#{eventoController.entidades}" var="evento"
+									paginator="true" paginatorAlwaysVisible="true" rows="5">
+
+									<p:column headerText="Código" width="80">
+										<p:outputLabel value="#{evento.id}" />
+									</p:column>
+
+									<p:column headerText="Nome" width="80">
+										<p:outputLabel value="#{evento.nome}" />
+									</p:column>
+
+									<p:column headerText="Coordenador" width="80">
+										<p:outputLabel value="#{evento.coordenador.nome}" />
+									</p:column>
+
+									<p:column headerText="Data Inicial" width="80">
+										<p:outputLabel value="#{evento.dtini}" />
+									</p:column>
+
+									<p:column headerText="Data Final" width="80">
+										<p:outputLabel value="#{evento.dtfim}" />
+									</p:column>
+
+									<p:column headerText="Opções" width="150">
+										<!-- Editar -->
+										<p:commandButton icon="ui-icon-refresh" alt="Editar"
+											title="Editar" immediate="true" process="@this"
+											update="@form"
+											actionListener="#{atividadeEventoController.setEvento(evento)}">>
+											<f:setPropertyActionListener
+												target="#{eventoController.entidade}" value="#{evento}" />
+										</p:commandButton>
+										<!-- Excluir -->
+										<p:commandButton icon="ui-icon-trash" update="@form"
+											actionListener="#{eventoController.apagar(evento)}">
+											<p:confirm header="Confirmar"
+												message="Tem certeza que deseja excluír?"
+												icon="ui-icon-alert" />
+										</p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+
+							</p:panel>
+						</p:panel>
+
+					</p:tab>
+
+					<p:tab id="tab_cadastro_atividade_evento" closable="true"
+						title="Cadastro de Atividades do Evento #{atividadeEventoController.evento.nome}"
+						rendered="#{atividadeEventoController.cadastrar_atividade}">
+
+						<p:panel id="cadastro_atividade_evento"
+							header="Cadastro de Atividades do Evento #{atividadeEventoController.evento.nome}"
+							styleClass="center">
+
+							<h:panelGrid columns="6" cellpadding="5">
+
+								<p:outputLabel id="lb_atividade_evento_id" value="Código: " />
+								<p:inputText size="10" id="txt_atividade_evento_id"
+									value="#{atividadeEventoController.entidade.id}"
+									disabled="#{atividadeEventoController.editando_registro}">
+									<p:watermark for="txt_atividade_evento_id" value="Código"></p:watermark>
+								</p:inputText>
+
+								<p:outputLabel id="lb_atividade_evento_nome"
+									value="Nome da Atividade: " />
+								<p:inputText size="40" id="txt_atividade_evento_nome"
+									value="#{atividadeEventoController.entidade.nome}">
+									<p:watermark for="txt_atividade_evento_nome"
+										value="Digite o Nome da Atividade do Evento"></p:watermark>
+								</p:inputText>
+
+								<p:outputLabel value="Limite de Inscritos: " />
+								<p:inputText size="10"
+									id="txt_atividade_evento_quantidade_inscritos"
+									value="#{atividadeEventoController.entidade.quantidadeInscritos}">
+									<p:watermark for="txt_atividade_evento_quantidade_inscritos"
+										value="Limite"></p:watermark>
+								</p:inputText>
+
+								<p:outputLabel id="lb_atividadeEvento_dataInicial"
+									value="Data de Inicio:" />
+								<p:calendar id="txt_atividadeEvento_dataInicial"
+									value="#{atividadeEventoController.entidade.dataInicial_}"
+									pattern="dd/MM/yyyy HH:mm">
+								</p:calendar>
+
+								<p:outputLabel id="lb_atividadeEvento_dataFinal"
+									value="Data de Término:" />
+								<p:calendar id="txt_atividadeEvento_dataFinal"
+									value="#{atividadeEventoController.entidade.dataFinal_}"
+									pattern="dd/MM/yyyy HH:mm">
+								</p:calendar>
+
+								<p:outputLabel value="Palestrante: " />
+								<p:selectOneMenu label="Palestrante"
+									converter="PalestranteConverter" filter="true"
+									value="#{atividadeEventoController.entidade.palestrante}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems
+										value="#{atividadeEventoController.palestrantes}"
+										var="palestrante" itemLabel="#{palestrante.nome}"
+										itemValue="#{palestrante}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Ingresso: " />
+								<p:selectOneMenu label="Ingresso" converter="IngressoConverter"
+									filter="true"
+									value="#{atividadeEventoController.entidade.ingresso}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems value="#{atividadeEventoController.ingressos}"
+										var="ingresso" itemLabel="#{ingresso.nome}"
+										itemValue="#{ingressso}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Sala: " />
+								<p:selectOneMenu label="Sala"
+									converter="SalaConverter" filter="true"
+									value="#{atividadeEventoController.entidade.sala}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems
+										value="#{atividadeEventoController.salas}"
+										var="sala" itemLabel="#{sala.nome}"
+										itemValue="#{sala}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Descrição: " />
+								<p:inputTextarea cols="40" maxlength="256" rows="4"
+									id="txt_atividade_evento_descricao"
+									value="#{atividadeEventoController.entidade.descricao}">
+									<p:watermark for="txt_atividade_evento_descricao"
+										value="Digite uma descrição sobre esta atividade"></p:watermark>
+								</p:inputTextarea>
+
+							</h:panelGrid>
+
+							<h:panelGrid columns="3">
+
+								<p:commandButton value="Cadastrar"
+									rendered="#{atividadeEventoController.editando_registro eq true ? false : true}"
+									update="@form"
+									actionListener="#{atividadeEventoController.gravar()}"></p:commandButton>
+
+								<p:commandButton value="Alterar" update="@form"
+									rendered="#{atividadeEventoController.editando_registro}"
+									actionListener="#{atividadeEventoController.alterar()}"></p:commandButton>
+
+								<p:commandButton value="Pesquisar" update="@form"
+									actionListener="#{atividadeEventoController.buscar}"></p:commandButton>
+
+								<p:commandButton value="Limpar" update="@form"
+									actionListener="#{eventoController.limpar()}"></p:commandButton>
+
+							</h:panelGrid>
+
+							<p:panel id="pesquisa_atividade_evento"
+								header="Lista de Atividades do Evento #{atividadeEventoController.entidade.evento.nome}"
+								visible="#{atividadeEventoController.size_maior_q_zero}">
+								<p:dataTable value="#{atividadeEventoController.entidades}"
+									var="atividadeEvento" paginator="true"
+									paginatorAlwaysVisible="true" rows="5">
+
+									<p:column headerText="Código" width="80">
+										<p:outputLabel value="#{atividadeEvento.id}" />
+									</p:column>
+
+									<p:column headerText="Nome" width="80">
+										<p:outputLabel value="#{atividadeEvento.nome}" />
+									</p:column>
+
+									<p:column headerText="Evento" width="80">
+										<p:outputLabel value="#{atividadeEvento.evento.nome}" />
+									</p:column>
+
+									<p:column headerText="Data Inicial" width="80">
+										<p:outputLabel value="#{atividadeEvento.dataInicial}" />
+									</p:column>
+
+									<p:column headerText="Data Final" width="80">
+										<p:outputLabel value="#{atividadeEvento.dataFinal}" />
+									</p:column>
+
+									<p:column headerText="Opções" width="150">
+										<!-- Editar -->
+										<p:commandButton icon="ui-icon-refresh" alt="Editar"
+											title="Editar" immediate="true" process="@this"
+											update="@form">
+											<f:setPropertyActionListener
+												target="#{atividadeEventoController.entidade}"
+												value="#{atividadeEvento}" />
+										</p:commandButton>
+										<!-- Excluir -->
+										<p:commandButton icon="ui-icon-trash" update="@form"
+											actionListener="#{atividadeEventoController.apagar(atividadeEvento)}">
+											<p:confirm header="Confirmar"
+												message="Tem certeza que deseja excluír esta Atividade?"
+												icon="ui-icon-alert" />
+										</p:commandButton>
+									</p:column>
+
+								</p:dataTable>
+
+							</p:panel>
+						</p:panel>
+
+					</p:tab>
+
+				</p:tabView>
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>

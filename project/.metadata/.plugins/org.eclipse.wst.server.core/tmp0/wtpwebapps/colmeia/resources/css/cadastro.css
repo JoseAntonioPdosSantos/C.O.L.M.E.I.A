@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-image:
+		url(http://imgms.viajeaqui.abril.com.br/1/foto-galeria-materia-620-bm1q.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+
+#form {
+	height: 50%;
+	background: rgba(60%, 40%, 20%, 0.5);
+	font-size: 26px;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+.aba_aluno_estacio {
+	height: 50%;
+	background: rgba(60%, 40%, 20%, 0.5);
+	font-size: 40px;
+	color: #E0FFFF;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.aba_cad_instituicao_curso {
+	height: 50%;
+	background: rgba(60%, 40%, 20%, 0.5);
+	font-size: 16px;
+	color: #E0FFFF;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.aba_cad_dados_pessoais {
+	height: 50%;
+	background: rgba(60%, 40%, 20%, 0.5);
+	font-size: 16px;
+	color: #E0FFFF;
+	text-align: center;
+	box-sizing: border-box;
+}

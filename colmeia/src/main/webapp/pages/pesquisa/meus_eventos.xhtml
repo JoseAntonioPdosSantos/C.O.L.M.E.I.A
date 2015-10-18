@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -12,7 +12,7 @@
 
 			<h:form>
 
-				<p:growl id="msg" life="3000" />
+				<p:growl id="msg" showDetail="true" life="5000" />
 
 				<p:panel
 					visible="#{meusEventosController.size_maior_q_zero eq false ? true : false}">
@@ -35,15 +35,18 @@
 						</p:column>
 
 						<p:column headerText="Evento" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.nome}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.evento.nome}" />
 						</p:column>
 
 						<p:column headerText="Coordenador" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.evento.coordenador.nome}" />
 						</p:column>
 
 						<p:column headerText="Data Inicial" width="80">
-							<p:outputLabel value="#{usuarioEvento.atividadeEvento.dataInicial}" />
+							<p:outputLabel
+								value="#{usuarioEvento.atividadeEvento.dataInicial}" />
 						</p:column>
 
 						<p:column headerText="Data Final" width="80">

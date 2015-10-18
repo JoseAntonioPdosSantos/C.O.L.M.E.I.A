@@ -7,28 +7,35 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 
 	<managed-bean>
 		<managed-bean-name>Login</managed-bean-name>
-		<managed-bean-class>br.com.colmeia.controller.imp.Login</managed-bean-class>
+		<managed-bean-class>br.com.colmeia.controller.implementacao.Login</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 	<navigation-rule>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/pages/login/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/pages/cadastro/cadastro.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>acessar</from-outcome>
+			<to-view-id>/pages/borders/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/pages/login/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>user</from-outcome>
-			<to-view-id>/faces/pages/borders/index.xhtml</to-view-id>
+			<from-outcome>usuario</from-outcome>
+			<to-view-id>/pages/borders/index.xhtml</to-view-id>
 		</navigation-case>
-<!-- 		<navigation-case> -->
-<!-- 			<from-outcome>no_user</from-outcome> -->
-<!-- 			<to-view-id>/pages/login/login.xhtml</to-view-id> -->
-<!-- 		</navigation-case> -->
-<!-- 		<navigation-case> -->
-<!-- 			<from-outcome>register_user</from-outcome> -->
-<!-- 			<to-view-id>/pages/cadastro/cadastro_usuario.xhtml</to-view-id> -->
-<!-- 		</navigation-case> -->
-<!-- 		<navigation-case> -->
-<!-- 			<from-outcome>i_forget_my_password</from-outcome> -->
-<!-- 			<to-view-id>/pages/cadastro/recuperar_senha.xhtml</to-view-id> -->
-<!-- 		</navigation-case> -->
+		<navigation-case>
+			<from-outcome>register_user</from-outcome>
+			<to-view-id>/pages/cadastro/cadastro.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 </faces-config>

@@ -1,0 +1,33 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:layoutUnit position="north" size="13%" collapsible="false">
+		<h:form>
+
+			<h:panelGrid styleClass="center" >
+				<p:outputLabel
+					value="Seja Bem Vindo(a) #{topMenuController.entidade.nome}" />
+				<p:spacer width="10" />
+				<p:commandLink id="lnkLogout" value="Logout" action="logout"
+					actionListener="#{topMenuController.deslogar()}" update="@form"
+					ajax="false">
+				</p:commandLink>
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:layoutUnit>
+
+</ui:composition>
+
+</html>
+
+
+

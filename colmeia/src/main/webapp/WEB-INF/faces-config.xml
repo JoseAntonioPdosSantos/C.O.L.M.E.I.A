@@ -12,21 +12,28 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
 	</managed-bean>
 
 	<navigation-rule>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/pages/login/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/pages/cadastro/cadastro.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>acessar</from-outcome>
+			<to-view-id>/pages/borders/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/pages/login/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>usuario</from-outcome>
 			<to-view-id>/pages/borders/index.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>novo_usuario</from-outcome>
-			<to-view-id>/pages/login/login.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>register_user</from-outcome>
-			<to-view-id>/pages/cadastro/cadastro.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>index</from-outcome>
 			<to-view-id>/pages/cadastro/cadastro.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>

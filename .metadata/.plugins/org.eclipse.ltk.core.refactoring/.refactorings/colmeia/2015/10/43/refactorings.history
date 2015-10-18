@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;colmeia/src/main/webapp/pages/cadastro/cadastro_usuario_inicial.xhtml&apos; to &apos;cadastro_usuario_sou_estacio.xhtml&apos;" description="Rename resource &apos;cadastro_usuario_inicial.xhtml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/pages/cadastro/cadastro_usuario_inicial.xhtml" name="cadastro_usuario_sou_estacio.xhtml" stamp="1445180841456" updateReferences="true"/>
+</session>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14412354424420" configfile="/colmeia/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/registro/dlg_presenca.xhtml" x="122" y="370" id="pf14414727018521" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14416742504746 pf14416742504747 pf14416742504748 pf14437985708150" inlinks="pf14416742504747" path="/pages/login/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/borders/index.xhtml" x="338" y="178" id="pf144167425047410" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14416742504746" path="/pages/borders/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/cadastro/cadastro.xhtml" x="338" y="562" id="pf144167425047411" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14416742504748 pf14437985708150" path="/pages/cadastro/cadastro.xhtml"/>
+  <links id="pf14416742504746" target="pf144167425047410" source="pf14414727018521" outcome="usuario"/>
+  <links id="pf14416742504748" target="pf144167425047411" source="pf14414727018521" outcome="register_user"/>
+  <links id="pf14416742504747" target="pf14414727018521" source="pf14414727018521" outcome="novo_usuario">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14437985708150" target="pf144167425047411" source="pf14414727018521" outcome="index"/>
+</pageflow:Pageflow>

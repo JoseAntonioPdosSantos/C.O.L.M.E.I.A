@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14451049772270" configfile="/colmeia/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/login/login.xhtml" x="122" y="562" id="pf14451078688190" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14451078688201 pf14451078688202" inlinks="pf14451078688202" path="/pages/login/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/borders/index.xhtml" x="338" y="178" id="pf14451078688203" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14451078688201" path="/pages/borders/index.xhtml"/>
+  <links id="pf14451078688201" target="pf14451078688203" source="pf14451078688190" outcome="usuario"/>
+  <links id="pf14451078688202" target="pf14451078688190" source="pf14451078688190" outcome="logout"/>
+</pageflow:Pageflow>

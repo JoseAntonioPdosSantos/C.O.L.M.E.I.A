@@ -1,0 +1,14 @@
+127.0.0.1 - - [12/Oct/2015:21:20:02 -0400] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:03 -0400] "GET /colmeia/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/pages/login/login.xhtml HTTP/1.1" 200 3414
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/theme.css.xhtml?ln=primefaces-flick HTTP/1.1" 200 18393
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/style.css.xhtml?ln=css HTTP/1.1" 200 397
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/login.css.xhtml?ln=css HTTP/1.1" 200 330
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/primefaces.css.xhtml?ln=primefaces&v=5.1 HTTP/1.1" 200 58744
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/css/default.css HTTP/1.1" 404 1040
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/css/syntaxhighlighter/syntaxhighlighter.css HTTP/1.1" 404 1096
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&v=5.1 HTTP/1.1" 200 108195
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&v=5.1 HTTP/1.1" 200 236815
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/primefaces.js.xhtml?ln=primefaces&v=5.1 HTTP/1.1" 200 313177
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&v=5.1 HTTP/1.1" 200 42
+0:0:0:0:0:0:0:1 - - [12/Oct/2015:21:20:05 -0400] "GET /colmeia/javax.faces.resource/bootstrap.min.css.xhtml?ln=css HTTP/1.1" 200 122669

@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -8,49 +7,67 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Login</title>
-	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
-	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		<title>Login</title>
+	</f:facet>
+
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/default.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
 
 </h:head>
-<h:body style="background-color: darkturquoise">
 
-	<div align="center" style="margin-top: 15%">
-		<h:form>
-		
-		
-		<p:growl id="growl" sticky="true" showDetail="true" life="1500" />
-		
-			<h1>Login:</h1>
-			<h:panelGrid columns="2" cellspacing="5">
-				<p:outputLabel for="cpf" value="CPF: " />
-				<p:inputMask id="cpf" value="#{login.usuario.cpf}"
+<h:body>
+
+	<div class="container">
+
+		<h:form styleClass="form col-sm-8">
+
+			<p:growl id="msg" showDetail="true" life="5000" />
+
+			<h:panelGrid>
+				
+				<h1>Login:</h1>
+
+				<p:outputLabel value="CPF: " />
+				<p:inputMask id="sizing-addon1"
+					styleClass="form-control duzentos_px" value="#{login.usuario.cpf}"
 					mask="999.999.999-99" />
-				<h:outputText value="Senha: " />
-				<p:password id="nonFeedback"
+				<p:outputLabel value="Senha: " />
+				<p:password styleClass="form-control duzentos_px"
 					value="#{login.usuario.senha}" />
 
-			</h:panelGrid>
+				<br />
 
-			<br />
-			<p:panelGrid columns="1">
 				<p:row>
-					<p:column>
-						<p:commandButton value="Entrar" update="@form"
-							style="background-color: dodgerblue" id="entrar"
-							actionListener="#{login.doLogin()}"></p:commandButton>
-					</p:column>
-
 
 					<p:column>
-						<p:commandButton value="Cadastrar"
-							style="background-color: dodgerblue"  update="@form" id="cadastrar"
-							actionListener="#{login.cadastrar()}"></p:commandButton>
+						<h:commandButton id="entrar" value="Log In"
+							styleClass="btn btn-primary" action="#{login.doLogin()}"></h:commandButton>
 					</p:column>
+
+					<p:spacer width="30" />
+
+					<p:column>
+						<h:commandButton value="Cadastrar" styleClass="btn btn-success"
+							immediate="true" action="#{login.cadastrar()}"></h:commandButton>
+					</p:column>
+				
 				</p:row>
-			</p:panelGrid>
+
+			</h:panelGrid>
+		
 		</h:form>
+	
 	</div>
 
 </h:body>
+
 </html>

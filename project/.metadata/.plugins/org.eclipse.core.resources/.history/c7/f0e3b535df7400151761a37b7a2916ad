@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+body {
+	background-image:
+		url(https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-9/11255818_866166013478320_2686911748235827251_n.jpg?oh=c10ae202bd544260df870f068d857ba2&oe=56C92B0D&__gda__=1455595835_3aff92e6e71468ad44a40c534f049337);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+	width: 100vw;
+	height: 100vh;
+}
