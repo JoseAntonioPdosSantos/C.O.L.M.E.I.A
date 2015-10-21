@@ -29,6 +29,7 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 	private List<Palestrante> palestrantes;
 	private List<Ingresso> ingressos;
 	private List<Sala> salas;
+	private String icon;
 
 	@Override
 	protected void inicializarVariavel() {
@@ -47,7 +48,7 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
-		
+
 	}
 
 	private void buscarIngressos() {
@@ -157,6 +158,17 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 
 	public void setSalas(List<Sala> salas) {
 		this.salas = salas;
+	}
+
+	public String getIcon(AtividadeEvento atividadeEvento) {
+		if(atividadeEvento.isUsuarioInscrito())
+			return "ui-icon-check";
+		else
+			return "ui-icon-circle-plus";
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }
