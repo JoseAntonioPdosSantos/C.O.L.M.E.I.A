@@ -21,6 +21,9 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		if(entity.getQuantidadeInscritos() == null || entity.getQuantidadeInscritos()<= 0)
+			throw new Exception("Desculpe! O número máximo de inscritos deve ser maior que zero (0)");
+		
 		if (entity.getEvento() == null)
 			throw new Exception("Desculpe! É necessário informar um evento");
 		if (entity.getDataInicial() == null)

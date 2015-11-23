@@ -145,12 +145,14 @@
 								</p:inputText>
 
 								<p:outputLabel value="Limite de Inscritos: " />
-								<p:inputText size="10"
+								<p:inputMask mask="9?999999" placeHolder=""
 									id="txt_atividade_evento_quantidade_inscritos"
 									value="#{atividadeEventoController.entidade.quantidadeInscritos}">
 									<p:watermark for="txt_atividade_evento_quantidade_inscritos"
 										value="Limite"></p:watermark>
-								</p:inputText>
+								</p:inputMask>
+
+
 
 								<p:outputLabel id="lb_atividadeEvento_dataInicial"
 									value="Data de Inicio:" />
