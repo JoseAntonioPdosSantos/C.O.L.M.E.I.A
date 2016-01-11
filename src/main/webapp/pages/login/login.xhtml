@@ -14,13 +14,9 @@
 		<title>Login</title>
 	</f:facet>
 
-	<link type="text/css" rel="stylesheet"
-		href="#{request.contextPath}/css/default.css" />
-	<link type="text/css" rel="stylesheet"
-		href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
-	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
-	<h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="login.css"/>
 
 </h:head>
 
@@ -28,18 +24,23 @@
 
 	<div class="container">
 
-		<h:form styleClass="form col-sm-8">
+<div class="col-md-10"></div>
+
+		<h:form styleClass="form col-md-2">
 
 			<p:growl id="msg" showDetail="true" life="5000" />
 
-			<h:panelGrid>
+			<h:panelGrid styleClass="badge">
 				
-				<h1>Login:</h1>
-
+				<br /><br />
+					
 				<p:outputLabel value="CPF: " />
 				<p:inputMask id="sizing-addon1"
 					styleClass="form-control duzentos_px" value="#{login.usuario.cpf}"
 					mask="999.999.999-99" />
+					
+					<br />
+					
 				<p:outputLabel value="Senha: " />
 				<p:password styleClass="form-control duzentos_px"
 					value="#{login.usuario.senha}" />
@@ -59,9 +60,14 @@
 						<h:commandButton value="Cadastrar" styleClass="btn btn-success"
 							immediate="true" action="#{login.cadastrar()}"></h:commandButton>
 					</p:column>
+					
+					<br/> <br/><br/>
+						<h:commandLink value="Esqueci minha senha" styleClass="label label-warning"
+							immediate="true" action="#{usuarioController.esqueciMinhaSenha}"></h:commandLink>
+				
 				
 				</p:row>
-
+<br /><br />
 			</h:panelGrid>
 		
 		</h:form>

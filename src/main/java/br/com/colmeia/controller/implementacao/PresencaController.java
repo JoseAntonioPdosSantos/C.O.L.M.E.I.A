@@ -109,7 +109,7 @@ public class PresencaController extends Controller<UsuarioEvento,UsuarioEventoSe
 
 	public void desmarcarPresenca(UsuarioEvento usuarioEvento) {
 		try {
-			usuarioEvento = service.desmarcarPresenca(usuarioEvento);
+			usuarioEvento = getService().desmarcarPresenca(usuarioEvento);
 			message(FacesMessage.SEVERITY_INFO, "Registro de Presença", "Presença Desmarcada com Sucesso");
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());

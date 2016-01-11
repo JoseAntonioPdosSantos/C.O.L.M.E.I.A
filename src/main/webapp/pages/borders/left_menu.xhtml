@@ -10,10 +10,13 @@
 	<p:layoutUnit position="west" size="15%" header="Menu" >
 		<h:form>
 			<p:panelMenu>
+				<p:submenu label="Home" rendered="#{menuController.getAcesso('usuario')}">
+					<p:menuitem url="/pages/borders/index.xhtml" value="Home" />
+				</p:submenu>
 				<p:submenu id="submenu_minha_conta" label="Minha Conta" rendered="#{menuController.getAcesso('usuario')}">
 					<p:menuitem id="menu_meus_dados" url="/pages/cadastro/cadastro_usuario.xhtml" value="Meus Dados" />
 					<p:menuitem id="menu_meus_eventos" url="/pages/pesquisa/meus_eventos.xhtml"  value="Meus Eventos" />
-					<p:menuitem id="menu_certificado" url="/pages/pesquisa/meus_certificados.xhtml" value="Meus Certificados" />
+<!-- 					<p:menuitem id="menu_certificado" url="/pages/pesquisa/meus_certificados.xhtml" value="Meus Certificados" /> -->
 				</p:submenu>
 				<p:submenu id="submenu_evento" label="Eventos" rendered="#{menuController.getAcesso('usuario')}">
 					<p:menuitem id="menu_inscricao_evento" url="/pages/cadastro/cadastro_usuario_evento.xhtml" value="Inscrição de Eventos" />

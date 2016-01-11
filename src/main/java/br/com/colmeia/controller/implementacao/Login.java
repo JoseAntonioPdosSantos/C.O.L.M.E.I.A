@@ -49,10 +49,6 @@ public class Login implements Serializable {
 		return (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	}
 
-	public String esqueciMinhaSenha() {
-		return "i_forget_my_password";
-	}
-
 	public String cadastrar() {
 		return "register_user";
 	}

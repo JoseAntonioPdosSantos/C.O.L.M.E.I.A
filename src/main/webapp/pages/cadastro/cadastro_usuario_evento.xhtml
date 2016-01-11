@@ -123,8 +123,8 @@
 
 						<p:column headerText="Inscrições" width="30">
 							<!-- Inscrever -->
-							<p:commandButton value="#{atividadeEvento.usuarioInscrito eq true?'Inscrito':'Increver'}" icon="#{atividadeEventoController.getIcon(atividadeEvento)}" 
-								process="@this" update="@form" styleClass="btn btn-success"
+							<p:commandButton style="height:20px;" value="#{atividadeEvento.usuarioInscrito eq true?'':''}" icon="#{atividadeEventoController.getIcon(atividadeEvento)}" 
+								process="@this" update="@form" styleClass="btn btn-success btn-20px"
 								actionListener="#{usuarioEventoController.inscrever(atividadeEvento)}">
 							</p:commandButton>
 <!-- 								<p:confirm header="Confirmar" -->

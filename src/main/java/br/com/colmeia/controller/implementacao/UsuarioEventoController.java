@@ -88,7 +88,8 @@ public class UsuarioEventoController extends Controller<UsuarioEvento, UsuarioEv
 
 	public void inscrever(AtividadeEvento atividadeEvento) {
 		try {
-			getService().inscreverEmUmaAtividadeDeEvento(atividadeEvento, usuario);
+			String mensage = getService().inscreverEmUmaAtividadeDeEvento(atividadeEvento, usuario);
+			message(SUCCESS,mensage);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}

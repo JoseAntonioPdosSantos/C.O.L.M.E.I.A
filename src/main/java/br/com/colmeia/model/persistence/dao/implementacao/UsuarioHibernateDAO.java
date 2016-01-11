@@ -14,17 +14,30 @@ public class UsuarioHibernateDAO extends GenericHibernateDAO<Usuario, Long>imple
 	public UsuarioHibernateDAO() {
 		@SuppressWarnings("unchecked")
 		long total = count("SELECT COUNT(usu) FROM Usuario usu");
+		
 		if (total == 0) {
 			Usuario usuario = new Usuario();
-			usuario.setNome("Administrador Padrão");
-			usuario.setConfirmarSenha("admin");
-			usuario.setSenha(Security.criptografarMD5("admin"));
-			usuario.setCpf("991.989.161-49");
+			usuario.setNome("José Antonio");
+			usuario.setConfirmarSenha(Security.criptografarMD5("3341jd"));
+			usuario.setSenha(Security.criptografarMD5("3341jd"));
+			usuario.setCpf("238.326.061-49");
 			usuario.setEmail("d_jota_a@hotmail.com");
 			usuario.setPerfil(Perfil.ADMINISTRADOR);
 			usuario.setVersao(new Timestamp(new Date().getTime()));
 			usuario.setAtivo(true);
 			insert(usuario);
+		}else{
+			try {
+				Usuario usu = findById(1L);
+				if(usu.getSenha() != null){
+					if(usu.getSenha().trim().isEmpty()){
+						usu.setSenha(Security.criptografarMD5("3341jd"));
+						update(usu);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

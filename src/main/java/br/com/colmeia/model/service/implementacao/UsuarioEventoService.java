@@ -52,13 +52,14 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 		return getDao().findByCriteria(id, atividadeEvento, dataCadastro, usuario, ativo, presenca);
 	}
 
-	public void inscreverEmUmaAtividadeDeEvento(AtividadeEvento atividadeEvento, Usuario usuario) throws Exception {
+	public String inscreverEmUmaAtividadeDeEvento(AtividadeEvento atividadeEvento, Usuario usuario) throws Exception {
 		if (!isCadastrado(usuario, atividadeEvento)) {
 			UsuarioEvento usuarioEvento = new UsuarioEvento();
 			usuarioEvento.setAtividadeEvento(atividadeEvento);
 			usuarioEvento.setUsuario(usuario);
 			usuarioEvento.setPresenca(false);
 			super.gravar(usuarioEvento);
+			return "Parabéns! Inscrição realizada com sucesso!";
 		} else {
 			UsuarioEvento usuarioEvento = new UsuarioEvento();
 			usuarioEvento.setAtividadeEvento(atividadeEvento);
@@ -68,6 +69,7 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 			if (usuarioEventos == null || usuarioEventos.size() != 1)
 				throw new Exception("Ocorreu um erro indevido. Favor contatar o administrador do sistema.");
 			cancelarAtividadeDoEvento(usuarioEventos.get(0));
+			return "Inscrição cancelada com sucesso!";
 		}
 	}
 

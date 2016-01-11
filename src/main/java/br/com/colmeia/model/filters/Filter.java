@@ -30,6 +30,7 @@ public class Filter implements javax.servlet.Filter {
 				|| requ.getRequestURL().toString().endsWith("cadastro.xhtml")
 				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_inicial.xhtml.xhtml")
 				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_inst_curso.xhtml")
+				|| requ.getRequestURL().toString().endsWith("alterar_senha.xhtml")
 				|| requ.getRequestURL().toString().endsWith("cadastro_usuario_dados_pessoais.xhtml")) {
 			chain.doFilter(requ, resp);
 		} else {

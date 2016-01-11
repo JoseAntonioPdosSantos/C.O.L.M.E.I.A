@@ -14,7 +14,7 @@
 
 			<h:form>
 
-				<p:growl id="msg" life="5000" />
+				<p:growl id="msg" showDetail="true" life="5000" />
 
 				<p:tabView id="tabView_registro_presenca" dynamic="true"
 					cache="true">
@@ -184,13 +184,13 @@
 
 								<p:column headerText="Opções" width="150">
 									<!-- Marcar Presença -->
-									<p:commandButton value="Marcar"
+									<p:commandButton value="Falta"
 										update="@form"
 										rendered="#{usuarioEvento.presenca_ eq true ? false:true}"
 										actionListener="#{presencaController.marcarPresenca(usuarioEvento)}">
 									</p:commandButton>
 									<!-- desmarcar Presença -->
-									<p:commandButton value="Desmarcar"
+									<p:commandButton value="Presente"
 										update="@form" rendered="#{usuarioEvento.presenca_}"
 										actionListener="#{presencaController.desmarcarPresenca(usuarioEvento)}">
 									</p:commandButton>

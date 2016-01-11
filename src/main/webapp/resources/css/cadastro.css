@@ -1,8 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background-image:
-		url(http://deforma.com.br/blog/wp-content/uploads/2015/05/design-thinking.jpg);
+	background-image: url(/colmeia/resources/images/banner_estacio_03.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -14,7 +13,7 @@ body {
 #form {
 	height: 100vh;
 	width:100vw;
-	background: rgba(60%, 40%, 20%, 0.5);
+	background: rgba(60%, 40%, 20%, 0.1);
 	font-size: 26px;
 	padding: 40px;
 	box-sizing: border-box;

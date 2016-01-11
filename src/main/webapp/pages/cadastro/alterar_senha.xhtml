@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		<title>Esqueci Minha Senha</title>
+	</f:facet>
+
+	<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="esqueci_minha_senha.css"/>
+
+</h:head>
+
+<h:body>
+
+<h:form styleClass="form">
+
+<p:growl id="msg" showDetail="true" life="5000" />
+
+<div class="container panel panel-default col-md-4 ">
+
+		<h3>Esqueci Minha Senha</h3>
+		<h6>Digete seu CPF, sua senha, confirme a senha e clique em Alterar</h6>
+		<br /> <br />
+
+		<h:panelGrid columns="2">
+
+			<p:outputLabel value="CPF:" />
+			<p:inputMask id="sizing-addon1" styleClass="form-control duzentos_px"
+				value="#{usuarioController.entidade.cpf}" mask="999.999.999-99">
+			</p:inputMask>
+
+			<p:outputLabel value="Senha:" />
+			<p:password id="txt_usuario_senha" size="20"
+				styleClass="form-control"
+				value="#{usuarioController.entidade.senha}"
+				match="txt_usuario_confirmarsenha" feedback="true">
+				<p:watermark for="txt_usuario_senha" value="Digite sua senha aqui"></p:watermark>
+			</p:password>
+
+			<p:outputLabel value="Confirmar Senha:" />
+			<p:password id="txt_usuario_confirmarsenha" size="20"
+				styleClass="form-control"
+				value="#{usuarioController.entidade.confirmarSenha}" feedback="true">
+				<p:watermark for="txt_usuario_confirmarsenha"
+					value="Confirme sua senha"></p:watermark>
+			</p:password>
+
+		</h:panelGrid>
+
+		<br /> <br />
+		<div class="container">
+			<h:commandButton value="Alterar" update="@form"
+				styleClass="btn btn-success" actionListener="#{usuarioController.alterarSenha()}"
+				action="#{usuarioController.novoUsuario}" />
+		</div>
+
+		<br /> <br />
+
+</div>
+
+</h:form>
+
+</h:body>
+
+
+</html>

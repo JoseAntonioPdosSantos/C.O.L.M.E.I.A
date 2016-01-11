@@ -35,7 +35,7 @@ public class InstituicaoService extends Service<Instituicao, Long, InstituicaoHi
 				nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
 			if (entity.isEstacio()) {
-				estacio = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
+				estacio = Restrictions.eq("estacio",entity.isEstacio());
 			}
 		}
 		return getDao().findByCriteria(id, nome,estacio);

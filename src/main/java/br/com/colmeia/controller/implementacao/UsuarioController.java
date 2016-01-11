@@ -29,6 +29,7 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 	private boolean aba_cadasto_inst_curso;
 	private boolean aba_cadasto_dados_pessoais;
 	private boolean combobox_instituicao;
+	private boolean atualizarDados;
 
 	@Override
 	protected void inicializarVariavel() {
@@ -66,7 +67,26 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 	public String novoUsuario() {
 		try {
 			String senha = getEntidade().getSenha();
-			getService().gravar(getEntidade());
+			String confirmaSenha = getEntidade().getConfirmarSenha();
+			String cpf = getEntidade().getCpf();
+			if (atualizarDados) {
+				Usuario usuario = new Usuario();
+				usuario.setCpf(cpf);
+				setEntidade(entidade);
+				List<Usuario> usuarios = getService().buscar(usuario);
+				if (usuarios.size() == 1)
+					setEntidade(usuarios.get(0));
+				else{
+					message(WORNING, "Verifique o CPF digitado");
+					return null;
+				}
+				getEntidade().setSenha(senha);
+				getEntidade().setConfirmarSenha(confirmaSenha);
+				getService().alterar(getEntidade());
+				atualizarDados = false;
+			} else {
+				getService().gravar(getEntidade());
+			}
 			Login login = new Login();
 			getEntidade().setSenha(senha);
 			login.setUsuario(getEntidade());
@@ -107,10 +127,19 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 		alterar();
 	}
 
+	public void alterarSenha() {
+		atualizarDados = true;
+	}
+
+	public String esqueciMinhaSenha() {
+		return "esqueci_minha_senha";
+	}
+
 	public void irParaProximaAbaDepoisUniversitario() {
 		if (entidade.isUniversitario()) {
 			tornarAbaVisivel("aba_cadastro_usuario_sou_estacio");
 		} else {
+			entidade.setAlunoEstacio(false);
 			tornarAbaVisivel("aba_cadasto_dados_pessoais");
 		}
 	}
