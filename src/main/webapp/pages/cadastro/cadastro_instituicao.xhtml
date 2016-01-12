@@ -15,7 +15,7 @@
 
 				<p:growl id="msg" showDetail="true" life="5000" />
 
-				<p:panel id="cadastro" header="Cadastro de Instituição"
+				<p:panel id="cadastro" header="Cadastro de instituição"
 					styleClass="center">
 
 					<h:panelGrid columns="4">
@@ -58,7 +58,7 @@
 
 				</p:panel>
 
-				<p:panel id="pesquisa" header="Lista de Instituições"
+				<p:panel id="pesquisa" header="Lista de instituições"
 					visible="#{instituicaoController.size_maior_q_zero}">
 					<p:dataTable value="#{instituicaoController.entidades}"
 						var="instituicao" paginator="true" paginatorAlwaysVisible="true"

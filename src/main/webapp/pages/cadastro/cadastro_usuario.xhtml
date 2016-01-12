@@ -16,7 +16,7 @@
 
 				<p:growl id="msg" showDetail="true" life="5000" />
 
-				<p:panel id="cadastro" header="Cadastro de Usuario"
+				<p:panel id="cadastro" header="Cadastro de usuário"
 					styleClass="center">
 
 					<p:panelGrid columns="6">
@@ -75,7 +75,7 @@
 							value="#{usuarioController.entidade.senha}">
 							<p:watermark for="txt_usuario_senha" value="Senha"></p:watermark>
 						</p:password>
-						<p:outputLabel value="Confirmar Senha:" />
+						<p:outputLabel value="Confirmar senha:" />
 						<p:password id="txt_usuario_confirmarsenha" size="20"
 							value="#{usuarioController.entidade.confirmarSenha}">
 							<p:watermark for="txt_usuario_confirmarsenha"
@@ -102,7 +102,7 @@
 
 				</p:panel>
 
-				<p:panel id="pesquisa" header="Lista de Usuários"
+				<p:panel id="pesquisa" header="Lista de usuários"
 					rendered="#{menuController.getAcesso('coordenador')}"
 					visible="#{usuarioController.size_maior_q_zero}">
 					<p:dataTable value="#{usuarioController.entidades}" var="usuario"
