@@ -18,11 +18,11 @@
 
 				<p:tabView id="tabView_usuario_evento" dynamic="true" cache="true">
 
-					<p:tab title="Eventos Vigentes">
+					<p:tab title="Eventos vigentes">
 
 						<p:panel
 							visible="#{usuarioEventoController.evento_vigente_size_maior_q_zero eq true ? false : true}">
-							<h1>Desculpe! Não Há Eventos Disponíveis</h1>
+							<h1>Não há eventos disponíveis</h1>
 						</p:panel>
 
 						<p:panel id="eventos_vigente" header="Lista de Eventos Vigentes"
@@ -57,15 +57,15 @@
 
 					</p:tab>
 
-					<p:tab title="Eventos Encerrados">
+					<p:tab title="Eventos encerrados">
 
 						<p:panel
 							visible="#{usuarioEventoController.evento_encerrado_size_maior_q_zero eq true ? false : true}">
-							<h1>Desculpe! Não Há Eventos Disponíveis</h1>
+							<h1>Não há eventos disponíveis</h1>
 						</p:panel>
 
 						<p:panel id="eventos_encerrados" styleClass="center"
-							header="Lista de Eventos Encerrados"
+							header="Lista de eventos encerrados"
 							visible="#{usuarioEventoController.evento_encerrado_size_maior_q_zero}">
 
 							<p:dataTable value="#{usuarioEventoController.eventosEncerrados}"
@@ -80,11 +80,11 @@
 									<p:outputLabel value="#{eventoEncerrados.coordenador.nome}" />
 								</p:column>
 
-								<p:column headerText="Data Inicial" width="80">
+								<p:column headerText="Data inicial" width="80">
 									<p:outputLabel value="#{eventoEncerrados.dtini}" />
 								</p:column>
 
-								<p:column headerText="Data Final" width="80">
+								<p:column headerText="Data final" width="80">
 									<p:outputLabel value="#{eventoEncerrados.dtfim}" />
 								</p:column>
 
