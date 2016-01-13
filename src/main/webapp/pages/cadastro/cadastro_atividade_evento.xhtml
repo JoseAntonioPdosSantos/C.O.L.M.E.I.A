@@ -14,11 +14,11 @@
 
 			<p:panel
 				visible="#{usuarioEventoController.atividade_evento_vigente_size_maior_q_zero eq true ? false : true}">
-				<h1>Desculpe! Não Há Atividades Cadastradas para este Evento</h1>
+				<h1>Não há atividades para este evento</h1>
 			</p:panel>
 
 			<p:panel
-				header="Atividades para o Evento #{usuarioEventoController.evento.nome}">
+				header="Atividades para o evento #{usuarioEventoController.evento.nome}">
 				<p:dataTable value="#{usuarioEventoController.atividadesEvento}"
 					var="atividadeEvento" paginator="true"
 					paginatorAlwaysVisible="true" rows="5">
@@ -31,11 +31,11 @@
 						<p:outputLabel value="#{atividadeEvento.evento.coordenador.nome}" />
 					</p:column>
 
-					<p:column headerText="Data Inicial" width="80">
+					<p:column headerText="Data inicial" width="80">
 						<p:outputLabel value="#{atividadeEvento.dataInicial}" />
 					</p:column>
 
-					<p:column headerText="Data Final" width="80">
+					<p:column headerText="Data final" width="80">
 						<p:outputLabel value="#{atividadeEvento.dataFinal}" />
 					</p:column>
 

@@ -16,7 +16,7 @@
 
 				<p:growl id="msg" showDetail="true" life="5000" />
 
-				<p:panel id="cadastro" header="Cadastro de Ingresso"
+				<p:panel id="cadastro" header="Cadastro de ingresso"
 					styleClass="center">
 
 					<h:panelGrid columns="4">
@@ -53,7 +53,7 @@
 
 				</p:panel>
 
-				<p:panel id="pesquisa" header="Lista de Ingressos"
+				<p:panel id="pesquisa" header="Lista de ingressos"
 					visible="#{ingressoController.size_maior_q_zero}">
 					<p:dataTable id="table_ingressos" value="#{ingressoController.entidades}" var="ingresso"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"

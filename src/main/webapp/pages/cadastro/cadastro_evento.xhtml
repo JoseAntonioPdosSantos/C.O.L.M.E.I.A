@@ -20,7 +20,7 @@
 
 					<p:tab id="tab_cadastro_evento" title="Cadastro de Eventos">
 
-						<p:panel id="cadastro_evento" header="Cadastro de Eventos"
+						<p:panel id="cadastro_evento" header="Cadastro de eventos"
 							styleClass="center">
 
 							<h:panelGrid columns="4" cellpadding="5">
@@ -31,20 +31,20 @@
 									disabled="#{eventoController.editando_registro}">
 									<p:watermark for="txt_evento_id" value="Código"></p:watermark>
 								</p:inputText>
-								<p:outputLabel id="lb_evento_nome" value="Nome do Evento: " />
+								<p:outputLabel id="lb_evento_nome" value="Nome do evento: " />
 								<p:inputText size="40" id="txt_evento_nome"
 									value="#{eventoController.entidade.nome}">
 									<p:watermark for="txt_evento_nome"
 										value="Digite o nome do Evento"></p:watermark>
 								</p:inputText>
 
-								<p:outputLabel id="lb_evento_dtini" value="Data de Inicio:" />
+								<p:outputLabel id="lb_evento_dtini" value="Data de inicio:" />
 								<p:calendar id="txt_evento_dtini"
 									value="#{eventoController.entidade.dtini_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
-								<p:outputLabel id="lb_evento_dtfim" value="Data de Término:" />
+								<p:outputLabel id="lb_evento_dtfim" value="Data de término:" />
 								<p:calendar id="txt_evento_dtfim"
 									value="#{eventoController.entidade.dtfim_}"
 									pattern="dd/MM/yyyy HH:mm">
@@ -69,7 +69,7 @@
 
 							</h:panelGrid>
 
-							<p:panel id="pesquisa_evento" header="Lista de Eventos"
+							<p:panel id="pesquisa_evento" header="Lista de eventos"
 								visible="#{eventoController.size_maior_q_zero}">
 								<p:dataTable value="#{eventoController.entidades}" var="evento"
 									paginator="true" paginatorAlwaysVisible="true" rows="5">
@@ -86,11 +86,11 @@
 										<p:outputLabel value="#{evento.coordenador.nome}" />
 									</p:column>
 
-									<p:column headerText="Data Inicial" width="80">
+									<p:column headerText="Data inicial" width="80">
 										<p:outputLabel value="#{evento.dtini}" />
 									</p:column>
 
-									<p:column headerText="Data Final" width="80">
+									<p:column headerText="Data final" width="80">
 										<p:outputLabel value="#{evento.dtfim}" />
 									</p:column>
 
@@ -120,11 +120,11 @@
 					</p:tab>
 
 					<p:tab id="tab_cadastro_atividade_evento" closable="true"
-						title="Cadastro de Atividades do Evento #{atividadeEventoController.evento.nome}"
+						title="Cadastro de atividades do evento #{atividadeEventoController.evento.nome}"
 						rendered="#{atividadeEventoController.cadastrar_atividade}">
 
 						<p:panel id="cadastro_atividade_evento"
-							header="Cadastro de Atividades do Evento #{atividadeEventoController.evento.nome}"
+							header="Cadastro de atividades do evento #{atividadeEventoController.evento.nome}"
 							styleClass="center">
 
 							<h:panelGrid columns="6" cellpadding="5">
@@ -137,14 +137,14 @@
 								</p:inputText>
 
 								<p:outputLabel id="lb_atividade_evento_nome"
-									value="Nome da Atividade: " />
+									value="Nome da atividade: " />
 								<p:inputText size="40" id="txt_atividade_evento_nome"
 									value="#{atividadeEventoController.entidade.nome}">
 									<p:watermark for="txt_atividade_evento_nome"
-										value="Digite o Nome da Atividade do Evento"></p:watermark>
+										value="Digite o nome da atividade do evento"></p:watermark>
 								</p:inputText>
 
-								<p:outputLabel value="Limite de Inscritos: " />
+								<p:outputLabel value="Limite de inscritos: " />
 								<p:inputMask mask="9?999999" placeHolder=""
 									id="txt_atividade_evento_quantidade_inscritos"
 									value="#{atividadeEventoController.entidade.quantidadeInscritos}">
@@ -155,14 +155,14 @@
 
 
 								<p:outputLabel id="lb_atividadeEvento_dataInicial"
-									value="Data de Inicio:" />
+									value="Data de inicio:" />
 								<p:calendar id="txt_atividadeEvento_dataInicial"
 									value="#{atividadeEventoController.entidade.dataInicial_}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
 								<p:outputLabel id="lb_atividadeEvento_dataFinal"
-									value="Data de Término:" />
+									value="Data de término:" />
 								<p:calendar id="txt_atividadeEvento_dataFinal"
 									value="#{atividadeEventoController.entidade.dataFinal_}"
 									pattern="dd/MM/yyyy HH:mm">
@@ -230,7 +230,7 @@
 							</h:panelGrid>
 
 							<p:panel id="pesquisa_atividade_evento"
-								header="Lista de Atividades do Evento #{atividadeEventoController.entidade.evento.nome}"
+								header="Lista de atividades do evento #{atividadeEventoController.entidade.evento.nome}"
 								visible="#{atividadeEventoController.size_maior_q_zero}">
 								<p:dataTable value="#{atividadeEventoController.entidades}"
 									var="atividadeEvento" paginator="true"
@@ -248,11 +248,11 @@
 										<p:outputLabel value="#{atividadeEvento.evento.nome}" />
 									</p:column>
 
-									<p:column headerText="Data Inicial" width="80">
+									<p:column headerText="Data inicial" width="80">
 										<p:outputLabel value="#{atividadeEvento.dataInicial}" />
 									</p:column>
 
-									<p:column headerText="Data Final" width="80">
+									<p:column headerText="Data final" width="80">
 										<p:outputLabel value="#{atividadeEvento.dataFinal}" />
 									</p:column>
 

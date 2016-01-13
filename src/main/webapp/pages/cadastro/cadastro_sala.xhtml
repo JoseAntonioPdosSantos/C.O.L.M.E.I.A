@@ -15,7 +15,7 @@
 
 				<p:growl id="msg" showDetail="true" life="5000" />
 
-				<p:panel id="cadastro" header="Cadastro de Sala" styleClass="center">
+				<p:panel id="cadastro" header="Cadastro de sala" styleClass="center">
 
 					<h:panelGrid columns="4">
 
@@ -52,7 +52,7 @@
 
 				</p:panel>
 
-				<p:panel id="pesquisa" header="Lista de Salas"
+				<p:panel id="pesquisa" header="Lista de salas"
 					visible="#{salaController.size_maior_q_zero}">
 					<p:dataTable value="#{salaController.entidades}"
 						var="sala" paginator="true" paginatorAlwaysVisible="true"
