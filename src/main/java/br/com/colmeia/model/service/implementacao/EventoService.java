@@ -1,11 +1,14 @@
 package br.com.colmeia.model.service.implementacao;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.colmeia.model.persistence.dao.implementacao.EventoHibernateDAO;
+import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.service.generics.Service;
 import br.com.colmeia.model.utils.HibernateUtil;
@@ -58,8 +61,18 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 	}
 
 	public List<Evento> buscarEventosEncerrados() {
-		Criterion dtini = Restrictions.le("dtini", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		
+		List<AtividadeEvento> atividadesEvento = new AtividadeEventoService().buscarAtividadeEventoPorDataFim(HibernateUtil.getCurrentDate());
+		
+		LinkedList<Evento> eventos_ = new LinkedList<Evento>();
+		
+		for(AtividadeEvento atividade : atividadesEvento)
+			eventos_.add(atividade.getEvento());
+		
+		List<Evento> eventos = new ArrayList<Evento>();
+		for(Evento evento : eventos_)
+			eventos.add(evento);
+		return eventos;
 	}
 
 	public List<Evento> buscarEventosVigentes() {

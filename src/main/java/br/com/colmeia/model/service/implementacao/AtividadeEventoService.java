@@ -1,7 +1,6 @@
 package br.com.colmeia.model.service.implementacao;
 
-import java.sql.Date;
-import java.util.Calendar;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
@@ -10,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.AtividadeEventoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.HibernateUtil;
 
 public class AtividadeEventoService extends Service<AtividadeEvento, Long, AtividadeEventoHibernateDAO> {
 
@@ -46,6 +46,17 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		}
 		return true;
 	}
+	
+	public List<AtividadeEvento> buscarAtividadeEventoPorDataFim(Timestamp dataFinal){
+		AtividadeEvento atividadeEvento = new AtividadeEvento();
+		atividadeEvento.setDataFinal(dataFinal);
+		try {
+			return buscar(atividadeEvento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<AtividadeEvento> buscar(AtividadeEvento entity) throws Exception {
@@ -71,13 +82,13 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 				evento = Restrictions.eq("evento", entity.getEvento());
 			}
 			if (entity.getDataInicial() != null) {
-				dataInicial = Restrictions.eq("datainicial", entity.getDataInicial());
+				dataInicial = Restrictions.between("dataInicial",entity.getDataInicial(), entity.getDataInicial());
 			}
 			if (entity.getDataFinal() != null) {
-				dataFinal = Restrictions.eq("datafinal", entity.getDataFinal());
+				dataFinal = Restrictions.between("dataFinal", entity.getDataFinal(),entity.getDataFinal());
 			}
-			if (entity.getQuantidadeInscritos() != null) {
-				quantidadeInscritos = Restrictions.eq("quantidadeinscritos", entity.getQuantidadeInscritos());
+			if (entity.getQuantidadeInscritos() != null && entity.getQuantidadeInscritos() > 0) {
+				quantidadeInscritos = Restrictions.eq("quantidadeInscritos", entity.getQuantidadeInscritos());
 			}
 			if (entity.getPalestrante() != null) {
 				palestrante = Restrictions.eq("palestrante", entity.getPalestrante());
@@ -94,12 +105,12 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosEncerrados() {
-		Criterion dtini = Restrictions.le("datainicial", new Date(Calendar.getInstance().getTimeInMillis()));
+		Criterion dtini = Restrictions.le("datainicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosVigentes() {
-		Criterion dtini = Restrictions.le("datainicial", new Date(Calendar.getInstance().getTimeInMillis()));
+		Criterion dtini = Restrictions.le("datainicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 

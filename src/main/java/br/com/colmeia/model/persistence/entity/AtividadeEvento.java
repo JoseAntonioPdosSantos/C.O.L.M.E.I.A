@@ -1,6 +1,5 @@
 package br.com.colmeia.model.persistence.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -74,17 +73,6 @@ public class AtividadeEvento extends EntidadeBase {
 		return dataInicial;
 	}
 
-	public java.util.Date getDataInicial_() {
-		if (dataInicial != null)
-			return new java.util.Date(dataInicial.getTime());
-		return null;
-	}
-
-	public void setDataInicial_(java.util.Date dataInicial) {
-		if (dataInicial != null)
-			this.dataInicial = new Timestamp(dataInicial.getTime());
-	}
-
 	public void setDataInicial(Date dataInicial) {
 		this.dataInicial = dataInicial;
 	}
@@ -97,11 +85,6 @@ public class AtividadeEvento extends EntidadeBase {
 		if (dataFinal != null)
 			return new java.util.Date(dataFinal.getTime());
 		return null;
-	}
-
-	public void setDataFinal_(java.util.Date dataFinal) {
-		if (dataFinal != null)
-			this.dataFinal = new Timestamp(dataFinal.getTime());
 	}
 
 	public void setDataFinal(Date dataFinal) {
