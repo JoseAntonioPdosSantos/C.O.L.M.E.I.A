@@ -44,6 +44,9 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(entity.getPalestrante() == null){
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
 		}
+		if(!verificaSala(entity)){
+			throw new Exception("Desculpe! Já existe uma Atividade marcada durante este período");
+		}
 		return true;
 	}
 	
@@ -113,6 +116,19 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		Criterion dtini = Restrictions.le("datainicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
+
+	public Boolean verificaSala(AtividadeEvento entity){
+		List<AtividadeEvento> lista = buscarAtividadeEventosVigentes();
+		for (AtividadeEvento atividade : lista){
+			if (entity.getSala() == atividade.getSala()) {
+				if (entity.getDataInicial().before(atividade.getDataFinal()) || (entity.getDataFinal().after(atividade.getDataInicial()))){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 
 	@Override
 	public AtividadeEventoHibernateDAO getDao() {
