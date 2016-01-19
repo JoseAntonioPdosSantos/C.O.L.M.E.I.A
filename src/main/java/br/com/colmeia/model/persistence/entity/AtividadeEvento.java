@@ -1,6 +1,6 @@
 package br.com.colmeia.model.persistence.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -27,8 +29,10 @@ public class AtividadeEvento extends EntidadeBase {
 	@JoinColumn(nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Evento evento;
-	private Timestamp dataInicial;
-	private Timestamp dataFinal;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataInicial;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataFinal;
 	private Integer quantidadeInscritos;
 	@Column(nullable = false)
 	private Palestrante palestrante;
@@ -65,26 +69,15 @@ public class AtividadeEvento extends EntidadeBase {
 		this.evento = evento;
 	}
 
-	public Timestamp getDataInicial() {
+	public Date getDataInicial() {
 		return dataInicial;
 	}
 
-	public java.util.Date getDataInicial_() {
-		if (dataInicial != null)
-			return new java.util.Date(dataInicial.getTime());
-		return null;
-	}
-
-	public void setDataInicial_(java.util.Date dataInicial) {
-		if (dataInicial != null)
-			this.dataInicial = new Timestamp(dataInicial.getTime());
-	}
-
-	public void setDataInicial(Timestamp dataInicial) {
+	public void setDataInicial(Date dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
-	public Timestamp getDataFinal() {
+	public Date getDataFinal() {
 		return dataFinal;
 	}
 
@@ -94,12 +87,7 @@ public class AtividadeEvento extends EntidadeBase {
 		return null;
 	}
 
-	public void setDataFinal_(java.util.Date dataFinal) {
-		if (dataFinal != null)
-			this.dataFinal = new Timestamp(dataFinal.getTime());
-	}
-
-	public void setDataFinal(Timestamp dataFinal) {
+	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 

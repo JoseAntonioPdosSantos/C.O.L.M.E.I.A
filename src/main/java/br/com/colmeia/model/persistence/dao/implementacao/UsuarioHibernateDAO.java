@@ -20,7 +20,7 @@ public class UsuarioHibernateDAO extends GenericHibernateDAO<Usuario, Long>imple
 			usuario.setNome("José Antonio");
 			usuario.setConfirmarSenha(Security.criptografarMD5("3341jd"));
 			usuario.setSenha(Security.criptografarMD5("3341jd"));
-			usuario.setCpf("238.326.061-49");
+			usuario.setCpf("991.989.161-49");
 			usuario.setEmail("d_jota_a@hotmail.com");
 			usuario.setPerfil(Perfil.ADMINISTRADOR);
 			usuario.setVersao(new Timestamp(new Date().getTime()));
