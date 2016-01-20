@@ -45,7 +45,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
 		}
 		if(!verificaSala(entity)){
-			throw new Exception("Desculpe! Já existe uma Atividade marcada durante este período");
+			throw new Exception("Já existe uma atividade marcada nesta sala durante este período");
 		}
 		return true;
 	}
@@ -108,22 +108,26 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosEncerrados() {
-		Criterion dtini = Restrictions.le("datainicial", HibernateUtil.getCurrentDate());
+		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosVigentes() {
-		Criterion dtini = Restrictions.le("datainicial", HibernateUtil.getCurrentDate());
+		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 
-	public Boolean verificaSala(AtividadeEvento entity){
+	public boolean verificaSala(AtividadeEvento entity){
 		List<AtividadeEvento> lista = buscarAtividadeEventosVigentes();
 		for (AtividadeEvento atividade : lista){
-			if (entity.getSala() == atividade.getSala()) {
-				if (entity.getDataInicial().before(atividade.getDataFinal()) || (entity.getDataFinal().after(atividade.getDataInicial()))){
-					return false;
+			if (entity.getSala().equals(atividade.getSala())) {
+				if (entity.getDataFinal().before(atividade.getDataInicial())){
+					continue;
 				}
+				if (entity.getDataInicial().after(atividade.getDataFinal())){
+					continue;
+				}
+				return false;
 			}
 		}
 		return true;
