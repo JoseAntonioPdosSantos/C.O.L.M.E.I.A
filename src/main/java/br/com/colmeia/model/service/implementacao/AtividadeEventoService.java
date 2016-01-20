@@ -1,6 +1,7 @@
 package br.com.colmeia.model.service.implementacao;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
@@ -43,6 +44,9 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		}
 		if(entity.getPalestrante() == null){
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
+		}
+		if(minuteConverter(diferenciarData(entity.getDataInicial(), entity.getDataFinal())) < 5){
+			throw new Exception("Atividade deve ser maior que 5 minutos");
 		}
 		return true;
 	}
@@ -99,6 +103,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 			if(entity.getAtivo() != null){
 				ativo = Restrictions.eq("ativo", entity.getAtivo());
 			}
+			
 		}
 		return getDao().findByCriteria(id, nome, evento, dataInicial, dataFinal, quantidadeInscritos, palestrante,
 				ingresso,ativo);
@@ -118,5 +123,13 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	public AtividadeEventoHibernateDAO getDao() {
 		return new AtividadeEventoHibernateDAO();
 	}
-
+	
+	private long diferenciarData(Date dataInicial, Date dataFinal) {
+		return Math.abs(dataFinal.getTime() - dataInicial.getTime());
+	}
+	
+	private long minuteConverter(long value) {
+		return value / 1000 / 60;
+	}
+	
 }
