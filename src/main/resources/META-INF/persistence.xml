@@ -12,17 +12,17 @@
 		<properties>
 			<!-- dados da conexao -->
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			<!-- Desenvolvimento -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/colmeia" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="postgres" />
-			
+
 			<!-- propriedades do hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="false" />
@@ -30,25 +30,30 @@
 
 			<!-- atualiza o banco, gera as tabelas se for preciso -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			
-			
-			
-			
-			
-			
-			
+			<property name="hibernate.cache.use_query_cache" value="false" />
+
+
+
+
+
+
+
 			<!-- Produção -->
-<!-- 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.10.14.2:5432/colmeia" /> -->
-<!-- 			<property name="javax.persistence.jdbc.user" value="adminfdrfc27" /> -->
-<!-- 			<property name="javax.persistence.jdbc.password" value="n2iBTa1eUWPd" /> -->
-			
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.10.14.2:5432/colmeia" 
+				/> -->
+			<!-- <property name="javax.persistence.jdbc.user" value="adminfdrfc27" 
+				/> -->
+			<!-- <property name="javax.persistence.jdbc.password" value="n2iBTa1eUWPd" 
+				/> -->
+
 			<!-- propriedades do hibernate -->
-<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> -->
-<!-- 			<property name="hibernate.show_sql" value="false" /> -->
-<!-- 			<property name="hibernate.format_sql" value="false" /> -->
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" 
+				/> -->
+			<!-- <property name="hibernate.show_sql" value="false" /> -->
+			<!-- <property name="hibernate.format_sql" value="false" /> -->
 
 			<!-- atualiza o banco, gera as tabelas se for preciso -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 
 
 		</properties>
