@@ -44,6 +44,14 @@ public class UsuarioController extends Controller<Usuario, UsuarioService> {
 		carregarCursos();
 	}
 
+	@Override
+	public void buscar() {
+		super.buscar();
+		for (Usuario usuario : entidades) {
+			usuario.setConfirmarSenha(usuario.getSenha());
+		}
+	}
+	
 	private void carregarInstituicoes() {
 		try {
 			Instituicao instituicao = new Instituicao();

@@ -1,6 +1,5 @@
 package br.com.colmeia.model.persistence.entity;
 
-import javax.faces.component.UIInput;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -46,10 +45,6 @@ public class Usuario extends EntidadeBase {
 	private String confirmarSenha;
 	@Transient
 	private boolean alunoEstacio;
-	@Transient
-	private UIInput cpfUI;
-	@Transient
-	private UIInput passwordUI;
 	@Transient
 	private boolean universitario;
 
@@ -130,24 +125,8 @@ public class Usuario extends EntidadeBase {
 		this.perfil = perfil;
 	}
 
-	public UIInput getPasswordUI() {
-		return passwordUI;
-	}
-
-	public void setPasswordUI(UIInput passwordUI) {
-		this.passwordUI = passwordUI;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public UIInput getCpfUI() {
-		return cpfUI;
-	}
-
-	public void setCpfUI(UIInput cpfUI) {
-		this.cpfUI = cpfUI;
 	}
 
 	public String getConfirmarSenha() {
@@ -172,6 +151,31 @@ public class Usuario extends EntidadeBase {
 
 	public void setUniversitario(boolean universitario) {
 		this.universitario = universitario;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
