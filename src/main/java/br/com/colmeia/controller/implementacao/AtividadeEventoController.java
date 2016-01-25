@@ -29,7 +29,6 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 	private List<Palestrante> palestrantes;
 	private List<Ingresso> ingressos;
 	private List<Sala> salas;
-	private String icon;
 
 	@Override
 	protected void inicializarVariavel() {
@@ -75,7 +74,6 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 		try {
 			entidade.setId(null);
 			entidade.setEvento(getEvento());
-			System.out.println(entidade.getSala());
 			getService().gravar(getEntidade());
 			entidade = new AtividadeEvento();
 			entidade.setEvento(evento);
@@ -167,8 +165,5 @@ public class AtividadeEventoController extends Controller<AtividadeEvento, Ativi
 			return "ui-icon-circle-plus";
 	}
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
 
 }
