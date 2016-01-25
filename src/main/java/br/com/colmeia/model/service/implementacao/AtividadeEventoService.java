@@ -48,9 +48,14 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(!verificaSala(entity)){
 			throw new Exception("Já existe uma atividade marcada nesta sala durante este período");
 		}
+		if(!verificaPalestrante(entity)){
+			throw new Exception("Já existe uma atividade marcada para este palestrante durante este período");
+		}
 		if(minuteConverter(diferenciarData(entity.getDataInicial(), entity.getDataFinal())) < 5){
 			throw new Exception("Atividade deve ser maior que 5 minutos");
 		}
+		
+		
 		return true;
 	}
 	
@@ -118,14 +123,43 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosVigentes() {
-		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		Criterion dataFinal = Restrictions.ge("dataFinal", HibernateUtil.getCurrentDate());
+		Criterion ativo = Restrictions.eq("ativo",true);
+		return getDao().findByCriteria(dataFinal,ativo);
 	}
 
 	public boolean verificaSala(AtividadeEvento entity){
 		List<AtividadeEvento> lista = buscarAtividadeEventosVigentes();
 		for (AtividadeEvento atividade : lista){
 			if (entity.getSala().equals(atividade.getSala())) {
+				if (entity.getDataInicial().equals(atividade.getDataInicial())){
+					return false;
+				}
+				if (entity.getDataFinal().equals(atividade.getDataFinal())){
+					return false;
+				}
+				if (entity.getDataFinal().before(atividade.getDataInicial())){
+					continue;
+				}
+				if (entity.getDataInicial().after(atividade.getDataFinal())){
+					continue;
+				}
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean verificaPalestrante(AtividadeEvento entity){
+		List<AtividadeEvento> lista = buscarAtividadeEventosVigentes();
+		for (AtividadeEvento atividade : lista){
+			if (entity.getPalestrante().equals(atividade.getPalestrante())) {
+				if (entity.getDataFinal().equals(atividade.getDataFinal())){
+					return false;
+				}
+				if (entity.getDataInicial().equals(atividade.getDataInicial())){
+					return false;
+				}
 				if (entity.getDataFinal().before(atividade.getDataInicial())){
 					continue;
 				}
