@@ -3,8 +3,6 @@ package br.com.colmeia.controller.implementacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import static br.com.colmeia.controller.util.Message.*;
-
 import br.com.colmeia.controller.generics.Controller;
 import br.com.colmeia.model.persistence.entity.Instituicao;
 import br.com.colmeia.model.service.implementacao.InstituicaoService;
@@ -18,16 +16,6 @@ public class InstituicaoController extends Controller<Instituicao, InstituicaoSe
 	@Override
 	protected void inicializarVariavel() {
 		limpar();
-	}
-
-	public void apagar(Instituicao instituicao) {
-		try {
-			service.apagar(instituicao);
-			buscar();
-			message(SUCCESS_DELETE);
-		} catch (Exception e) {
-			message(ERROR, e.getMessage());
-		}
 	}
 
 	public void limpar() {
