@@ -47,10 +47,10 @@
 						</p:inputText>
 
 						<p:outputLabel value="CPF:" />
-						<p:inputText id="txt_usuario_cpf" size="20"
+						<p:inputMask id="txt_usuario_cpf" size="20" mask="999.999.999-99" 
 							value="#{usuarioController.entidade.cpf}">
 							<p:watermark for="txt_usuario_cpf" value="CPF"></p:watermark>
-						</p:inputText>
+						</p:inputMask>
 
 						<p:outputLabel value="Nome:" />
 						<p:inputText id="txt_usuario_nome" size="40"
