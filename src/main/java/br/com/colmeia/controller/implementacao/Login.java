@@ -36,6 +36,7 @@ public class Login implements Serializable {
 					return "";
 				}
 				if (usuario != null) {
+					usuario.setConfirmarSenha(usuario.getSenha());
 					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 					return "usuario";
 				}

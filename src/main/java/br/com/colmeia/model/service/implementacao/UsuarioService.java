@@ -32,8 +32,12 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 	}
 
 	private void criptografarMD5(Usuario entity) {
-		entity.setSenha(Security.criptografarMD5(entity.getSenha()));
-		entity.setConfirmarSenha(Security.criptografarMD5(entity.getConfirmarSenha()));
+		if(entity.getSenha() != null){
+			if(entity.getSenha().length() < 32){
+				entity.setSenha(Security.criptografarMD5(entity.getSenha()));
+				entity.setConfirmarSenha(Security.criptografarMD5(entity.getConfirmarSenha()));
+			}
+		}
 	}
 
 	public boolean validarSalvarAlterar(Usuario entity) throws Exception {
