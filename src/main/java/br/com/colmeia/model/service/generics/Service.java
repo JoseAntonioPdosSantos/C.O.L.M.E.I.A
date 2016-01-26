@@ -15,23 +15,30 @@ public abstract class Service<T extends EntidadeBase, ID extends Serializable, D
 	}
 
 	public void gravar(T entity) throws Exception {
-		if (validarEntity(entity)) {
+		if (validarSalvarAlterar(entity)) {
 			controleBasicoAuditoria(entity);
 			getDao().insert(entity);
 		}
 	}
 
+	public abstract boolean validarExcluir(T entity);
+
+	private void update(T entity) {
+		controleBasicoAuditoria(entity);
+		getDao().update(entity);
+	}
+
 	public void alterar(T entity) throws Exception {
-		if (validarEntity(entity)) {
-			controleBasicoAuditoria(entity);
-			getDao().update(entity);
+		if (validarSalvarAlterar(entity)) {
+			update(entity);
 		}
 	}
 
 	public void apagar(T entity) throws Exception {
-		controleBasicoAuditoria(entity);
-		entity.setAtivo(false);
-		alterar(entity);
+		if (validarExcluir(entity)) {
+			entity.setAtivo(false);
+			update(entity);
+		}
 	}
 
 	public List<T> buscarTodos() throws Exception {

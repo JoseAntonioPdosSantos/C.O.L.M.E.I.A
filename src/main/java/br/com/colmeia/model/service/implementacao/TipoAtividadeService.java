@@ -11,7 +11,7 @@ import br.com.colmeia.model.service.generics.Service;
 
 public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtividadeHibernateDAO> {
 
-	public boolean validarEntity(TipoAtividade entity) throws Exception {
+	public boolean validarSalvarAlterar(TipoAtividade entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 
@@ -43,6 +43,11 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 	@Override
 	public TipoAtividadeHibernateDAO getDao() {
 		return new TipoAtividadeHibernateDAO();
+	}
+
+	@Override
+	public boolean validarExcluir(TipoAtividade entity) {
+		return true;
 	}
 
 }

@@ -11,7 +11,7 @@ import br.com.colmeia.model.service.generics.Service;
 
 public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 
-	public boolean validarEntity(Sala entity) throws Exception {
+	public boolean validarSalvarAlterar(Sala entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 
@@ -47,6 +47,11 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 	@Override
 	public SalaHibernateDAO getDao() {
 		return new SalaHibernateDAO();
+	}
+
+	@Override
+	public boolean validarExcluir(Sala entity) {
+		return true;
 	}
 
 }

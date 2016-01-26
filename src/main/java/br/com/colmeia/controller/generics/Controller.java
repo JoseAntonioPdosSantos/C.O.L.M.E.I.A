@@ -36,32 +36,32 @@ public abstract class Controller<T extends EntidadeBase,Service extends br.com.c
 			entidade.setId(null);
 			getService().gravar(entidade);
 			limpar();
-			buscar();
 			message(SUCCESS_RECORD);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
+		buscar();
 	}
 
 	public void alterar() {
 		try {
 			getService().alterar(getEntidade());
 			inicializarVariavel();
-			buscar();
 			message(SUCCESS_UPDATE);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
+		buscar();
 	}
 
 	public void apagar(T entidade) {
 		try {
 			getService().apagar(entidade);
-			buscar();
 			message(SUCCESS_DELETE);
 		} catch (Exception e) {
 			message(ERROR, e.getMessage());
 		}
+		buscar();
 	}
 
 	public void buscar() {

@@ -19,7 +19,7 @@
 				<p:panel id="cadastro" header="Cadastro de usuário"
 					styleClass="center">
 
-					<p:panelGrid columns="6">
+					<p:panelGrid columns="8">
 
 						<p:outputLabel value="Instituição:" />
 						<p:selectOneMenu label="Instituição"
@@ -70,17 +70,6 @@
 							<p:watermark for="txt_usuario_email" value="E-mail"></p:watermark>
 						</p:inputText>
 
-						<p:outputLabel value="Senha:" />
-						<p:password id="txt_usuario_senha" size="20" redisplay="true"
-							value="#{usuarioController.entidade.senha}">
-							<p:watermark for="txt_usuario_senha" value="Senha"></p:watermark>
-						</p:password>
-						<p:outputLabel value="Confirmar senha:" />
-						<p:password id="txt_usuario_confirmarsenha" size="20" redisplay="true"
-							value="#{usuarioController.entidade.confirmarSenha}">
-							<p:watermark for="txt_usuario_confirmarsenha"
-								value="Confirmar Senha"></p:watermark>
-						</p:password>
 					</p:panelGrid>
 
 					<p:panel>

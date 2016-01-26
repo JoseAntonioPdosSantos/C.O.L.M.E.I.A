@@ -12,7 +12,7 @@ import br.com.colmeia.model.utils.HibernateUtil;
 
 public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 
-	public boolean validarEntity(Evento entity) throws Exception {
+	public boolean validarSalvarAlterar(Evento entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 		if (entity.getCoordenador() == null)
@@ -60,7 +60,7 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			}
 		}
 
-		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal);
+		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal,ativo);
 	}
 
 	public List<Evento> buscarEventosEncerrados() {
@@ -76,6 +76,11 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 	@Override
 	public EventoHibernateDAO getDao() {
 		return new EventoHibernateDAO();
+	}
+
+	@Override
+	public boolean validarExcluir(Evento entity) {
+		return true;
 	}
 
 }

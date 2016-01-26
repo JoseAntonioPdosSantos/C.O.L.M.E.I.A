@@ -14,7 +14,7 @@ import br.com.colmeia.model.utils.HibernateUtil;
 
 public class AtividadeEventoService extends Service<AtividadeEvento, Long, AtividadeEventoHibernateDAO> {
 
-	public boolean validarEntity(AtividadeEvento entity) throws Exception {
+	public boolean validarSalvarAlterar(AtividadeEvento entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 		if (entity.getNome() == null)
@@ -184,6 +184,11 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	
 	private long minuteConverter(long value) {
 		return value / 1000 / 60;
+	}
+
+	@Override
+	public boolean validarExcluir(AtividadeEvento entity) {
+		return true;
 	}
 
 }

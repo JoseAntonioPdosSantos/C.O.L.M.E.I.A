@@ -11,7 +11,7 @@ import br.com.colmeia.model.service.generics.Service;
 
 public class PalestranteService extends Service<Palestrante, Long, PalestranteHibernateDAO> {
 
-	public boolean validarEntity(Palestrante entity) throws Exception {
+	public boolean validarSalvarAlterar(Palestrante entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 
@@ -43,6 +43,11 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 	@Override
 	public PalestranteHibernateDAO getDao() {
 		return new PalestranteHibernateDAO();
+	}
+
+	@Override
+	public boolean validarExcluir(Palestrante entity) {
+		return true;
 	}
 
 }

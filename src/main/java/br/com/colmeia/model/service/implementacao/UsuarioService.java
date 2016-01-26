@@ -15,7 +15,7 @@ import br.com.colmeia.model.utils.Util;
 public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> {
 
 	public void gravar(Usuario entity) throws Exception {
-		if (validarEntity(entity)) {
+		if (validarSalvarAlterar(entity)) {
 			entity.setPerfil(Perfil.USUARIO);
 			criptografarMD5(entity);
 			controleBasicoAuditoria(entity);
@@ -24,7 +24,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 	}
 
 	public void alterar(Usuario entity) throws Exception {
-		if (validarEntity(entity)) {
+		if (validarSalvarAlterar(entity)) {
 			criptografarMD5(entity);
 			controleBasicoAuditoria(entity);
 			getDao().update(entity);
@@ -36,7 +36,7 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 		entity.setConfirmarSenha(Security.criptografarMD5(entity.getConfirmarSenha()));
 	}
 
-	public boolean validarEntity(Usuario entity) throws Exception {
+	public boolean validarSalvarAlterar(Usuario entity) throws Exception {
 		if (entity == null)
 			throw new Exception("Desculpe! Ocorreu um Erro Inesperado");
 		if (entity.getNome() == null)
@@ -116,6 +116,8 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 		Criterion instituicao = null;
 		Criterion perfil = null;
 		Criterion senha = null;
+		Criterion ativo = null;
+		
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
@@ -144,13 +146,21 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 			if (entity.getSenha() != null && !entity.getSenha().trim().isEmpty()) {
 				senha = Restrictions.eq("senha", entity.getSenha());
 			}
+			if(entity.getAtivo() != null){
+				ativo = Restrictions.eq("ativo", entity.getAtivo());
+			}
 		}
-		return getDao().findByCriteria(id, nome, cpf, ra, email, curso, instituicao, perfil, senha);
+		return getDao().findByCriteria(id, nome, cpf, ra, email, curso, instituicao, perfil, senha,ativo);
 	}
 
 	@Override
 	public UsuarioHibernateDAO getDao() {
 		return new UsuarioHibernateDAO();
+	}
+
+	@Override
+	public boolean validarExcluir(Usuario entity) {
+		return true;
 	}
 
 }
