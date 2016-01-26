@@ -18,7 +18,6 @@ import javax.persistence.Transient;
 @Entity
 public class AtividadeEvento extends EntidadeBase {
 
-
 	private static final long serialVersionUID = 55820150624622989L;
 	@Id
 	@SequenceGenerator(sequenceName = "atividade_evento_seq", initialValue = 1, name = "atividade_evento_seq")
@@ -73,7 +72,6 @@ public class AtividadeEvento extends EntidadeBase {
 		return dataInicial;
 	}
 
-
 	public void setDataInicial(Date dataInicial) {
 		this.dataInicial = dataInicial;
 	}
@@ -82,9 +80,6 @@ public class AtividadeEvento extends EntidadeBase {
 		return dataFinal;
 	}
 
-	
-
-	
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}
@@ -139,6 +134,31 @@ public class AtividadeEvento extends EntidadeBase {
 
 	public void setSala(Sala sala) {
 		this.sala = sala;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AtividadeEvento other = (AtividadeEvento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

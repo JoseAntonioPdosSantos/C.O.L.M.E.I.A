@@ -14,16 +14,16 @@ public abstract class EntidadeBase implements Serializable {
 
 	private static final long serialVersionUID = -2896653165482488556L;
 	@JoinColumn
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	protected Usuario usuarioAlteracao;
 	protected Boolean ativo;
 	@Version
 	protected Timestamp versao;
 
 	public abstract void setId(Long id);
-	
+
 	public abstract Long getId();
-	
+
 	public Timestamp getVersao() {
 		return versao;
 	}
@@ -43,9 +43,9 @@ public abstract class EntidadeBase implements Serializable {
 	public Boolean getAtivo() {
 		return ativo;
 	}
-	
+
 	public boolean isAtivo() {
-		if(ativo == null)
+		if (ativo == null)
 			ativo = false;
 		return ativo;
 	}
