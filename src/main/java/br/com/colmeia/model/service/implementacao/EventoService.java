@@ -36,6 +36,8 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 		Criterion coordenador = null;
 		Criterion dataInicial = null;
 		Criterion dataFinal = null;
+		Criterion ativo = null;
+
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
@@ -53,7 +55,11 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			if (entity.getDataFinal() != null) {
 				dataFinal = Restrictions.eq("dataFinal", entity.getDataFinal());
 			}
+			if (entity.getAtivo() != null){
+				ativo = Restrictions.eq("ativo", entity.getAtivo());
+			}
 		}
+
 		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal);
 	}
 
