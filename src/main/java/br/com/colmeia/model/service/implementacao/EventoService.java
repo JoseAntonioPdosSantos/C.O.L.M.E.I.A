@@ -1,14 +1,11 @@
 package br.com.colmeia.model.service.implementacao;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.colmeia.model.persistence.dao.implementacao.EventoHibernateDAO;
-import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.service.generics.Service;
 import br.com.colmeia.model.utils.HibernateUtil;
@@ -25,9 +22,9 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
-		if (entity.getDtini() == null)
+		if (entity.getDataInicial() == null)
 			throw new Exception("Desculpe! O campo 'Data Inicial' é obrigatório");
-		if (entity.getDtfim() == null)
+		if (entity.getDataFinal() == null)
 			throw new Exception("Desculpe! O campo 'Data Final' é obrigatório");
 		return true;
 	}
@@ -37,8 +34,8 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 		Criterion id = null;
 		Criterion nome = null;
 		Criterion coordenador = null;
-		Criterion dtini = null;
-		Criterion dtfim = null;
+		Criterion dataInicial = null;
+		Criterion dataFinal = null;
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
@@ -50,33 +47,23 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			if (entity.getCoordenador() != null) {
 				coordenador = Restrictions.eq("coordenador", entity.getCoordenador());
 			}
-			if (entity.getDtini() != null) {
-				dtini = Restrictions.eq("dtini", entity.getDtini());
+			if (entity.getDataInicial() != null) {
+				dataInicial = Restrictions.eq("dataInicial", entity.getDataInicial());
 			}
-			if (entity.getDtfim() != null) {
-				dtfim = Restrictions.eq("dtfim", entity.getDtfim());
+			if (entity.getDataFinal() != null) {
+				dataFinal = Restrictions.eq("dataFinal", entity.getDataFinal());
 			}
 		}
-		return getDao().findByCriteria(id, nome, coordenador, dtini, dtfim);
+		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal);
 	}
 
 	public List<Evento> buscarEventosEncerrados() {
-		
-		List<AtividadeEvento> atividadesEvento = new AtividadeEventoService().buscarAtividadeEventoPorDataFim(HibernateUtil.getCurrentDate());
-		
-		LinkedList<Evento> eventos_ = new LinkedList<Evento>();
-		
-		for(AtividadeEvento atividade : atividadesEvento)
-			eventos_.add(atividade.getEvento());
-		
-		List<Evento> eventos = new ArrayList<Evento>();
-		for(Evento evento : eventos_)
-			eventos.add(evento);
-		return eventos;
+		Criterion dataInicial = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
+		return getDao().findByCriteria(dataInicial);
 	}
 
 	public List<Evento> buscarEventosVigentes() {
-		Criterion dtini = Restrictions.ge("dtini", HibernateUtil.getCurrentDate());
+		Criterion dtini = Restrictions.ge("dataInicial", HibernateUtil.getCurrentDate());
 		return getDao().findByCriteria(dtini);
 	}
 

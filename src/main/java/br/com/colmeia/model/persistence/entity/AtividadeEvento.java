@@ -73,6 +73,7 @@ public class AtividadeEvento extends EntidadeBase {
 		return dataInicial;
 	}
 
+
 	public void setDataInicial(Date dataInicial) {
 		this.dataInicial = dataInicial;
 	}
@@ -81,12 +82,9 @@ public class AtividadeEvento extends EntidadeBase {
 		return dataFinal;
 	}
 
-	public java.util.Date getDataFinal_() {
-		if (dataFinal != null)
-			return new java.util.Date(dataFinal.getTime());
-		return null;
-	}
+	
 
+	
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}

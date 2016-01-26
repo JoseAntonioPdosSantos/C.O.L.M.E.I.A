@@ -38,15 +38,15 @@
 										value="Digite o nome do evento"></p:watermark>
 								</p:inputText>
 
-								<p:outputLabel id="lb_evento_dtini" value="Data de inicio:" />
-								<p:calendar id="txt_evento_dtini"
-									value="#{eventoController.entidade.dtini_}"
+								<p:outputLabel id="lb_evento_dataInicial" value="Data de inicio:" />
+								<p:calendar id="txt_evento_dataInicial"
+									value="#{eventoController.entidade.dataInicial}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 
-								<p:outputLabel id="lb_evento_dtfim" value="Data de término:" />
-								<p:calendar id="txt_evento_dtfim"
-									value="#{eventoController.entidade.dtfim_}"
+								<p:outputLabel id="lb_evento_dataFinal" value="Data de término:" />
+								<p:calendar id="txt_evento_dataFinal"
+									value="#{eventoController.entidade.dataFinal}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
 							</h:panelGrid>
@@ -87,11 +87,11 @@
 									</p:column>
 
 									<p:column headerText="Data inicial" width="80">
-										<p:outputLabel value="#{evento.dtini}" />
+										<p:outputLabel value="#{evento.dataInicial}" />
 									</p:column>
 
 									<p:column headerText="Data final" width="80">
-										<p:outputLabel value="#{evento.dtfim}" />
+										<p:outputLabel value="#{evento.dataFinal}" />
 									</p:column>
 
 									<p:column headerText="Opções" width="150">

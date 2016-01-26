@@ -1,6 +1,6 @@
 package br.com.colmeia.model.persistence.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Evento extends EntidadeBase {
@@ -20,11 +22,13 @@ public class Evento extends EntidadeBase {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "evento_seq")
 	private Long id;
 	private String nome;
-	@JoinColumn(nullable=false)
+	@JoinColumn(nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario coordenador;
-	private Date dtini;
-	private Date dtfim;
+	@Temporal(TemporalType.DATE)
+	private Date dataInicial;
+	@Temporal(TemporalType.DATE)
+	private Date dataFinal;
 
 	public Long getId() {
 		return id;
@@ -50,46 +54,71 @@ public class Evento extends EntidadeBase {
 		this.coordenador = coordenador;
 	}
 
-	public Date getDtini() {
-		return dtini;
+	public Date getDataInicial() {
+		return dataInicial;
 	}
 
-	public void setDtini(Date dtini) {
-		this.dtini = dtini;
+	public void setdataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
 	}
 
-	public Date getDtfim() {
-		return dtfim;
+	public Date getdataFinal() {
+		return dataFinal;
 	}
 
-	public void setDtfim(Date dtfim) {
-		this.dtfim = dtfim;
+	public void setdataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public java.util.Date getDtini_() {
-		if (dtini != null)
-			return new java.util.Date(dtini.getTime());
+	public java.util.Date getdataInicial_() {
+		if (dataInicial != null)
+			return new java.util.Date(dataInicial.getTime());
 		return null;
 	}
 
-	public void setDtini_(java.util.Date dtini) {
-		if (dtini != null)
-			this.dtini = new Date(dtini.getTime());
+	public void setdataInicial_(java.util.Date dataInicial) {
+		if (dataInicial != null)
+			this.dataInicial = new Date(dataInicial.getTime());
 	}
 
-	public java.util.Date getDtfim_() {
-		if (dtfim != null)
-			return new java.util.Date(dtfim.getTime());
+	public java.util.Date getDataFinal() {
+		if (dataFinal != null)
+			return new java.util.Date(dataFinal.getTime());
 		return null;
 	}
 
-	public void setDtfim_(java.util.Date dtfim) {
-		if (dtfim != null)
-			this.dtfim = new Date(dtfim.getTime());
+	public void setdataFinal_(java.util.Date dataFinal) {
+		if (dataFinal != null)
+			this.dataFinal = new Date(dataFinal.getTime());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Evento other = (Evento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

@@ -1,7 +1,7 @@
 package br.com.colmeia.model.service.implementacao;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
@@ -10,7 +10,6 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.AtividadeEventoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.service.generics.Service;
-import br.com.colmeia.model.utils.HibernateUtil;
 
 public class AtividadeEventoService extends Service<AtividadeEvento, Long, AtividadeEventoHibernateDAO> {
 
@@ -31,11 +30,11 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 			throw new Exception("Desculpe! O campo 'Data Inicial' é obrigatório");
 		if (entity.getDataFinal() == null)
 			throw new Exception("Desculpe! O campo 'Data Final' é obrigatório");
-		if (entity.getDataInicial().before(entity.getEvento().getDtini())
-				|| entity.getDataInicial().after(entity.getEvento().getDtfim_()))
+		if (entity.getDataInicial().before(entity.getEvento().getDataInicial())
+				|| entity.getDataInicial().after(entity.getEvento().getDataFinal()))
 			throw new Exception("Desculpe! A data inicial da atividade deve entre a data inicial e final do evento");
-		if (entity.getDataFinal().before(entity.getEvento().getDtini())
-				|| entity.getDataFinal().after(entity.getEvento().getDtfim_()))
+		if (entity.getDataFinal().before(entity.getEvento().getDataInicial())
+				|| entity.getDataFinal().after(entity.getEvento().getDataFinal()))
 			throw new Exception("Desculpe! A data inicial da atividade deve entre a data inicial e final do evento");
 		if (entity.getDataInicial().after(entity.getDataFinal()))
 			throw new Exception("Desculpe! A data inicial não pode ser depois da data final");
@@ -45,24 +44,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(entity.getPalestrante() == null){
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
 		}
-		if(!verificaSala(entity)){
-			throw new Exception("Já existe uma atividade marcada nesta sala durante este período");
-		}
-		if(minuteConverter(diferenciarData(entity.getDataInicial(), entity.getDataFinal())) < 5){
-			throw new Exception("Atividade deve ser maior que 5 minutos");
-		}
 		return true;
-	}
-	
-	public List<AtividadeEvento> buscarAtividadeEventoPorDataFim(Timestamp dataFinal){
-		AtividadeEvento atividadeEvento = new AtividadeEvento();
-		atividadeEvento.setDataFinal(dataFinal);
-		try {
-			return buscar(atividadeEvento);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	@Override
@@ -89,12 +71,12 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 				evento = Restrictions.eq("evento", entity.getEvento());
 			}
 			if (entity.getDataInicial() != null) {
-				dataInicial = Restrictions.between("dataInicial",entity.getDataInicial(), entity.getDataInicial());
+				dataInicial = Restrictions.eq("dataInicial", entity.getDataInicial());
 			}
 			if (entity.getDataFinal() != null) {
-				dataFinal = Restrictions.between("dataFinal", entity.getDataFinal(),entity.getDataFinal());
+				dataFinal = Restrictions.eq("dataFinal", entity.getDataFinal());
 			}
-			if (entity.getQuantidadeInscritos() != null && entity.getQuantidadeInscritos() > 0) {
+			if (entity.getQuantidadeInscritos() != null) {
 				quantidadeInscritos = Restrictions.eq("quantidadeInscritos", entity.getQuantidadeInscritos());
 			}
 			if (entity.getPalestrante() != null) {
@@ -106,50 +88,24 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 			if(entity.getAtivo() != null){
 				ativo = Restrictions.eq("ativo", entity.getAtivo());
 			}
-			
 		}
 		return getDao().findByCriteria(id, nome, evento, dataInicial, dataFinal, quantidadeInscritos, palestrante,
 				ingresso,ativo);
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosEncerrados() {
-		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		Criterion dataInicial = Restrictions.le("dataInicial", new Date(Calendar.getInstance().getTimeInMillis()));
+		return getDao().findByCriteria(dataInicial);
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosVigentes() {
-		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		Criterion dataInicial = Restrictions.le("dataInicial", new Date(Calendar.getInstance().getTimeInMillis()));
+		return getDao().findByCriteria(dataInicial);
 	}
-
-	public boolean verificaSala(AtividadeEvento entity){
-		List<AtividadeEvento> lista = buscarAtividadeEventosVigentes();
-		for (AtividadeEvento atividade : lista){
-			if (entity.getSala().equals(atividade.getSala())) {
-				if (entity.getDataFinal().before(atividade.getDataInicial())){
-					continue;
-				}
-				if (entity.getDataInicial().after(atividade.getDataFinal())){
-					continue;
-				}
-				return false;
-			}
-		}
-		return true;
-	}
-
 
 	@Override
 	public AtividadeEventoHibernateDAO getDao() {
 		return new AtividadeEventoHibernateDAO();
 	}
-	
-	private long diferenciarData(Date dataInicial, Date dataFinal) {
-		return Math.abs(dataFinal.getTime() - dataInicial.getTime());
-	}
-	
-	private long minuteConverter(long value) {
-		return value / 1000 / 60;
-	}
-	
+
 }

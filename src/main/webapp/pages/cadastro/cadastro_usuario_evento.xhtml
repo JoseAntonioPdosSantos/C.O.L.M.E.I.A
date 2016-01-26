@@ -41,7 +41,7 @@
 								</p:column>
 
 								<p:column headerText="Período" width="80">
-									<p:outputLabel value="#{eventoVigente.dtini} a #{eventoVigente.dtfim}" />
+									<p:outputLabel value="#{eventoVigente.dataInicial} a #{eventoVigente.dataFinal}" />
 								</p:column>
 
 								<p:column headerText="Inscrições" width="150">
@@ -81,11 +81,11 @@
 								</p:column>
 
 								<p:column headerText="Data inicial" width="80">
-									<p:outputLabel value="#{eventoEncerrados.dtini}" />
+									<p:outputLabel value="#{eventoEncerrados.dataInicial}" />
 								</p:column>
 
 								<p:column headerText="Data final" width="80">
-									<p:outputLabel value="#{eventoEncerrados.dtfim}" />
+									<p:outputLabel value="#{eventoEncerrados.dataFinal}" />
 								</p:column>
 
 							</p:dataTable>
