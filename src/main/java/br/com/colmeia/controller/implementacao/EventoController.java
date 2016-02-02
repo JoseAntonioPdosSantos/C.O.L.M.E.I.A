@@ -12,7 +12,7 @@ import br.com.colmeia.model.service.implementacao.EventoService;
 @ViewScoped
 public class EventoController extends Controller<Evento, EventoService> {
 
-	private static final long serialVersionUID = 4163304504886369441L;
+	private static final long serialVersionUID = 7486874983750775657L;
 	private Usuario coordenador;
 
 	@Override

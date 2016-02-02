@@ -36,6 +36,9 @@ public class Evento extends EntidadeBase {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="evento")
 	private List<AtividadeEvento> atividadesEvento;
 	
+	private String email;
+    private String telefone;
+    
 	public Long getId() {
 		return id;
 	}
@@ -116,6 +119,21 @@ public class Evento extends EntidadeBase {
 
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
@@ -142,5 +160,6 @@ public class Evento extends EntidadeBase {
 			return false;
 		return true;
 	}
+
 
 }

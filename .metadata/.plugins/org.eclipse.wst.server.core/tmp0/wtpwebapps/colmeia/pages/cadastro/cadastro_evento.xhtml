@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+		<p:layoutUnit position="center">
+			<h:form>
+				<p:panel header="Cadastro de Eventos">
+
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						<p:outputLabel id="lb_evento" value="Nome do Evento: " />
+						<p:inputText size="40" id="it_evento"
+							value="#{eventoController.evento.nome}">
+							<p:watermark for="it_evento" value="Digite o nome do Evento"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel id="lb_dtini" value="Data de Inicio:" />
+						<p:calendar id="c_dtini" value="#{eventoController.evento.dtini}" />
+
+						<p:outputLabel id="lb_dtfim" value="Data de Término:" />
+						<p:calendar id="c_dtfim" value="#{eventoController.evento.dtfim}" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+
+
+						<p:commandButton value="Cadastrar"
+							style="background-color: dodgerblue" id="enviar"
+							actionListener="#{eventroController.gravar()}"></p:commandButton>
+						<p:commandButton value="Voltar"
+							style="background-color: dodgerblue" id="Voltar"
+							action="#{eventoController.voltar}"></p:commandButton>
+
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{eventoController.eventos}"
+						var="evento" paginator="true" paginatorAlwaysVisible="true"
+						rows="5" />
+
+				</p:panel>
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>

@@ -49,6 +49,17 @@
 									value="#{eventoController.entidade.dataFinal}"
 									pattern="dd/MM/yyyy HH:mm">
 								</p:calendar>
+								
+								<p:outputLabel id="lb_evento_email" value="E-mail: " />
+								<p:inputText size="40" id="txt_evento_email"
+									value="#{eventoController.entidade.email}">
+									<p:watermark for="txt_evento_email"
+										value="Digite o E-mail para contato"></p:watermark>
+								</p:inputText>
+								
+								<p:outputLabel id="lb_evento_telefone" value="Telefone: " />
+								 <p:inputMask id="telefone" value="#{eventoController.entidade.telefone}" mask="(99) 9999-9999?9"/>
+								
 							</h:panelGrid>
 
 							<h:panelGrid columns="3">

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+
+		<p:layoutUnit position="center">
+			<h:form>
+
+				<p:panel header="Cadastro de Organnizador">
+					<h:panelGrid columns="4">
+						<p:outputLabel value="Código:" />
+						<p:inputText id="id" size="40"
+							value="#{organizadorController.organizador.id}" />
+						<p:outputLabel value="Nome:" />
+						<p:inputText id="nome" size="40"
+							value="#{organizadorController.organizador.nome}" />
+						<p:outputLabel value="CPF:" />
+						<p:inputText id="cpf" size="40"
+							value="#{organizadorController.organizador.cpf}" />
+						<p:outputLabel value="R.A.:" />
+						<p:inputText id="ra" size="40"
+							value="#{organizadorController.organizador.ra}" />
+
+						<p:panel>
+
+							<p:commandButton value="Pesquisar"
+								actionListener="#{organizadorController.buscar}" />
+						</p:panel>
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:dataTable value="#{organizadorController.organizadores}" var="organizador"
+					paginator="true" paginatorAlwaysVisible="true" rows="5" />
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>
