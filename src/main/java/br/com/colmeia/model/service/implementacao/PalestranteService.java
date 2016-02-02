@@ -46,8 +46,10 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 	}
 
 	@Override
-	public boolean validarExcluir(Palestrante entity) {
+	public boolean validarExcluir(Palestrante entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

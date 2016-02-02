@@ -96,6 +96,12 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 		Criterion ct_ativo = Restrictions.eq("ativo", true);
 		return getDao().findByCriteria(ct_usuario, ct_atividade_evento, ct_ativo);
 	}
+	
+	public List<UsuarioEvento> getUsuarioEventoPorAtividadeEvento (AtividadeEvento atividadeEvento){
+		Criterion ct_atividade_evento = Restrictions.eq("atividadeEvento", atividadeEvento);
+		
+		return getDao().findByCriteria(ct_atividade_evento);
+	}
 
 	public UsuarioEvento registrarPresenca(UsuarioEvento usuarioEvento) throws Exception {
 		usuarioEvento.setPresenca(true);
@@ -133,8 +139,10 @@ public class UsuarioEventoService extends Service<UsuarioEvento, Long, UsuarioEv
 	}
 
 	@Override
-	public boolean validarExcluir(UsuarioEvento entity) {
+	public boolean validarExcluir(UsuarioEvento entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

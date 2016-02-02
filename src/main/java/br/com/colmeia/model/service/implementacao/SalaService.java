@@ -21,6 +21,9 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		if(!verificaSala(entity)){
+			throw new Exception("Já existe uma sala com esse nome");
+		}
 		return true;
 	}
 
@@ -49,9 +52,20 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 		return new SalaHibernateDAO();
 	}
 
-	@Override
-	public boolean validarExcluir(Sala entity) {
+	
+	
+	public boolean verificaSala(Sala entity) throws Exception{
+		List<Sala> lista = buscar(entity);
+		for (Sala sala : lista){
+			if(sala.getNome().equals(entity.getNome())){
+				return false;
+			}
+			}
 		return true;
-	}
+		}
 
+	@Override
+	public boolean validarExcluir(Sala entity) throws Exception {
+			return true;
+	}
 }

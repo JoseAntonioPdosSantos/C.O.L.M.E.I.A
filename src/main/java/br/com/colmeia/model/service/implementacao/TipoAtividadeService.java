@@ -21,6 +21,9 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		if(!verificaTipoAtividade(entity)){
+			throw new Exception("Já existe uma atividade com esse nome");
+		}
 		return true;
 	}
 
@@ -39,6 +42,16 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 		}
 		return getDao().findByCriteria(id, nome);
 	}
+	
+	public boolean verificaTipoAtividade(TipoAtividade entity) throws Exception{
+		List<TipoAtividade> lista = buscar(entity);
+		for (TipoAtividade atividade : lista){
+			if(atividade.getNome().equals(entity.getNome())){
+				return false;
+			}
+			}
+		return true;
+		}
 
 	@Override
 	public TipoAtividadeHibernateDAO getDao() {
@@ -46,8 +59,10 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 	}
 
 	@Override
-	public boolean validarExcluir(TipoAtividade entity) {
+	public boolean validarExcluir(TipoAtividade entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

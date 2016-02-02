@@ -16,4 +16,6 @@ public interface IService<T, ID extends Serializable> {
 	T buscarPorId(ID id) throws Exception;
 
 	boolean validarSalvarAlterar(T entity) throws Exception;
+
+	boolean validarExcluir(T entity) throws Exception;
 }

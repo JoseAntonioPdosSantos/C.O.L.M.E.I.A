@@ -1,7 +1,9 @@
 package br.com.colmeia.model.persistence.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,7 +32,10 @@ public class Evento extends EntidadeBase {
 	private Date dataInicial;
 	@Temporal(TemporalType.DATE)
 	private Date dataFinal;
-
+	@Column
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="evento")
+	private List<AtividadeEvento> atividadesEvento;
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,6 +100,22 @@ public class Evento extends EntidadeBase {
 	public void setdataFinal_(java.util.Date dataFinal) {
 		if (dataFinal != null)
 			this.dataFinal = new Date(dataFinal.getTime());
+	}
+
+	public List<AtividadeEvento> getAtividadesEvento() {
+		return atividadesEvento;
+	}
+
+	public void setAtividadesEvento(List<AtividadeEvento> atividadesEvento) {
+		this.atividadesEvento = atividadesEvento;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
 	}
 
 	@Override

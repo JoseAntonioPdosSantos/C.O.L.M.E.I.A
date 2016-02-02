@@ -46,8 +46,10 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 	}
 
 	@Override
-	public boolean validarExcluir(Ingresso entity) {
+	public boolean validarExcluir(Ingresso entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

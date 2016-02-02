@@ -47,8 +47,10 @@ public class InstituicaoService extends Service<Instituicao, Long, InstituicaoHi
 	}
 
 	@Override
-	public boolean validarExcluir(Instituicao entity) {
+	public boolean validarExcluir(Instituicao entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

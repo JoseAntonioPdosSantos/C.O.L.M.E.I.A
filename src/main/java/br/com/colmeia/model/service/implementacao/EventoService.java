@@ -6,6 +6,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.colmeia.model.persistence.dao.implementacao.EventoHibernateDAO;
+import br.com.colmeia.model.persistence.entity.AtividadeEvento;
 import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.service.generics.Service;
 import br.com.colmeia.model.utils.HibernateUtil;
@@ -55,22 +56,24 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			if (entity.getDataFinal() != null) {
 				dataFinal = Restrictions.eq("dataFinal", entity.getDataFinal());
 			}
-			if (entity.getAtivo() != null){
+			if (entity.getAtivo() != null) {
 				ativo = Restrictions.eq("ativo", entity.getAtivo());
 			}
 		}
 
-		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal,ativo);
+		return getDao().findByCriteria(id, nome, coordenador, dataInicial, dataFinal, ativo);
 	}
 
 	public List<Evento> buscarEventosEncerrados() {
 		Criterion dataInicial = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dataInicial);
+		Criterion ativo = Restrictions.eq("ativo", true);
+		return getDao().findByCriteria(dataInicial, ativo);
 	}
 
 	public List<Evento> buscarEventosVigentes() {
-		Criterion dtini = Restrictions.ge("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		Criterion dataInicial = Restrictions.ge("dataInicial", HibernateUtil.getCurrentDate());
+		Criterion ativo = Restrictions.eq("ativo", true);
+		return getDao().findByCriteria(dataInicial, ativo);
 	}
 
 	@Override
@@ -79,8 +82,22 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 	}
 
 	@Override
-	public boolean validarExcluir(Evento entity) {
+	public boolean validarExcluir(Evento entity) throws Exception {
 		return true;
+	}
+
+	private boolean apagarAtividadesEvento(Evento entity) throws Exception {
+		for (AtividadeEvento atividadeEvento : entity.getAtividadesEvento()) {
+			new AtividadeEventoService().apagar(atividadeEvento);
+		}
+		return true;
+	}
+
+	public void apagar(Evento entity) throws Exception {
+		if (validarExcluir(entity)) {
+			if (apagarAtividadesEvento(entity))
+				super.apagar(entity);
+		}
 	}
 
 }

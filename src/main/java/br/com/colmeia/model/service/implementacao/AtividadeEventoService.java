@@ -9,7 +9,9 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.colmeia.model.persistence.dao.implementacao.AtividadeEventoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.AtividadeEvento;
+import br.com.colmeia.model.persistence.entity.UsuarioEvento;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.service.implementacao.UsuarioEventoService;
 import br.com.colmeia.model.utils.HibernateUtil;
 
 public class AtividadeEventoService extends Service<AtividadeEvento, Long, AtividadeEventoHibernateDAO> {
@@ -118,8 +120,8 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosEncerrados() {
-		Criterion dtini = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
-		return getDao().findByCriteria(dtini);
+		Criterion dataInicial = Restrictions.le("dataInicial", HibernateUtil.getCurrentDate());
+		return getDao().findByCriteria(dataInicial);
 	}
 
 	public List<AtividadeEvento> buscarAtividadeEventosVigentes() {
@@ -185,9 +187,27 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	private long minuteConverter(long value) {
 		return value / 1000 / 60;
 	}
-
+	
+	public boolean verificaInscrito(AtividadeEvento entity){
+		List<UsuarioEvento> lista = new UsuarioEventoService().getUsuarioEventoPorAtividadeEvento(entity);
+		for(UsuarioEvento usuarioEvento : lista){
+			if(entity.equals(usuarioEvento.getAtividadeEvento())){
+				return false;
+			}
+			
+		}
+		return true;
+	}
+		
 	@Override
-	public boolean validarExcluir(AtividadeEvento entity) {
+	public boolean validarExcluir(AtividadeEvento entity) throws Exception {
+		if(!verificaInscrito(entity)){
+			return false;
+			
+		}
+		if(!verificaInscrito(entity)){
+			throw new Exception("Existem inscritos,atividade não pode ser excluida");
+		}
 		return true;
 	}
 

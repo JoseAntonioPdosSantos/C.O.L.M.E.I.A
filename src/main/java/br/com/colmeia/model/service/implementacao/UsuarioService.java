@@ -163,8 +163,10 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 	}
 
 	@Override
-	public boolean validarExcluir(Usuario entity) {
+	public boolean validarExcluir(Usuario entity) throws Exception {
 		return true;
 	}
+
+	
 
 }

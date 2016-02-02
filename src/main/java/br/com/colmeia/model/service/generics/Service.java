@@ -21,8 +21,6 @@ public abstract class Service<T extends EntidadeBase, ID extends Serializable, D
 		}
 	}
 
-	public abstract boolean validarExcluir(T entity);
-
 	private void update(T entity) {
 		controleBasicoAuditoria(entity);
 		getDao().update(entity);

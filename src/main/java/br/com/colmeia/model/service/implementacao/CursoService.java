@@ -50,8 +50,10 @@ public class CursoService extends Service<Curso, Long, CursoHibernateDAO> {
 	}
 
 	@Override
-	public boolean validarExcluir(Curso entity) {
+	public boolean validarExcluir(Curso entity) throws Exception {
 		return true;
 	}
+
+
 
 }
