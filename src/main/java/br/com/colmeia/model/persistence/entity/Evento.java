@@ -119,7 +119,7 @@ public class Evento extends EntidadeBase {
 
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
-
+	}
 	public String getEmail() {
 		return email;
 	}
