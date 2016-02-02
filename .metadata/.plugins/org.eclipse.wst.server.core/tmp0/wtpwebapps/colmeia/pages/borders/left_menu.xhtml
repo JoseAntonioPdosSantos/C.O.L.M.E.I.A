@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:layoutUnit position="west" size="200" header="Menu" >
+		<h:form>
+			<p:panelMenu id="pm_left">
+				<p:submenu id="sm_meu_dados" label="Dados Pessoais">
+					<p:menuitem id="mi_meus_dados" url="/faces/pages/cadastro/cadastro_usuario.xhtml" value="Meus Dados" />
+				</p:submenu>
+				<p:submenu id="sm_evento" label="Eventos">
+					<p:menuitem id="mi_lista_evento" url="/faces/pages/cadastro/cadastro_evento.xhtml" value="Lista de Eventos" />
+					<p:menuitem id="mi_meus_eventos" url="/faces/pages/pesquisa/meus_eventos.xhtml"  value="Meus Eventos" />
+				</p:submenu>
+				<p:submenu id="sm_certificado" label="Certificado">
+					<p:menuitem id="mi_certificado" url="/faces/pages/pesquisa/meus_certificados.xhtml" value="Gerar Certificado" />
+				</p:submenu>
+				<p:submenu id="sm_organizador" label="Organizador">
+					<p:menuitem id="mi_presenca" url="/faces/pages/cadastro/cadastro_evento.xhtml" value="Controle de Presença" />
+					<p:menuitem id="mi_leitor" value="Leitor QR-Code" />
+				</p:submenu>
+				<p:submenu id="sm_coordenador" label="Coordenador">
+					<p:menuitem id="mi_cad_organizador" url="/faces/pages/cadastro/cadastro_organizador.xhtml" value="Cadstro de Organizadores" />
+					<p:menuitem id="mi_cad_evento" url="/faces/pages/cadastro/cadastro_evento.xhtml" value="Cadastro de Eventos" />
+				</p:submenu>
+			</p:panelMenu>
+		</h:form>
+	</p:layoutUnit>
+</ui:composition>
+
+</html>

@@ -29,7 +29,9 @@ public class Evento extends EntidadeBase {
 	private Date dataInicial;
 	@Temporal(TemporalType.DATE)
 	private Date dataFinal;
-
+	private String email;
+    private String telefone;
+    
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +98,22 @@ public class Evento extends EntidadeBase {
 			this.dataFinal = new Date(dataFinal.getTime());
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -120,5 +138,6 @@ public class Evento extends EntidadeBase {
 			return false;
 		return true;
 	}
+
 
 }

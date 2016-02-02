@@ -9,6 +9,7 @@ import br.com.colmeia.model.persistence.dao.implementacao.EventoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Evento;
 import br.com.colmeia.model.service.generics.Service;
 import br.com.colmeia.model.utils.HibernateUtil;
+import br.com.colmeia.model.utils.Util;
 
 public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 
@@ -20,12 +21,20 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 		if (entity.getNome() == null)
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 		if (entity.getNome().trim().isEmpty())
-			throw new Exception(
-					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		if (entity.getDataInicial() == null)
 			throw new Exception("Desculpe! O campo 'Data Inicial' é obrigatório");
 		if (entity.getDataFinal() == null)
 			throw new Exception("Desculpe! O campo 'Data Final' é obrigatório");
+		if (entity.getEmail() == null && entity.getTelefone() == null)
+			throw new Exception("Desculpe! O campo 'E-mail' ou 'Telefone' é obrigatório");
+		if (entity.getEmail().trim().isEmpty() && entity.getTelefone().trim().isEmpty())
+			throw new Exception("Desculpe! O campo 'E-mail' ou 'Telefone' é obrigatório");
+		if (entity.getEmail() != null){
+			if (!Util.validarEmail(entity.getEmail())){
+				throw new Exception("Desculpe! O campo E-mail digitado está invalido");
+			}
+		}
 		return true;
 	}
 

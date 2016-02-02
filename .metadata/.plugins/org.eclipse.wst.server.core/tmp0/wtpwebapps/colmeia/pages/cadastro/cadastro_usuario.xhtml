@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/pages/borders/index.xhtml">
+
+	<ui:define name="page_central">
+		<p:layoutUnit position="center">
+			<h:form>
+				<p:panel header="Cadastro de Usuário">
+
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						<p:outputLabel id="lb_nome" for="nome" value="Nome: " />
+						<p:inputText size="40" id="nome"
+							value="#{usuarioController.usuario.nome}">
+							<p:watermark for="nome" value="Digite seu nome completo"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel id="lb_cpf" for="cpf" value="CPF: " />
+						<p:inputText id="cpf" value="#{usuarioController.usuario.cpf}">
+							<p:watermark for="cpf" value="Digite seu CPF"></p:watermark>
+						</p:inputText>
+
+						<h:outputLabel id="lb_e_academico" value="É acadêmico?"
+							for="e_academico"></h:outputLabel>
+						<p:selectOneRadio id="e_academico" value="#">
+							<f:selectItem itemLabel="Sim" itemValue="Sim" />
+							<f:selectItem itemLabel="Não" itemValue="Não" />
+						</p:selectOneRadio>
+
+						<p:outputLabel id="lb_instituicao" for="instituicao"
+							value="Instituição: "></p:outputLabel>
+						<p:selectOneMenu id="instituicao"
+							value="#{usuarioController.usuario.instituicao}">
+							<f:selectItem itemLabel="Estácio de Sá" itemValue="1" />
+							<f:selectItem itemLabel="Option 2" itemValue="2" />
+							<f:selectItem itemLabel="Option 3" itemValue="3" />
+						</p:selectOneMenu>
+
+						<p:outputLabel id="lb_ra" for="ra" value="RA: " />
+						<p:inputText id="ra" value="#{usuarioController.usuario.ra}">
+							<p:watermark for="ra" value="Digite seu RA de Aluno Estácio"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel id="lb_curso" for="curso" value="Curso: "></p:outputLabel>
+						<p:selectOneMenu id="curso"
+							value="#{usuarioController.usuario.curso}">
+							<f:selectItem itemLabel="Option 1" itemValue="1" />
+							<f:selectItem itemLabel="Option 2" itemValue="2" />
+							<f:selectItem itemLabel="Option 3" itemValue="3" />
+						</p:selectOneMenu>
+
+						<p:outputLabel id="lb_email" for="email" value="Email: " />
+						<p:inputText id="email" value="#{usuarioController.usuario.email}">
+							<p:watermark for="email" value="Digite seu Email"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel id="lb_confirme_email" for="confirme_email"
+							value="Confirme Email: " />
+						<p:inputText id="confirme_email" value="#">
+							<p:watermark for="confirme_email" value="Confirme Email"></p:watermark>
+						</p:inputText>
+
+						<p:outputLabel id="lb_senha" for="senha" value="Senha: " />
+						<p:password id="senha" value="#{usuarioController.usuario.senha}">
+							<p:watermark for="senha" value="Digite sua senha"></p:watermark>
+						</p:password>
+
+						<p:outputLabel id="lb_confirme_senha" for="confirme_senha"
+							value="Confirme Senha: " />
+						<p:password id="confirme_senha"
+							value="#{usuarioController.usuario.senha}">
+							<p:watermark for="confirme_senha" value="Confirme senha"></p:watermark>
+						</p:password>
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+
+
+						<p:commandButton value="Enviar"
+							style="background-color: dodgerblue" id="enviar"
+							actionListener="#{usuarioController.gravar()}"></p:commandButton>
+						<p:commandButton value="Cancelar"
+							style="background-color: dodgerblue" id="Voltar"
+							action="#{usuarioController.voltar}"></p:commandButton>
+
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{usuarioController.usuarios}" var="usuario"
+						paginator="true" paginatorAlwaysVisible="true" rows="5">
+						<p:outputLabel value="#{usuario.nome}">
+						</p:outputLabel>
+					</p:dataTable>
+
+				</p:panel>
+			</h:form>
+		</p:layoutUnit>
+	</ui:define>
+</ui:composition>
+</html>
