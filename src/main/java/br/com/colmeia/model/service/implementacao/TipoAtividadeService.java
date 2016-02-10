@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.TipoAtividadeHibernateDAO;
 import br.com.colmeia.model.persistence.entity.TipoAtividade;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtividadeHibernateDAO> {
 
@@ -31,7 +32,8 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 	public List<TipoAtividade> buscar(TipoAtividade entity) throws Exception {
 		Criterion id = null;
 		Criterion nome = null;
-
+		Criterion ativo = null;
+		
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
@@ -39,19 +41,26 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
 				nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
+			if(entity.getAtivo() !=null){
+				ativo = Restrictions.eq("ativo", entity.getAtivo());
+			}
 		}
-		return getDao().findByCriteria(id, nome);
+		return getDao().findByCriteria(id, nome,ativo);
 	}
 	
 	public boolean verificaTipoAtividade(TipoAtividade entity) throws Exception{
-		List<TipoAtividade> lista = buscar(entity);
-		for (TipoAtividade atividade : lista){
-			if(atividade.getNome().equals(entity.getNome())){
+		TipoAtividade tipoAtividadeAtivo = new TipoAtividade();
+		tipoAtividadeAtivo.setAtivo(true);
+		List<TipoAtividade> lista = buscar(tipoAtividadeAtivo);
+
+		for (TipoAtividade tipoAtividade : lista) {
+			if (Util.compare(tipoAtividade.getNome(), entity.getNome()) == 0) {
 				return false;
 			}
-			}
-		return true;
 		}
+
+		return true;
+	}
 
 	@Override
 	public TipoAtividadeHibernateDAO getDao() {

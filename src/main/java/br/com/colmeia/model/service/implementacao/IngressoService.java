@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.IngressoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Ingresso;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDAO> {
 
@@ -19,8 +20,11 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 
 		if (entity.getNome().trim().isEmpty())
-			throw new Exception(
-					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		
+		if(!verificaIngresso(entity))
+			throw new Exception("Já existe um Ingresso com esse nome");
+		
 		return true;
 	}
 
@@ -28,6 +32,7 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 	public List<Ingresso> buscar(Ingresso entity) throws Exception {
 		Criterion id = null;
 		Criterion nome = null;
+		Criterion ativo = null;
 
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
@@ -36,10 +41,28 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
 				nome = Restrictions.ilike("nome", "%"+entity.getNome()+"%");
 			}
+			if(entity.getAtivo() !=null){
+				ativo = Restrictions.eq("ativo", entity.getAtivo());
+			}
 		}
-		return getDao().findByCriteria(id, nome);
+		return getDao().findByCriteria(id, nome,ativo);
 	}
 
+	public boolean verificaIngresso(Ingresso entity) throws Exception {
+		Ingresso ingressoAtivo = new Ingresso();
+		ingressoAtivo.setAtivo(true);
+		List<Ingresso> lista = buscar(ingressoAtivo);
+
+		for (Ingresso ingresso : lista) {
+			if (Util.compare(ingresso.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	
 	@Override
 	public IngressoHibernateDAO getDao() {
 		return new IngressoHibernateDAO();

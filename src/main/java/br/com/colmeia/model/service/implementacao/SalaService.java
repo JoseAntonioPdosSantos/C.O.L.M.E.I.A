@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.SalaHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Sala;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 
@@ -19,9 +20,9 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 
 		if (entity.getNome().trim().isEmpty())
-			throw new Exception(
-					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
-		if(!verificaSala(entity)){
+			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		
+		if (!verificaSala(entity)) {
 			throw new Exception("Já existe uma sala com esse nome");
 		}
 		return true;
@@ -40,11 +41,11 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
 				nome = Restrictions.ilike("nome", "%" + entity.getNome() + "%");
 			}
-			if(entity.getAtivo() != null){
+			if (entity.getAtivo() != null) {
 				ativo = Restrictions.eq("ativo", entity.getAtivo());
 			}
 		}
-		return getDao().findByCriteria(id, nome,ativo);
+		return getDao().findByCriteria(id, nome, ativo);
 	}
 
 	@Override
@@ -52,20 +53,22 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 		return new SalaHibernateDAO();
 	}
 
-	
-	
-	public boolean verificaSala(Sala entity) throws Exception{
-		List<Sala> lista = buscar(entity);
-		for (Sala sala : lista){
-			if(sala.getNome().equals(entity.getNome())){
+	public boolean verificaSala(Sala entity) throws Exception {
+		Sala salaAtiva = new Sala();
+		salaAtiva.setAtivo(true);
+		List<Sala> lista = buscar(salaAtiva);
+
+		for (Sala sala : lista) {
+			if (Util.compare(sala.getNome(), entity.getNome()) == 0) {
 				return false;
 			}
-			}
-		return true;
 		}
+
+		return true;
+	}
 
 	@Override
 	public boolean validarExcluir(Sala entity) throws Exception {
-			return true;
+		return true;
 	}
 }

@@ -22,7 +22,8 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 		if (entity.getNome() == null)
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório");
 		if (entity.getNome().trim().isEmpty())
-			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+			throw new Exception(
+					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		if (entity.getDataInicial() == null)
 			throw new Exception("Desculpe! O campo 'Data Inicial' é obrigatório");
 		if (entity.getDataFinal() == null)
@@ -31,8 +32,8 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 			throw new Exception("Desculpe! O campo 'E-mail' ou 'Telefone' é obrigatório");
 		if (entity.getEmail().trim().isEmpty() && entity.getTelefone().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'E-mail' ou 'Telefone' é obrigatório");
-		if (entity.getEmail() != null){
-			if (!Util.validarEmail(entity.getEmail())){
+		if (entity.getEmail() != null) {
+			if (!Util.validarEmail(entity.getEmail())) {
 				throw new Exception("Desculpe! O campo E-mail digitado está invalido");
 			}
 		}
@@ -96,6 +97,14 @@ public class EventoService extends Service<Evento, Long, EventoHibernateDAO> {
 	}
 
 	private boolean apagarAtividadesEvento(Evento entity) throws Exception {
+		try {
+			for (AtividadeEvento atividadeEvento : entity.getAtividadesEvento()) {
+				if (!new AtividadeEventoService().validarExcluir(atividadeEvento))
+					return false;
+			}
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 		for (AtividadeEvento atividadeEvento : entity.getAtividadesEvento()) {
 			new AtividadeEventoService().apagar(atividadeEvento);
 		}

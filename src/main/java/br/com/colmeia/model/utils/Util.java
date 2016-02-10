@@ -1,11 +1,20 @@
 package br.com.colmeia.model.utils;
 
+import java.text.Collator;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Util {
 
+	private static Collator collator;
+	
+	static {
+		collator  = Collator.getInstance(new Locale("pt", "BR"));
+		collator.setStrength(Collator.PRIMARY);
+	}
+	
 	public static boolean isCPFValido(String cpf) {
 		if (cpf == null)
 			return false;
@@ -68,5 +77,9 @@ public class Util {
         }
         return isEmailValido;
     }
+	
+	public static int compare(String arg1,String arg2){
+		return collator.compare(arg1, arg2);
+	}
 
 }

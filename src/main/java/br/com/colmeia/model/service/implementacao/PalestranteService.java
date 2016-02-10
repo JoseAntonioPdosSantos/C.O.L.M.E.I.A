@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.PalestranteHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Palestrante;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class PalestranteService extends Service<Palestrante, Long, PalestranteHibernateDAO> {
 
@@ -21,6 +22,9 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		if(!verificaPalestrante(entity))
+			throw new Exception("Já existe um Palestrante com esse nome");
+		
 		return true;
 	}
 
@@ -28,7 +32,8 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 	public List<Palestrante> buscar(Palestrante entity) throws Exception {
 		Criterion id = null;
 		Criterion nome = null;
-
+		Criterion ativo = null;
+		
 		if (entity != null) {
 			if (entity.getId() != null && entity.getId() > 0) {
 				id = Restrictions.eq("id", entity.getId());
@@ -36,10 +41,30 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 			if (entity.getNome() != null && !entity.getNome().trim().isEmpty()) {
 				nome = Restrictions.ilike("nome", "%"+entity.getNome()+"%");
 			}
+			if(entity.getAtivo() !=null){
+				ativo = Restrictions.eq("ativo", entity.getAtivo());
+			}
 		}
-		return getDao().findByCriteria(id, nome);
+		return getDao().findByCriteria(id, nome,ativo);
 	}
 
+	public boolean verificaPalestrante(Palestrante entity) throws Exception {
+		Palestrante palestranteAtivo = new Palestrante();
+		palestranteAtivo.setAtivo(true);
+		List<Palestrante> lista = buscar(palestranteAtivo);
+
+		for (Palestrante palestrante : lista) {
+			if (Util.compare(palestrante.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	
+	
+	
 	@Override
 	public PalestranteHibernateDAO getDao() {
 		return new PalestranteHibernateDAO();

@@ -202,11 +202,7 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 	@Override
 	public boolean validarExcluir(AtividadeEvento entity) throws Exception {
 		if(!verificaInscrito(entity)){
-			return false;
-			
-		}
-		if(!verificaInscrito(entity)){
-			throw new Exception("Existem inscritos,atividade não pode ser excluida");
+			throw new Exception("Existem inscritos,não pode ser excluida");
 		}
 		return true;
 	}
