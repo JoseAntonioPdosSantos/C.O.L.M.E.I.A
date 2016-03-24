@@ -15,7 +15,7 @@ public class Ingresso extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "ingresso_seq", initialValue = 1, name = "ingresso_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ingresso_seq")
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@Column
 	private String nome;
 
 	public Long getId() {

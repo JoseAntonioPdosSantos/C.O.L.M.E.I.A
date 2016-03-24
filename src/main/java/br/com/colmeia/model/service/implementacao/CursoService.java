@@ -21,9 +21,19 @@ public class CursoService extends Service<Curso, Long, CursoHibernateDAO> {
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
+		if(!isUnique(entity))
+			throw new Exception("Desculpe! Já existe um curso cadastrado com este nome");
+		
 		return true;
 	}
 
+	private boolean isUnique(Curso entity) throws Exception{
+		Curso curso = new Curso();
+		curso.setNome(entity.getNome());
+		List<Curso> cursos = buscar(curso);
+		return cursos==null || cursos.size() == 0;
+	}
+	
 	@Override
 	public List<Curso> buscar(Curso entity) throws Exception {
 		Criterion id = null;

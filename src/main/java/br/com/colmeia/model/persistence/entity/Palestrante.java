@@ -15,7 +15,7 @@ public class Palestrante extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "palestrante_seq", initialValue = 1, name = "palestrante_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "palestrante_seq")
 	private Long id;
-	@Column(nullable = false)
+	@Column
 	private String nome;
 
 	public Long getId() {

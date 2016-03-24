@@ -8,7 +8,6 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.IngressoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Ingresso;
 import br.com.colmeia.model.service.generics.Service;
-import br.com.colmeia.model.utils.Util;
 
 public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDAO> {
 
@@ -22,12 +21,19 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		
-		if(!verificaIngresso(entity))
+		if(!isUnique(entity))
 			throw new Exception("Já existe um Ingresso com esse nome");
 		
 		return true;
 	}
 
+	private boolean isUnique(Ingresso entity) throws Exception{
+		Ingresso ingresso = new Ingresso();
+		ingresso.setNome(entity.getNome());
+		List<Ingresso> ingressos = buscar(ingresso);
+		return ingressos==null || ingressos.size() == 0;
+	}
+	
 	@Override
 	public List<Ingresso> buscar(Ingresso entity) throws Exception {
 		Criterion id = null;
@@ -47,21 +53,6 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 		}
 		return getDao().findByCriteria(id, nome,ativo);
 	}
-
-	public boolean verificaIngresso(Ingresso entity) throws Exception {
-		Ingresso ingressoAtivo = new Ingresso();
-		ingressoAtivo.setAtivo(true);
-		List<Ingresso> lista = buscar(ingressoAtivo);
-
-		for (Ingresso ingresso : lista) {
-			if (Util.compare(ingresso.getNome(), entity.getNome()) == 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-	
 	
 	@Override
 	public IngressoHibernateDAO getDao() {

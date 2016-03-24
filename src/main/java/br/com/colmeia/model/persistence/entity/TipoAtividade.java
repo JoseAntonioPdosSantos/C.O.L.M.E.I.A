@@ -16,7 +16,7 @@ public class TipoAtividade extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "tipo_atividade_seq", initialValue = 1, name = "tipo_atividade_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "tipo_atividade_seq")
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@Column
 	private String nome;
 
 	public Long getId() {

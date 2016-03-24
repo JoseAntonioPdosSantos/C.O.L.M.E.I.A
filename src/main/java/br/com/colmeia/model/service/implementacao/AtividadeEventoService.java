@@ -47,6 +47,12 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(entity.getPalestrante() == null){
 			throw new Exception("Desculpe! O campo 'Palestrante' é obrigatório");
 		}
+		if(entity.getSala() == null){
+			throw new Exception("Desculpe! O campo 'Sala' é obrigatório");
+		}
+		if(entity.getIngresso() == null){
+			throw new Exception("Desculpe! O campo 'Ingresso' é obrigatório");
+		}
 		if(!verificaSala(entity)){
 			throw new Exception("Já existe uma atividade marcada nesta sala durante este período");
 		}
@@ -56,8 +62,6 @@ public class AtividadeEventoService extends Service<AtividadeEvento, Long, Ativi
 		if(minuteConverter(diferenciarData(entity.getDataInicial(), entity.getDataFinal())) < 5){
 			throw new Exception("Atividade deve ser maior que 5 minutos");
 		}
-		
-		
 		return true;
 	}
 

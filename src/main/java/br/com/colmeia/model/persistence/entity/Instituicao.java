@@ -15,7 +15,7 @@ public class Instituicao extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "instituicao_seq", initialValue = 1, name = "instituicao_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "instituicao_seq")
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@Column
 	private String nome;
 	@Column
 	private Boolean estacio;

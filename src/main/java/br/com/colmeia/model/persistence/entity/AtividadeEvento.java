@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,9 +24,9 @@ public class AtividadeEvento extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "atividade_evento_seq", initialValue = 1, name = "atividade_evento_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "atividade_evento_seq")
 	private Long id;
-	@Column(nullable = false)
+	@Column
 	private String nome;
-	@JoinColumn(nullable = false)
+	@JoinColumn
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Evento evento;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -33,12 +34,15 @@ public class AtividadeEvento extends EntidadeBase {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFinal;
 	private Integer quantidadeInscritos;
-	@Column(nullable = false)
+	@JoinColumn
+	@OneToOne(fetch = FetchType.LAZY)
 	private Palestrante palestrante;
 	private String descricao;
-	@Column(nullable = false)
+	@JoinColumn
+	@OneToOne(fetch = FetchType.LAZY)
 	private Ingresso ingresso;
-	@Column(nullable = false)
+	@JoinColumn
+	@OneToOne(fetch = FetchType.LAZY)
 	private Sala sala;
 
 	@Transient

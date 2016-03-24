@@ -15,7 +15,7 @@ public class Sala extends EntidadeBase{
     @SequenceGenerator(sequenceName = "sala_seq", initialValue = 1, name = "sala_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "sala_seq")
     private Long id;
-    @Column(nullable=false,unique=true)
+    @Column
     private String nome;
 
     public Long getId() {

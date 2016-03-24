@@ -21,15 +21,15 @@ public class Usuario extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "usuario_seq", initialValue = 1, name = "usuario_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "usuario_seq")
 	private Long id;
-	@Column(nullable = false)
+	@Column
 	private String nome;
-	@Column(nullable = false, unique = true)
+	@Column
 	private String cpf;
 	@Column
 	private String ra;
 	@Column
 	private String email;
-	@Column(nullable = false)
+	@Column
 	private String senha;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn
@@ -38,7 +38,7 @@ public class Usuario extends EntidadeBase {
 	@JoinColumn
 	private Instituicao instituicao;
 	@Enumerated(EnumType.ORDINAL)
-	@Column(nullable = false)
+	@Column
 	private Perfil perfil;
 
 	@Transient

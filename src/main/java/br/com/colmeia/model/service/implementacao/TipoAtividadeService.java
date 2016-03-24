@@ -8,7 +8,6 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.TipoAtividadeHibernateDAO;
 import br.com.colmeia.model.persistence.entity.TipoAtividade;
 import br.com.colmeia.model.service.generics.Service;
-import br.com.colmeia.model.utils.Util;
 
 public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtividadeHibernateDAO> {
 
@@ -22,12 +21,19 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
-		if(!verificaTipoAtividade(entity)){
+		if(!isUnique(entity)){
 			throw new Exception("Já existe uma atividade com esse nome");
 		}
 		return true;
 	}
-
+	
+	private boolean isUnique(TipoAtividade entity) throws Exception{
+		TipoAtividade tipoAtividade = new TipoAtividade();
+		tipoAtividade.setNome(entity.getNome());
+		List<TipoAtividade> tipoAtividades = buscar(tipoAtividade);
+		return tipoAtividades==null || tipoAtividades.size() == 0;
+	}
+	
 	@Override
 	public List<TipoAtividade> buscar(TipoAtividade entity) throws Exception {
 		Criterion id = null;
@@ -48,20 +54,6 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 		return getDao().findByCriteria(id, nome,ativo);
 	}
 	
-	public boolean verificaTipoAtividade(TipoAtividade entity) throws Exception{
-		TipoAtividade tipoAtividadeAtivo = new TipoAtividade();
-		tipoAtividadeAtivo.setAtivo(true);
-		List<TipoAtividade> lista = buscar(tipoAtividadeAtivo);
-
-		for (TipoAtividade tipoAtividade : lista) {
-			if (Util.compare(tipoAtividade.getNome(), entity.getNome()) == 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	@Override
 	public TipoAtividadeHibernateDAO getDao() {
 		return new TipoAtividadeHibernateDAO();
@@ -71,7 +63,5 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 	public boolean validarExcluir(TipoAtividade entity) throws Exception {
 		return true;
 	}
-
-	
 
 }

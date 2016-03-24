@@ -8,7 +8,6 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.SalaHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Sala;
 import br.com.colmeia.model.service.generics.Service;
-import br.com.colmeia.model.utils.Util;
 
 public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 
@@ -22,12 +21,19 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception("Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
 		
-		if (!verificaSala(entity)) {
+		if (!isUnique(entity)) {
 			throw new Exception("Já existe uma sala com esse nome");
 		}
 		return true;
 	}
 
+	private boolean isUnique(Sala entity) throws Exception{
+		Sala sala = new Sala();
+		sala.setNome(entity.getNome());
+		List<Sala> salas = buscar(sala);
+		return salas==null || salas.size() == 0;
+	}
+	
 	@Override
 	public List<Sala> buscar(Sala entity) throws Exception {
 		Criterion id = null;
@@ -51,20 +57,6 @@ public class SalaService extends Service<Sala, Long, SalaHibernateDAO> {
 	@Override
 	public SalaHibernateDAO getDao() {
 		return new SalaHibernateDAO();
-	}
-
-	public boolean verificaSala(Sala entity) throws Exception {
-		Sala salaAtiva = new Sala();
-		salaAtiva.setAtivo(true);
-		List<Sala> lista = buscar(salaAtiva);
-
-		for (Sala sala : lista) {
-			if (Util.compare(sala.getNome(), entity.getNome()) == 0) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	@Override

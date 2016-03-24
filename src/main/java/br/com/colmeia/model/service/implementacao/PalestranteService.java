@@ -8,7 +8,6 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.PalestranteHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Palestrante;
 import br.com.colmeia.model.service.generics.Service;
-import br.com.colmeia.model.utils.Util;
 
 public class PalestranteService extends Service<Palestrante, Long, PalestranteHibernateDAO> {
 
@@ -22,10 +21,17 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 		if (entity.getNome().trim().isEmpty())
 			throw new Exception(
 					"Desculpe! O campo 'Nome' é obrigatório. Evite cadastrar campos com espaços em brancos");
-		if(!verificaPalestrante(entity))
+		if(!isUnique(entity))
 			throw new Exception("Já existe um Palestrante com esse nome");
 		
 		return true;
+	}
+
+	private boolean isUnique(Palestrante entity) throws Exception{
+		Palestrante palestrante = new Palestrante();
+		palestrante.setNome(entity.getNome());
+		List<Palestrante> palestrantes = buscar(palestrante);
+		return palestrantes==null || palestrantes.size() == 0;
 	}
 
 	@Override
@@ -48,23 +54,6 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 		return getDao().findByCriteria(id, nome,ativo);
 	}
 
-	public boolean verificaPalestrante(Palestrante entity) throws Exception {
-		Palestrante palestranteAtivo = new Palestrante();
-		palestranteAtivo.setAtivo(true);
-		List<Palestrante> lista = buscar(palestranteAtivo);
-
-		for (Palestrante palestrante : lista) {
-			if (Util.compare(palestrante.getNome(), entity.getNome()) == 0) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-	
-	
-	
-	
 	@Override
 	public PalestranteHibernateDAO getDao() {
 		return new PalestranteHibernateDAO();
@@ -74,7 +63,6 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 	public boolean validarExcluir(Palestrante entity) throws Exception {
 		return true;
 	}
-
 	
 
 }

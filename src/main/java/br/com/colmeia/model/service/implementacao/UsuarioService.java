@@ -67,10 +67,19 @@ public class UsuarioService extends Service<Usuario, Long, UsuarioHibernateDAO> 
 		}
 		if (!Util.isCPFValido(entity.getCpf()))
 			throw new Exception("Desculpe! O CPF digitado está inválido");
+		if (!isUnique(entity))
+			throw new Exception("Desculpe! O CPF digitado já se encontra cadastrado");
 
 		return true;
 	}
 
+	private boolean isUnique(Usuario entity) throws Exception{
+		Usuario usuario = new Usuario();
+		usuario.setNome(entity.getCpf());
+		List<Usuario> usuarios = buscar(usuario);
+		return usuarios==null || usuarios.size() == 0;
+	}
+	
 	private boolean isSenhaValida(Usuario entity) throws Exception {
 		String senha = entity.getSenha();
 		String confirmarSenha = entity.getConfirmarSenha();

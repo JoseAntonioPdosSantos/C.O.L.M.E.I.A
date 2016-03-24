@@ -15,7 +15,7 @@ public class Curso extends EntidadeBase {
 	@SequenceGenerator(sequenceName = "curso_seq", initialValue = 1, name = "curso_seq")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "curso_seq")
 	private Long id;
-	@Column(nullable = false, unique = true)
+	@Column
 	private String nome;
 
 	public Long getId() {
