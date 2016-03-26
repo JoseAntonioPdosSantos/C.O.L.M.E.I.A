@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.IngressoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Ingresso;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDAO> {
 
@@ -28,10 +29,16 @@ public class IngressoService extends Service<Ingresso, Long, IngressoHibernateDA
 	}
 
 	private boolean isUnique(Ingresso entity) throws Exception{
-		Ingresso ingresso = new Ingresso();
-		ingresso.setNome(entity.getNome());
-		List<Ingresso> ingressos = buscar(ingresso);
-		return ingressos==null || ingressos.size() == 0;
+		Ingresso ingressoAtivo = new Ingresso();
+		ingressoAtivo.setAtivo(true);
+		List<Ingresso> ingressos = buscar(ingressoAtivo);
+		for (Ingresso ingresso : ingressos) {
+			if (Util.compare(ingresso.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 	
 	@Override

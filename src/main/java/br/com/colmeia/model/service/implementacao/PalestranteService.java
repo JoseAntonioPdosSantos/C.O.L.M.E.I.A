@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.PalestranteHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Palestrante;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class PalestranteService extends Service<Palestrante, Long, PalestranteHibernateDAO> {
 
@@ -28,10 +29,17 @@ public class PalestranteService extends Service<Palestrante, Long, PalestranteHi
 	}
 
 	private boolean isUnique(Palestrante entity) throws Exception{
-		Palestrante palestrante = new Palestrante();
-		palestrante.setNome(entity.getNome());
-		List<Palestrante> palestrantes = buscar(palestrante);
-		return palestrantes==null || palestrantes.size() == 0;
+		Palestrante palestranteAtivo = new Palestrante();
+		palestranteAtivo.setAtivo(true);
+		List<Palestrante> palestrantes = buscar(palestranteAtivo);
+		
+		for (Palestrante palestrante : palestrantes) {
+			if (Util.compare(palestrante.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.TipoAtividadeHibernateDAO;
 import br.com.colmeia.model.persistence.entity.TipoAtividade;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtividadeHibernateDAO> {
 
@@ -28,11 +29,18 @@ public class TipoAtividadeService extends Service<TipoAtividade, Long, TipoAtivi
 	}
 	
 	private boolean isUnique(TipoAtividade entity) throws Exception{
-		TipoAtividade tipoAtividade = new TipoAtividade();
-		tipoAtividade.setNome(entity.getNome());
-		List<TipoAtividade> tipoAtividades = buscar(tipoAtividade);
-		return tipoAtividades==null || tipoAtividades.size() == 0;
-	}
+		TipoAtividade tipoAtividadeAtivo = new TipoAtividade();
+		tipoAtividadeAtivo.setAtivo(true);
+		List<TipoAtividade> tipoAtividades = buscar(tipoAtividadeAtivo);
+		
+		for (TipoAtividade tipoAtividade : tipoAtividades) {
+			if (Util.compare(tipoAtividade.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
+		}
 	
 	@Override
 	public List<TipoAtividade> buscar(TipoAtividade entity) throws Exception {
