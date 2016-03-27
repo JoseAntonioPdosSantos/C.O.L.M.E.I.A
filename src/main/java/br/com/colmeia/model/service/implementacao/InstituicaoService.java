@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.colmeia.model.persistence.dao.implementacao.InstituicaoHibernateDAO;
 import br.com.colmeia.model.persistence.entity.Instituicao;
 import br.com.colmeia.model.service.generics.Service;
+import br.com.colmeia.model.utils.Util;
 
 public class InstituicaoService extends Service<Instituicao, Long, InstituicaoHibernateDAO> {
 
@@ -26,10 +27,17 @@ public class InstituicaoService extends Service<Instituicao, Long, InstituicaoHi
 	}
 
 	private boolean isUnique(Instituicao entity) throws Exception{
-		Instituicao instituicao = new Instituicao();
-		instituicao.setNome(entity.getNome());
-		List<Instituicao> instituicoes = buscar(instituicao);
-		return instituicoes==null || instituicoes.size() == 0;
+		Instituicao instituicaoAtivo = new Instituicao();
+		instituicaoAtivo.setAtivo(true);
+		List<Instituicao> instituicoes = buscar(instituicaoAtivo);
+		for (Instituicao instituicao : instituicoes) {
+			if (Util.compare(instituicao.getNome(), entity.getNome()) == 0) {
+				return false;
+			}
+		}
+
+		return true;
+		
 	}
 	
 	@Override
